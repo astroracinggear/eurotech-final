@@ -1,16 +1,437 @@
-exports.handler = async (event) => {
-  const h = {'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'Content-Type','Access-Control-Allow-Methods':'POST, OPTIONS','Content-Type':'application/json'};
-  if (event.httpMethod === 'OPTIONS') return {statusCode:200,headers:h,body:''};
-  if (!process.env.ANTHROPIC_API_KEY) return {statusCode:500,headers:h,body:JSON.stringify({error:'No API key'})};
-  try {
-    const {vehicle,queryType,query,sources} = JSON.parse(event.body||'{}');
-    if (!query) return {statusCode:400,headers:h,body:JSON.stringify({error:'Query required'})};
-    const sys = 'VAG expert VW/Audi/SEAT/SKODA. Use G-numbers for fluids, VCDS addresses, ### headers. Be concise.';
-    const usr = (vehicle?'Vehicle: '+vehicle+'\n':'')+'Type: '+queryType+'\nQuery: '+query+'\nSources: '+(sources||[]).slice(0,3).join(', ')+'\n\n### Root Cause\n### VCDS Steps\n### Fix\n### Parts & Fluids\n### Canada Note';
-    const r = await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':process.env.ANTHROPIC_API_KEY,'anthropic-version':'2023-06-01'},body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:500,system:sys,messages:[{role:'user',content:usr}]})});
-    if (!r.ok) {const e=await r.text();return {statusCode:500,headers:h,body:JSON.stringify({error:'API error '+r.status,detail:e})};}
-    const d = await r.json();
-    const text = (d.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n').trim();
-    return {statusCode:200,headers:h,body:JSON.stringify({result:text})};
-  } catch(e) {return {statusCode:500,headers:h,body:JSON.stringify({error:e.message})};}
-};
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eurotech Performance Academy — VAG Technical Training</title>
+<meta name="description" content="Professional VAG Group technical training for technicians in North America and Europe. 45 modules, bilingual FR/EN, Canada-specific content.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red:#C8001A; --red-dark:#8B0012; --black:#0A0A0A;
+  --dark:#111111; --dark2:#1A1A1A; --white:#F5F5F3;
+  --silver:#C0C0C0; --text-muted:#888; --border:rgba(255,255,255,0.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;line-height:1.6}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:0.35;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E")}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 3rem;background:rgba(10,10,10,0.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(200,0,26,0.2)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:0.12em;color:var(--white);text-decoration:none}
+.nav-logo span{color:var(--red)}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--silver);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover{color:var(--red)}
+.nav-lang{display:flex;gap:0.5rem}
+.lang-btn{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;padding:0.3rem 0.7rem;border:1px solid rgba(255,255,255,0.15);background:transparent;color:var(--silver);cursor:pointer;transition:all 0.2s}
+.lang-btn.active{border-color:var(--red);color:var(--white);background:rgba(200,0,26,0.1)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 3rem 4rem;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 60% 50%,rgba(200,0,26,0.08) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 10% 80%,rgba(200,0,26,0.05) 0%,transparent 60%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(200,0,26,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(200,0,26,0.06) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%)}
+.hero-content{position:relative;max-width:1100px;margin:0 auto;width:100%}
+.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--red);margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem}
+.hero-eyebrow::before{content:'';display:block;width:40px;height:1px;background:var(--red)}
+h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,10vw,9rem);line-height:0.92;letter-spacing:0.02em;margin-bottom:2rem}
+h1 span{display:block}
+h1 .line-red{color:var(--red)}
+h1 .line-dim{color:rgba(245,245,243,0.3)}
+.hero-sub{font-size:1.05rem;color:rgba(245,245,243,0.65);max-width:540px;line-height:1.7;margin-bottom:3rem;font-weight:300}
+.hero-cta-group{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.btn-primary{font-family:'JetBrains Mono',monospace;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;padding:1rem 2.5rem;background:var(--red);color:var(--white);text-decoration:none;border:none;cursor:pointer;transition:background 0.25s;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%);display:inline-block}
+.btn-primary:hover{background:var(--red-dark)}
+.btn-secondary{font-family:'JetBrains Mono',monospace;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;padding:1rem 2rem;background:transparent;color:var(--silver);text-decoration:none;border:1px solid rgba(255,255,255,0.15);transition:all 0.25s;display:inline-block}
+.btn-secondary:hover{border-color:rgba(255,255,255,0.4);color:var(--white)}
+.hero-stats{display:flex;gap:3rem;margin-top:5rem;padding-top:2.5rem;border-top:1px solid rgba(255,255,255,0.07)}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;line-height:1}
+.stat-num span{color:var(--red)}
+.stat-label{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);margin-top:0.3rem}
+
+/* SHARED */
+.section-wrap{max-width:1100px;margin:0 auto;padding:6rem 3rem}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--red);margin-bottom:1rem}
+h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4.5rem);line-height:0.95;letter-spacing:0.02em;margin-bottom:1.5rem}
+.divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(200,0,26,0.3),transparent)}
+
+/* BLOCS */
+.blocs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.06);margin-top:3rem}
+.bloc-card{background:var(--dark);padding:2rem;position:relative;overflow:hidden;transition:background 0.3s}
+.bloc-card::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:2px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform 0.3s}
+.bloc-card:hover{background:var(--dark2)}
+.bloc-card:hover::after{transform:scaleX(1)}
+.bloc-num{font-family:'Bebas Neue',sans-serif;font-size:4rem;line-height:1;color:rgba(255,255,255,0.04);position:absolute;top:1rem;right:1.5rem}
+.bloc-tag{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:0.8rem}
+.bloc-title{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.05em;margin-bottom:0.8rem}
+.bloc-desc{font-size:0.82rem;color:var(--text-muted);line-height:1.6}
+.bloc-count{margin-top:1.2rem;font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:rgba(255,255,255,0.25);letter-spacing:0.1em}
+
+/* CANADA */
+.canada-box{margin-top:1px;background:rgba(200,0,26,0.06);border:1px solid rgba(200,0,26,0.2);padding:2rem;position:relative}
+.canada-badge{position:absolute;top:-11px;left:1.5rem;font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.2em;background:var(--red);padding:0.2rem 0.8rem;color:var(--white)}
+.canada-inner{display:grid;grid-template-columns:1fr 3fr;gap:2rem;align-items:center}
+.canada-engines{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;line-height:1}
+.canada-engines span{color:var(--red)}
+.canada-tag{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;color:var(--red);margin-bottom:0.6rem}
+.canada-desc{font-size:0.85rem;color:rgba(245,245,243,0.6);line-height:1.7}
+.canada-count{margin-top:0.8rem;font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:rgba(255,255,255,0.2);letter-spacing:0.1em}
+
+/* WHY */
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:3rem;align-items:start}
+.why-list{list-style:none}
+.why-item{display:flex;gap:1.2rem;padding:1.5rem 0;border-bottom:1px solid rgba(255,255,255,0.06)}
+.why-icon{width:36px;height:36px;border:1px solid rgba(200,0,26,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--red);font-size:0.85rem;clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,0 100%)}
+.why-text h3{font-size:0.95rem;font-weight:500;margin-bottom:0.3rem}
+.why-text p{font-size:0.82rem;color:var(--text-muted);line-height:1.6}
+.spec-box{background:var(--dark2);border:1px solid var(--border);padding:2.5rem;position:relative}
+.spec-box::before{content:'CANADA SPEC';position:absolute;top:-10px;left:1.5rem;font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.2em;background:var(--red);padding:0.2rem 0.8rem;color:var(--white)}
+.spec-row{display:flex;justify-content:space-between;align-items:center;padding:0.8rem 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:0.82rem}
+.spec-row:last-child{border-bottom:none}
+.spec-key{color:var(--text-muted);font-family:'JetBrains Mono',monospace;font-size:0.7rem}
+.spec-val{color:var(--white);font-weight:500}
+.spec-val.red{color:var(--red)}
+
+/* TOOLS */
+.tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem}
+.tool-item{padding:1.2rem;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);text-decoration:none;display:block;transition:border-color 0.2s,background 0.2s;cursor:pointer}
+.tool-item:hover{border-color:rgba(200,0,26,0.4);background:rgba(200,0,26,0.05)}
+.tool-icon{font-size:1.2rem;margin-bottom:0.5rem}
+.tool-name{font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--white);margin-bottom:0.3rem}
+.tool-desc{font-size:0.75rem;color:var(--text-muted);line-height:1.5}
+
+/* PRICING */
+.pricing-section{text-align:center}
+.pricing-card{max-width:480px;margin:3rem auto 0;background:var(--dark2);border:1px solid rgba(200,0,26,0.3);padding:3rem;position:relative;clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,0 100%)}
+.price-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;background:var(--red);padding:0.3rem 1rem;margin-bottom:2rem;color:var(--white)}
+.price-amount{font-family:'Bebas Neue',sans-serif;font-size:5rem;line-height:1}
+.price-amount sup{font-size:2rem;vertical-align:super;color:var(--red)}
+.price-period{font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.15em;color:var(--text-muted);margin-bottom:2rem;text-transform:uppercase}
+.price-features{list-style:none;text-align:left;margin-bottom:2.5rem}
+.price-features li{display:flex;gap:0.8rem;padding:0.6rem 0;font-size:0.88rem;border-bottom:1px solid rgba(255,255,255,0.05)}
+.price-features li::before{content:'→';color:var(--red);font-family:'JetBrains Mono',monospace;flex-shrink:0}
+.price-note{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;color:var(--text-muted);margin-top:1.5rem;text-transform:uppercase}
+
+/* FOOTER */
+footer{background:var(--dark);border-top:1px solid var(--border);padding:3rem}
+.footer-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:3rem}
+.footer-brand{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:0.1em;margin-bottom:0.8rem}
+.footer-brand span{color:var(--red)}
+.footer-tagline{font-size:0.8rem;color:var(--text-muted);line-height:1.6}
+.footer-col h4{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:1rem}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:0.6rem}
+.footer-col ul li a{font-size:0.82rem;color:var(--text-muted);text-decoration:none;transition:color 0.2s;display:block}
+.footer-col ul li a:hover{color:var(--white)}
+.footer-bottom{max-width:1100px;margin:2rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.05);display:flex;justify-content:space-between;align-items:center}
+.footer-bottom p{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;color:var(--text-muted);text-transform:uppercase}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.hero-eyebrow{animation:fadeUp 0.6s ease both}
+h1{animation:fadeUp 0.6s 0.1s ease both}
+.hero-sub{animation:fadeUp 0.6s 0.2s ease both}
+.hero-cta-group{animation:fadeUp 0.6s 0.3s ease both}
+.hero-stats{animation:fadeUp 0.6s 0.4s ease both}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--black)}
+::-webkit-scrollbar-thumb{background:var(--red)}
+
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  .hero{padding:7rem 1.5rem 3rem}
+  .section-wrap{padding:4rem 1.5rem}
+  .blocs-grid{grid-template-columns:1fr}
+  .why-grid{grid-template-columns:1fr}
+  .tools-grid{grid-template-columns:1fr}
+  .canada-inner{grid-template-columns:1fr}
+  .hero-stats{gap:1.5rem;flex-wrap:wrap}
+  .footer-inner{grid-template-columns:1fr;gap:2rem}
+  .footer-bottom{flex-direction:column;gap:1rem;text-align:center}
+  footer{padding:2rem 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">EUROTECH<span>.</span>ACADEMY</a>
+  <ul class="nav-links">
+    <li><a href="#training" data-en="Training" data-fr="Formation">Training</a></li>
+    <li><a href="#why" data-en="Why Us" data-fr="Pourquoi">Why Us</a></li>
+    <li><a href="#tools" data-en="Tools" data-fr="Outils">Tools</a></li>
+    <li><a href="#pricing" data-en="Pricing" data-fr="Tarifs">Pricing</a></li>
+    <li><a href="#contact" data-en="Contact" data-fr="Contact">Contact</a></li>
+  </ul>
+  <div class="nav-lang">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('fr')">FR</button>
+  </div>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow" data-en="VAG Technical Training — North America &amp; Europe" data-fr="Formation Technique VAG — Amérique du Nord &amp; Europe">VAG Technical Training — North America &amp; Europe</div>
+    <h1 id="hero-h1-en">
+      <span class="line-red">MASTER</span>
+      <span>THE VAG</span>
+      <span class="line-dim">GROUP.</span>
+    </h1>
+    <h1 id="hero-h1-fr" style="display:none">
+      <span class="line-red">MAÎTRISE</span>
+      <span>LE GROUPE</span>
+      <span class="line-dim">VAG.</span>
+    </h1>
+    <p class="hero-sub" data-en="45 modules of professional-grade technical training on Volkswagen, Audi, SEAT, SKODA and CUPRA systems. Built for serious technicians. Bilingual FR / EN." data-fr="45 modules de formation technique professionnelle sur les systèmes Volkswagen, Audi, SEAT, SKODA et CUPRA. Conçu pour les techniciens sérieux. Bilingue FR / EN.">45 modules of professional-grade technical training on Volkswagen, Audi, SEAT, SKODA and CUPRA systems. Built for serious technicians. Bilingual FR / EN.</p>
+    <div class="hero-cta-group">
+      <a href="https://www.skool.com/vag-academy-quebec-2369" target="_blank" class="btn-primary" data-en="Start Training — 9.99$/mo" data-fr="Commencer — 9.99$/mois">Start Training — 9.99$/mo</a>
+      <a href="#training" class="btn-secondary" data-en="View Curriculum" data-fr="Voir le programme">View Curriculum</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">45<span>+</span></div>
+        <div class="stat-label">Modules</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">2</div>
+        <div class="stat-label" data-en="Languages" data-fr="Langues">Languages</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">60<span>h</span></div>
+        <div class="stat-label" data-en="Content" data-fr="Contenu">Content</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">6</div>
+        <div class="stat-label" data-en="Blocks" data-fr="Blocs">Blocks</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<div class="section-wrap" id="training">
+  <div class="section-label" data-en="Curriculum" data-fr="Programme">Curriculum</div>
+  <h2 data-en="SIX BLOCKS.<br>COMPLETE EXPERTISE." data-fr="SIX BLOCS.<br>EXPERTISE COMPLÈTE.">SIX BLOCKS.<br>COMPLETE EXPERTISE.</h2>
+
+  <div class="blocs-grid">
+    <div class="bloc-card">
+      <div class="bloc-num">01</div>
+      <div class="bloc-tag" data-en="Block 1" data-fr="Bloc 1">Block 1</div>
+      <div class="bloc-title" data-en="ENGINES &amp; MECHANICS" data-fr="MOTEURS &amp; MÉCANIQUE">ENGINES &amp; MECHANICS</div>
+      <div class="bloc-desc" data-en="EA888 Gen1→Evo4, EA211 evo, EA288 TDI, EA839 V6, engine lubrication, EGR, DPF, AdBlue" data-fr="EA888 Gen1→Evo4, EA211 evo, EA288 TDI, EA839 V6, lubrification moteur, EGR, DPF, AdBlue">EA888 Gen1→Evo4, EA211 evo, EA288 TDI, EA839 V6, engine lubrication, EGR, DPF, AdBlue</div>
+      <div class="bloc-count">8 modules</div>
+    </div>
+    <div class="bloc-card">
+      <div class="bloc-num">02</div>
+      <div class="bloc-tag" data-en="Block 2" data-fr="Bloc 2">Block 2</div>
+      <div class="bloc-title" data-en="GEARBOXES &amp; DRIVETRAINS" data-fr="BOÎTES &amp; TRANSMISSIONS">GEARBOXES &amp; DRIVETRAINS</div>
+      <div class="bloc-desc" data-en="DQ200, DQ250, DQ381/500, S-Tronic, quattro AWD systems, Haldex advanced diagnosis" data-fr="DQ200, DQ250, DQ381/500, S-Tronic, systèmes quattro AWD, diagnostic Haldex avancé">DQ200, DQ250, DQ381/500, S-Tronic, quattro AWD systems, Haldex advanced diagnosis</div>
+      <div class="bloc-count">6 modules</div>
+    </div>
+    <div class="bloc-card">
+      <div class="bloc-num">03</div>
+      <div class="bloc-tag" data-en="Block 3" data-fr="Bloc 3">Block 3</div>
+      <div class="bloc-title" data-en="DIAGNOSIS: VCDS &amp; ODIS" data-fr="DIAGNOSTIC : VCDS &amp; ODIS">DIAGNOSIS: VCDS &amp; ODIS</div>
+      <div class="bloc-desc" data-en="VCDS interface, DTCs, measuring blocks, long coding, ODIS Service, SVM/SCN, CAN/LIN networks" data-fr="Interface VCDS, DTCs, blocs de mesure, codage long, ODIS Service, SVM/SCN, réseaux CAN/LIN">VCDS interface, DTCs, measuring blocks, long coding, ODIS Service, SVM/SCN, CAN/LIN networks</div>
+      <div class="bloc-count">8 modules</div>
+    </div>
+    <div class="bloc-card">
+      <div class="bloc-num">04</div>
+      <div class="bloc-tag" data-en="Block 4" data-fr="Bloc 4">Block 4</div>
+      <div class="bloc-title" data-en="HYBRID &amp; ELECTRIC" data-fr="HYBRIDE &amp; ÉLECTRIQUE">HYBRID &amp; ELECTRIC</div>
+      <div class="bloc-desc" data-en="MEB platform (ID.3/ID.4), PHEV Golf GTE, HV safety B2V, PPE 800V (Q6 e-tron), eTSI 48V" data-fr="Plateforme MEB (ID.3/ID.4), PHEV Golf GTE, sécurité HV B2V, PPE 800V (Q6 e-tron), eTSI 48V">MEB platform (ID.3/ID.4), PHEV Golf GTE, HV safety B2V, PPE 800V (Q6 e-tron), eTSI 48V</div>
+      <div class="bloc-count">5 modules</div>
+    </div>
+    <div class="bloc-card">
+      <div class="bloc-num">05</div>
+      <div class="bloc-tag" data-en="Block 5" data-fr="Bloc 5">Block 5</div>
+      <div class="bloc-title" data-en="VAG LINEUP &amp; PRODUCT" data-fr="GAMME &amp; PRODUIT VAG">VAG LINEUP &amp; PRODUCT</div>
+      <div class="bloc-desc" data-en="VW/Audi/SEAT/SKODA/CUPRA 2025, VIN decoding, ElsaPro, ETKA parts research" data-fr="Gamme VW/Audi/SEAT/SKODA/CUPRA 2025, décodage VIN, ElsaPro, recherche pièces ETKA">VW/Audi/SEAT/SKODA/CUPRA 2025, VIN decoding, ElsaPro, ETKA parts research</div>
+      <div class="bloc-count">5 modules</div>
+    </div>
+    <div class="bloc-card">
+      <div class="bloc-num">06</div>
+      <div class="bloc-tag" data-en="Block 6" data-fr="Bloc 6">Block 6</div>
+      <div class="bloc-title" data-en="QUALITY &amp; PROCESSES" data-fr="QUALITÉ &amp; PROCESSUS">QUALITY &amp; PROCESSES</div>
+      <div class="bloc-desc" data-en="Workshop KPIs, VAG audits, SAGA warranties, TSBs &amp; service campaigns, customer process" data-fr="KPIs atelier, audits VAG, garanties SAGA, TSB &amp; campagnes service, processus client">Workshop KPIs, VAG audits, SAGA warranties, TSBs &amp; service campaigns, customer process</div>
+      <div class="bloc-count">5 modules</div>
+    </div>
+  </div>
+
+  <div class="canada-box">
+    <div class="canada-badge" data-en="🇨🇦 CANADA SPECIALIZATION" data-fr="🇨🇦 SPÉCIALISATION CANADA">🇨🇦 CANADA SPECIALIZATION</div>
+    <div class="canada-inner">
+      <div><div class="canada-engines">EA837<br><span>EA839</span><br>EA888</div></div>
+      <div>
+        <div class="canada-tag" data-en="V6 3.0T + 2.0T TSI — 91 OCTANE · -30°C CANADIAN CONTEXT" data-fr="V6 3.0T + 2.0T TSI — 91 OCTANES · CONTEXTE CANADIEN -30°C">V6 3.0T + 2.0T TSI — 91 OCTANE · -30°C CANADIAN CONTEXT</div>
+        <div class="canada-desc" data-en="EA837 supercharged (S4 B8), EA839 3.0T / 2.9TT biturbo (S4 B9, RS4, RS5), EA888 Gen2 and Evo4 — Canadian maintenance intervals, cold-start failures, 91 octane tuning potential." data-fr="EA837 compresseur (S4 B8), EA839 3.0T / 2.9TT biturbo (S4 B9, RS4, RS5), EA888 Gen2 et Evo4 — intervalles canadiens, pannes démarrage froid, potentiel tuning 91 octane.">EA837 supercharged (S4 B8), EA839 3.0T / 2.9TT biturbo (S4 B9, RS4, RS5), EA888 Gen2 and Evo4 — Canadian maintenance intervals, cold-start failures, 91 octane tuning potential.</div>
+        <div class="canada-count" data-en="8 CANADA-SPECIFIC MODULES INCLUDED" data-fr="8 MODULES SPÉCIFIQUES CANADA INCLUS">8 CANADA-SPECIFIC MODULES INCLUDED</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section-wrap" id="why">
+  <div class="section-label" data-en="Why Eurotech Academy" data-fr="Pourquoi Eurotech Academy">Why Eurotech Academy</div>
+  <h2 data-en="BUILT FOR THE<br>WORKSHOP. NOT<br>THE CLASSROOM." data-fr="CONSTRUIT POUR<br>L'ATELIER. PAS<br>LA SALLE DE CLASSE.">BUILT FOR THE<br>WORKSHOP. NOT<br>THE CLASSROOM.</h2>
+  <div class="why-grid">
+    <ul class="why-list">
+      <li class="why-item">
+        <div class="why-icon">⚙</div>
+        <div class="why-text">
+          <h3 data-en="Real workshop cases" data-fr="Cas atelier réels">Real workshop cases</h3>
+          <p data-en="Every module includes practical diagnostic cases with VCDS and ODIS procedures you can apply the same day." data-fr="Chaque module inclut des cas pratiques avec procédures VCDS et ODIS applicables immédiatement.">Every module includes practical diagnostic cases with VCDS and ODIS procedures you can apply the same day.</p>
+        </div>
+      </li>
+      <li class="why-item">
+        <div class="why-icon">🇨🇦</div>
+        <div class="why-text">
+          <h3 data-en="Canada-specific content" data-fr="Contenu spécifique Canada">Canada-specific content</h3>
+          <p data-en="91 octane, -30°C cold starts, road salt, shortened intervals. Not a copy of European training." data-fr="91 octane, démarrages à -30°C, sel de route, intervalles raccourcis. Pas une copie de la formation européenne.">91 octane, -30°C cold starts, road salt, shortened intervals. Not a copy of European training.</p>
+        </div>
+      </li>
+      <li class="why-item">
+        <div class="why-icon">⚡</div>
+        <div class="why-text">
+          <h3 data-en="Bilingual FR / EN" data-fr="Bilingue FR / EN">Bilingual FR / EN</h3>
+          <p data-en="Complete content in both French and English. Switch anytime. Same depth both directions." data-fr="Contenu complet en français et en anglais. Changez à tout moment. Même profondeur dans les deux sens.">Complete content in both French and English. Switch anytime. Same depth both directions.</p>
+        </div>
+      </li>
+      <li class="why-item">
+        <div class="why-icon">✓</div>
+        <div class="why-text">
+          <h3 data-en="10 quiz questions per module" data-fr="10 questions QCM par module">10 quiz questions per module</h3>
+          <p data-en="Every module ends with a 10-question quiz and full commented answer key." data-fr="Chaque module se termine par un QCM de 10 questions avec corrigé commenté complet.">Every module ends with a 10-question quiz and full commented answer key.</p>
+        </div>
+      </li>
+    </ul>
+    <div class="spec-box">
+      <div class="spec-row"><span class="spec-key">OIL SPEC — EA839</span><span class="spec-val red">VW 508 00 / 0W-20</span></div>
+      <div class="spec-row"><span class="spec-key">OIL INTERVAL — CANADA</span><span class="spec-val">8,000 km / 1 year</span></div>
+      <div class="spec-row"><span class="spec-key">DQ381 FLUID</span><span class="spec-val">G 052 529 A2</span></div>
+      <div class="spec-row"><span class="spec-key">HALDEX OIL</span><span class="spec-val">G 052 175 A2 — 0.6L</span></div>
+      <div class="spec-row"><span class="spec-key">EA888 EVO4 CARBON</span><span class="spec-val red">70,000 km CA</span></div>
+      <div class="spec-row"><span class="spec-key">ZF 8AT FLUID</span><span class="spec-val">ZF LGF8 — NOT DSG</span></div>
+      <div class="spec-row"><span class="spec-key">MEB HV BATTERY</span><span class="spec-val">VCDS Address 0D</span></div>
+      <div class="spec-row"><span class="spec-key">CAN BUS TERMINAL</span><span class="spec-val red">60 Ω = healthy</span></div>
+      <div style="margin-top:1.5rem;font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;color:rgba(255,255,255,0.2);" data-en="EXTRACT FROM MODULE REFERENCE DATA" data-fr="EXTRAIT DES DONNÉES DE RÉFÉRENCE MODULES">EXTRACT FROM MODULE REFERENCE DATA</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section-wrap" id="tools">
+  <div class="section-label" data-en="Pro Tools" data-fr="Outils Pro">Pro Tools</div>
+  <h2 data-en="VAG RESEARCH<br>TOOLS — COMING SOON" data-fr="OUTILS DE RECHERCHE<br>VAG — BIENTÔT">VAG RESEARCH<br>TOOLS — COMING SOON</h2>
+  <p style="font-size:0.95rem;color:var(--text-muted);max-width:560px;line-height:1.7;" data-en="Premium tools for members. Aggregate North American and European VAG forums, validate technical information, and get AI-assisted diagnostics — all in one place." data-fr="Outils premium pour les membres. Agrégation des forums VAG nord-américains et européens, validation des informations techniques, et diagnostic assisté par IA — tout en un seul endroit.">Premium tools for members. Aggregate North American and European VAG forums, validate technical information, and get AI-assisted diagnostics — all in one place.</p>
+  <div class="tools-grid">
+    <a href="tools.html" class="tool-item"><div class="tool-icon">🔍</div><div class="tool-name" data-en="VAG Forum Search" data-fr="Recherche Forums VAG">VAG Forum Search</div><div class="tool-desc" data-en="Search AudiWorld, VWVortex, Rennlist, PeachParts and more. Verified results by model and DTC." data-fr="Cherche dans AudiWorld, VWVortex, Rennlist, PeachParts et plus. Résultats vérifiés par modèle et DTC.">Search AudiWorld, VWVortex, Rennlist, PeachParts and more. Verified results by model and DTC.</div></a>
+    <a href="tools.html" class="tool-item"><div class="tool-icon">🔧</div><div class="tool-name" data-en="DTC Diagnostic Tool" data-fr="Outil Diagnostic DTC">DTC Diagnostic Tool</div><div class="tool-desc" data-en="Enter a DTC + your engine → get a structured diagnostic checklist with VCDS procedures." data-fr="Entre un DTC + ton moteur → reçois une checklist diagnostique structurée avec procédures VCDS.">Enter a DTC + your engine → get a structured diagnostic checklist with VCDS procedures.</div></a>
+    <a href="tools.html" class="tool-item"><div class="tool-icon">🧪</div><div class="tool-name" data-en="Fluid Reference DB" data-fr="Base de données fluides">Fluid Reference DB</div><div class="tool-desc" data-en="Look up exact fluid specs by VIN or model. Never use the wrong oil or DSG fluid again." data-fr="Trouve les fluides exacts par VIN ou modèle. Plus jamais de mauvaise huile ou fluide DSG.">Look up exact fluid specs by VIN or model. Never use the wrong oil or DSG fluid again.</div></a>
+    <a href="tools.html" class="tool-item"><div class="tool-icon">🔢</div><div class="tool-name" data-en="Live VIN Decoder" data-fr="Décodeur VIN Live">Live VIN Decoder</div><div class="tool-desc" data-en="Decode any VAG VIN instantly — country, brand, model year, production sequence." data-fr="Décode n'importe quel VIN VAG instantanément — pays, marque, année modèle, séquence de production.">Decode any VAG VIN instantly — country, brand, model year, production sequence.</div></a>
+    <a href="tools.html" class="tool-item"><div class="tool-icon">📋</div><div class="tool-name" data-en="TSB Alert by Model" data-fr="Alertes TSB par Modèle">TSB Alert by Model</div><div class="tool-desc" data-en="Enter your VIN → see all active TSBs, recalls and service campaigns applicable." data-fr="Entre ton VIN → vois tous les TSB actifs, rappels et campagnes service applicables.">Enter your VIN → see all active TSBs, recalls and service campaigns applicable.</div></a>
+    <a href="tools.html" class="tool-item"><div class="tool-icon">🤖</div><div class="tool-name" data-en="AI VAG Assistant" data-fr="Assistant VAG IA">AI VAG Assistant</div><div class="tool-desc" data-en="Ask a technical question — AI searches forums + Eurotech modules and responds with verified sources." data-fr="Pose une question technique — l'IA cherche dans les forums + modules Eurotech et répond avec sources vérifiées.">Ask a technical question — AI searches forums + Eurotech modules and responds with verified sources.</div></a>
+  </div>
+  <div style="margin-top:2rem;text-align:center;">
+    <a href="https://www.skool.com/vag-academy-quebec-2369" target="_blank" class="btn-primary" data-en="Join Now — Get Early Access to Tools" data-fr="Rejoindre — Accès anticipé aux outils">Join Now — Get Early Access to Tools</a>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section-wrap pricing-section" id="pricing">
+  <div class="section-label" data-en="Membership" data-fr="Abonnement">Membership</div>
+  <h2 data-en="ONE PRICE.<br>EVERYTHING INCLUDED." data-fr="UN PRIX.<br>TOUT INCLUS.">ONE PRICE.<br>EVERYTHING INCLUDED.</h2>
+  <div class="pricing-card">
+    <div class="price-badge" data-en="Founding Member Rate" data-fr="Tarif Membre Fondateur">Founding Member Rate</div>
+    <div class="price-amount"><sup>$</sup>9.99</div>
+    <div class="price-period" data-en="/ month CAD — cancel anytime" data-fr="/ mois CAD — annulable en tout temps">/ month CAD — cancel anytime</div>
+    <ul class="price-features" id="price-features-en">
+      <li>45 technical modules (FR + EN)</li>
+      <li>8 Canada specialization modules</li>
+      <li>10 quiz questions + answer key per module</li>
+      <li>Private community on Skool</li>
+      <li>Early access to Pro Tools (coming soon)</li>
+      <li>New modules added regularly</li>
+    </ul>
+    <ul class="price-features" id="price-features-fr" style="display:none">
+      <li>45 modules techniques (FR + EN)</li>
+      <li>8 modules spécialisation Canada</li>
+      <li>10 QCM + corrigé commenté par module</li>
+      <li>Communauté privée sur Skool</li>
+      <li>Accès anticipé aux outils Pro (bientôt)</li>
+      <li>Nouveaux modules ajoutés régulièrement</li>
+    </ul>
+    <a href="https://www.skool.com/vag-academy-quebec-2369" target="_blank" class="btn-primary" style="width:100%;display:block;text-align:center;" data-en="Join Eurotech Academy" data-fr="Rejoindre Eurotech Academy">Join Eurotech Academy</a>
+    <div class="price-note" data-en="Hosted on Skool · Secure payment via Stripe" data-fr="Hébergé sur Skool · Paiement sécurisé via Stripe">Hosted on Skool · Secure payment via Stripe</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section-wrap" id="contact">
+  <div class="section-label">Contact</div>
+  <h2 data-en="QUESTIONS?" data-fr="QUESTIONS ?">QUESTIONS?</h2>
+  <p style="font-size:0.95rem;color:var(--text-muted);margin-top:1rem;max-width:480px;line-height:1.7;" data-en="For any question about the training, your subscription or technical content, reach us directly." data-fr="Pour toute question sur la formation, votre abonnement ou le contenu technique, contactez-nous directement.">For any question about the training, your subscription or technical content, reach us directly.</p>
+  <a href="/cdn-cgi/l/email-protection#c8a9bbbcbaa7baa9aba1a6afafada9ba88afa5a9a1a4e6aba7a5" style="display:inline-flex;align-items:center;gap:0.8rem;margin-top:1.5rem;font-family:'JetBrains Mono',monospace;font-size:0.8rem;letter-spacing:0.1em;color:var(--red);text-decoration:none;border-bottom:1px solid rgba(200,0,26,0.3);padding-bottom:0.3rem;">→ <span class="__cf_email__" data-cfemail="f5948681879a8794969c9b9292909487b59298949c99db969a98">[email&#160;protected]</span></a>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">EUROTECH<span>.</span>ACADEMY</div>
+      <div class="footer-tagline" data-en="Professional VAG technical training for North America and Europe. Bilingual FR/EN." data-fr="Formation technique VAG professionnelle pour l'Amérique du Nord et l'Europe. Bilingue FR/EN.">Professional VAG technical training for North America and Europe. Bilingual FR/EN.</div>
+    </div>
+    <div class="footer-col">
+      <h4 data-en="Training" data-fr="Formation">Training</h4>
+      <ul>
+        <li><a href="#training" data-en="All Modules" data-fr="Tous les modules">All Modules</a></li>
+        <li><a href="#training" data-en="Canada Specialization" data-fr="Spécialisation Canada">Canada Specialization</a></li>
+        <li><a href="#tools" data-en="Pro Tools (Soon)" data-fr="Outils Pro (Bientôt)">Pro Tools (Soon)</a></li>
+        <li><a href="https://www.skool.com/vag-academy-quebec-2369" target="_blank" data-en="Join on Skool" data-fr="Rejoindre sur Skool">Join on Skool</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 data-en="Legal" data-fr="Légal">Legal</h4>
+      <ul>
+        <li><a href="terms.html" data-en="Terms of Service" data-fr="Conditions d'utilisation">Terms of Service</a></li>
+        <li><a href="privacy.html" data-en="Privacy Policy" data-fr="Politique de confidentialité">Privacy Policy</a></li>
+        <li><a href="refund.html" data-en="Refund Policy" data-fr="Politique de remboursement">Refund Policy</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#cfaebcbbbda0bdaeaca6a1a8a8aaaebd8fa8a2aea6a3e1aca0a2">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Eurotech Performance Academy — <span data-en="All rights reserved" data-fr="Tous droits réservés">All rights reserved</span></p>
+    <p>Quebec, Canada · eurotech-academy.ca</p>
+  </div>
+</footer>
+
+<script>
+function setLang(lang) {
+  document.getElementById('hero-h1-en').style.display = lang === 'en' ? '' : 'none';
+  document.getElementById('hero-h1-fr').style.display = lang === 'fr' ? '' : 'none';
+  document.getElementById('price-features-en').style.display = lang === 'en' ? '' : 'none';
+  document.getElementById('price-features-fr').style.display = lang === 'fr' ? '' : 'none';
+  document.querySelectorAll('[data-en][data-fr]').forEach(el => {
+    el.innerHTML = lang === 'fr' ? el.dataset.fr : el.dataset.en;
+  });
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+  });
+  localStorage.setItem('lang', lang);
+}
+const saved = localStorage.getItem('lang');
+if (saved === 'fr') setLang('fr');
+</script>
+</body>
+</html>
