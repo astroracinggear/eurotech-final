@@ -1321,7 +1321,10 @@ async function doSearch() {
     }
 
     const data = await response.json();
-    const responseText = data.result || data.text || data.content || data.message || data.response || JSON.stringify(data);
+    const responseText = data.answer || data.result || data.text || data.content || data.message || data.response;
+    if (typeof responseText !== 'string' || !responseText.trim()) {
+      throw new Error('Empty or unexpected response from server.');
+    }
     showResult(responseText, vehicle, sources, searchType);
 
   } catch(err) {
