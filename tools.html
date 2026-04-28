@@ -882,6 +882,14 @@ kbd {
       <!-- Vehicle -->
       <div class="form-section">
         <div class="field-label">Vehicle</div>
+        <div class="field-full" style="margin-bottom:0.6rem;">
+          <div class="field-label" style="display:flex;align-items:center;justify-content:space-between;">
+            <span>VIN (recommended — auto-decode)</span>
+            <span id="vin-status" style="font-size:0.55rem;color:var(--muted);"></span>
+          </div>
+          <input type="text" id="vin" placeholder="WAUB4AF45MA123456 (17 chars)" autocomplete="off" maxlength="17" style="text-transform:uppercase;letter-spacing:0.05em;">
+        </div>
+        <div class="field-label" style="margin-top:0.8rem;color:var(--muted);font-size:0.55rem;">— OR enter manually —</div>
         <div class="field-row">
           <div>
             <div class="field-label">Brand / Model</div>
@@ -1029,6 +1037,73 @@ function setType(t) {
 ═══════════════════════════ */
 document.querySelectorAll('.src-tag').forEach(tag => {
   tag.addEventListener('click', () => tag.classList.toggle('on'));
+});
+
+// ═══ Live VIN decoder ═══
+const vinInput = document.getElementById('vin');
+const vinStatus = document.getElementById('vin-status');
+let vinTimer = null;
+
+vinInput.addEventListener('input', () => {
+  const v = vinInput.value.trim().toUpperCase();
+  vinInput.value = v;
+  clearTimeout(vinTimer);
+
+  if (v.length === 0) {
+    vinStatus.textContent = '';
+    vinStatus.style.color = 'var(--muted)';
+    return;
+  }
+
+  if (v.length < 17) {
+    vinStatus.textContent = `${v.length}/17`;
+    vinStatus.style.color = 'var(--muted)';
+    return;
+  }
+
+  if (v.length === 17) {
+    vinStatus.textContent = 'Decoding...';
+    vinStatus.style.color = 'var(--amber, #FFB800)';
+
+    vinTimer = setTimeout(async () => {
+      try {
+        const r = await fetch(`https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/${v}?format=json`);
+        if (!r.ok) throw new Error('NHTSA error');
+        const data = await r.json();
+        const results = data.Results || [];
+        const get = (key) => {
+          const item = results.find(x => x.Variable === key);
+          return item && item.Value && item.Value !== 'Not Applicable' ? item.Value : null;
+        };
+        const make = get('Make');
+        const model = get('Model');
+        const year = get('Model Year');
+        const trim = get('Trim') || get('Series');
+        const errorCode = get('Error Code');
+
+        if (errorCode && errorCode !== '0' && errorCode !== '6' && errorCode !== '7') {
+          vinStatus.textContent = '⚠ Invalid VIN';
+          vinStatus.style.color = 'var(--red2, #FF1A35)';
+          return;
+        }
+
+        if (make && model) {
+          // Auto-fill manual fields too
+          document.getElementById('model').value = `${make} ${model}${trim ? ' ' + trim : ''}`;
+          document.getElementById('year').value = year || '';
+
+          vinStatus.textContent = `✓ ${year || ''} ${make} ${model}${trim ? ' ' + trim : ''}`;
+          vinStatus.style.color = 'var(--green, #00E87A)';
+        } else {
+          vinStatus.textContent = '⚠ Decode incomplete';
+          vinStatus.style.color = 'var(--amber, #FFB800)';
+        }
+      } catch (e) {
+        vinStatus.textContent = '⚠ Decode failed';
+        vinStatus.style.color = 'var(--red2, #FF1A35)';
+      }
+    }, 500);
+  }
 });
 
 function toggleAllSources() {
@@ -1272,6 +1347,7 @@ function copyResult() {
    MAIN SEARCH
 ═══════════════════════════ */
 async function doSearch() {
+  const vin = document.getElementById('vin').value.trim().toUpperCase();
   const model = document.getElementById('model').value.trim();
   const year = document.getElementById('year').value.trim();
   const engine = document.getElementById('engine').value.trim();
@@ -1294,7 +1370,7 @@ async function doSearch() {
   if (btnText) btnText.textContent = 'Searching…';
 
   saveHistory(searchType, query.split('\n')[0]);
-  showLoading(vehicle, sources);
+  showLoading(vin || vehicle, sources);
 
   const typeMap = {
     dtc: `DTC fault code analysis: ${query}`,
@@ -1308,6 +1384,7 @@ async function doSearch() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
+        vin: vin && vin.length === 17 ? vin : null,
         vehicle,
         queryType: searchType,
         query,
