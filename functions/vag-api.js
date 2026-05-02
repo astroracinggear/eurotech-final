@@ -1,5 +1,5 @@
-// VAG Diagnostic Engine v6 — Haiku 4.5 + NHTSA VIN decoder
-// Auto-decodes VIN → confirms vehicle → sends verified info to AI
+// VAG Diagnostic Engine v7 — NHTSA validation override
+// When NHTSA data conflicts with known VAG facts, trust VAG facts
 
 exports.handler = async (event) => {
   const h = {
@@ -15,16 +15,14 @@ exports.handler = async (event) => {
     const { vin, vehicle, queryType, query, sources } = JSON.parse(event.body || '{}');
     if (!query) return { statusCode: 400, headers: h, body: JSON.stringify({ error: 'Query required' }) };
 
-    // ═══ NHTSA VIN DECODE (free, no API key) ═══
     let vinData = null;
     if (vin && vin.length === 17) {
       try {
         const nhtsaR = await fetch(`https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/${vin}?format=json`);
         if (nhtsaR.ok) {
           const data = await nhtsaR.json();
-          const results = data.Results || [];
           const get = (key) => {
-            const r = results.find(r => r.Variable === key);
+            const r = (data.Results || []).find(r => r.Variable === key);
             return r && r.Value && r.Value !== 'Not Applicable' ? r.Value : null;
           };
           vinData = {
@@ -32,34 +30,16 @@ exports.handler = async (event) => {
             model: get('Model'),
             year: get('Model Year'),
             trim: get('Trim') || get('Series'),
-            engineModel: get('Engine Model'),
-            engineConfig: get('Engine Configuration'),
             displacement: get('Displacement (L)'),
             cylinders: get('Engine Number of Cylinders'),
             fuelType: get('Fuel Type - Primary'),
             transmission: get('Transmission Style'),
             drive: get('Drive Type'),
             plant: get('Plant Country'),
-            bodyClass: get('Body Class'),
-            bodyType: get('Body Type'),
-            doors: get('Doors'),
-            errorCode: get('Error Code'),
-            errorText: get('Error Text')
+            bodyClass: get('Body Class')
           };
         }
-      } catch (e) {
-        // VIN decode failure not fatal
-      }
-    }
-
-    // Build vehicle string from VIN data or user input
-    let vehicleStr = vehicle || '';
-    if (vinData && vinData.make) {
-      const parts = [vinData.year, vinData.make, vinData.model, vinData.trim].filter(Boolean);
-      vehicleStr = parts.join(' ');
-      if (vinData.displacement) vehicleStr += ` (${vinData.displacement}L`;
-      if (vinData.cylinders) vehicleStr += ` ${vinData.cylinders}-cyl`;
-      if (vinData.displacement) vehicleStr += ')';
+      } catch {}
     }
 
     const sys = `Senior VAG technical specialist. Workshop pros depend on accuracy.
@@ -67,41 +47,45 @@ exports.handler = async (event) => {
 ENGINE TRUTH (only confirmed facts):
 EA837=V6 3.0 TFSI SUPERCHARGED (S4 B8, S5, Q7 4L, A6/A7 C7).
 EA839=V6 3.0/2.9 TFSI BITURBO (S4 B9, RS4, RS5, SQ5).
-EA855=2.5 TFSI 5-cyl (RS3, TT RS).
-EA888=2.0 TFSI 4-cyl turbo.
+EA855=2.5 TFSI 5-CYLINDER (RS3, TT RS) — ALWAYS 5-CYL, NEVER 4-CYL.
+EA888=2.0 TFSI 4-cyl turbo (Golf GTI/R, A4 base, A3, etc.).
 EA189=2.0 TDI Dieselgate. EA288=2.0 TDI modern.
 EA211=1.2/1.4/1.5 TSI modern.
 EA896/EA897=V6 3.0 TDI.
 
 FLUIDS: G 052 175 A2=Haldex (0.6L). G 052 529 A2=DQ381. G 055 005 A2=DQ250. G 052 182 A2=DQ200.
 
+NHTSA DATA RELIABILITY RULES — CRITICAL:
+- NHTSA is unreliable for VAG specifics. It often gets cylinder count, engine code, and trim WRONG.
+- If NHTSA says "4-cyl" but the model is a known 5-cyl (RS3, TT RS) → IGNORE NHTSA, use VAG truth table.
+- If NHTSA says "1.98L" for an RS3 → that's WRONG. RS3 = 2.5L 5-cyl EA855.
+- If NHTSA model is null/empty but VIN suggests RS3/RS5/S4/S5 etc. → use chassis code + plant + year to deduce.
+- Always cross-reference NHTSA data with your VAG knowledge. NHTSA is a hint, not gospel.
+- If NHTSA contradicts a known VAG fact, EXPLICITLY note: "⚠ NHTSA reports [X] but [model] uses [Y]".
+
 ABSOLUTE RULES:
-1. NEVER invent specs, codes, part numbers. Uncertain = "⚠ VERIFY: [what] against ElsaPro/VIN"
+1. NEVER invent specs. Uncertain = "⚠ VERIFY: [what] against ElsaPro/VIN"
 2. NEVER cite percentages or stats. Use: very common / common / occasional / rare.
-3. Engine codes (DEAU, CREC, etc.) are ENGINE codes, not regional allocations.
-4. Start with ### Vehicle Confirmed (using VIN data if provided)
+3. Engine codes (DEAU, CREC, etc.) are ENGINE codes, not allocations.
+4. Start with ### Vehicle Confirmed (using VIN data BUT cross-checked with VAG truth)
 5. End with ### CONFIDENCE: HIGH/MEDIUM/LOW
-6. Canadian context (91 octane, -30°C, salt) is factual.
-7. Use ### headers. Be direct.`;
+6. Use ### headers. Be direct.`;
 
     let usr = '';
     if (vinData && vinData.make) {
-      usr = `=== VIN-DECODED VEHICLE (verified data from NHTSA) ===
+      usr = `=== NHTSA VIN DECODE (HINT ONLY — verify against VAG truth) ===
 VIN: ${vin}
-Make: ${vinData.make}
-Model: ${vinData.model}
-Year: ${vinData.year}
-Trim: ${vinData.trim || 'N/A'}
-Engine: ${vinData.displacement || '?'}L ${vinData.cylinders || '?'}-cyl ${vinData.engineConfig || ''}
-Fuel: ${vinData.fuelType || 'N/A'}
-Transmission: ${vinData.transmission || 'N/A'}
-Drive: ${vinData.drive || 'N/A'}
-Plant: ${vinData.plant || 'N/A'}
-Body: ${vinData.bodyClass || 'N/A'}
+NHTSA says: ${vinData.year || '?'} ${vinData.make || '?'} ${vinData.model || 'MODEL UNKNOWN'} ${vinData.trim || ''}
+NHTSA engine: ${vinData.displacement || '?'}L ${vinData.cylinders || '?'}-cyl ${vinData.fuelType || ''}
+NHTSA transmission: ${vinData.transmission || 'N/A'}
+NHTSA drive: ${vinData.drive || 'N/A'}
+NHTSA plant: ${vinData.plant || 'N/A'}
+
+⚠ NHTSA is often wrong for VAG specifics. Cross-check with VIN chassis position 7-8 and known VAG truth.
 
 `;
-    } else if (vehicleStr) {
-      usr = `Vehicle (user-provided, NOT VIN-verified): ${vehicleStr}\n\n`;
+    } else if (vehicle) {
+      usr = `Vehicle (user-provided): ${vehicle}\n\n`;
     }
 
     usr += `Query type: ${queryType}
@@ -110,14 +94,14 @@ Sources: ${(sources || []).slice(0, 3).join(', ')}
 
 Respond with:
 ### Vehicle Confirmed
-(Match VIN data to VAG engine family; flag any mismatch with ⚠)
+(Decode VIN chassis code from positions 7-8 if NHTSA model is null. Cross-check with VAG truth. Flag NHTSA conflicts.)
 
 ### Engine Verification
-(Identify VAG engine code - EA837, EA839, EA888, etc.)
+(Identify VAG engine family — EA837/839/855/888/etc. Override NHTSA if it conflicts.)
 
 ### Root Cause Analysis
 ### VCDS Procedure
-### Most Likely Fixes (very common / common / occasional / rare — NO percentages)
+### Most Likely Fixes (very common / common / occasional / rare)
 ### Parts & Fluids
 ### TSBs & Recalls
 ### Canadian Context
@@ -145,15 +129,7 @@ Respond with:
 
     const d = await r.json();
     const text = (d.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n').trim();
-    return {
-      statusCode: 200,
-      headers: h,
-      body: JSON.stringify({
-        result: text,
-        vinData: vinData,
-        tokens: d.usage
-      })
-    };
+    return { statusCode: 200, headers: h, body: JSON.stringify({ result: text, vinData, tokens: d.usage }) };
 
   } catch (e) {
     return { statusCode: 500, headers: h, body: JSON.stringify({ error: e.message }) };
