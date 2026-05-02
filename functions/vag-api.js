@@ -1,137 +1,144 @@
-// VAG Diagnostic Engine v7 — NHTSA validation override
-// When NHTSA data conflicts with known VAG facts, trust VAG facts
+// VAG Tool Validation Bot — 1 test per batch (avoids 10s timeout)
 
-exports.handler = async (event) => {
-  const h = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    'Content-Type': 'application/json',
-  };
-  if (event.httpMethod === 'OPTIONS') return { statusCode: 200, headers: h, body: '' };
-  if (!process.env.ANTHROPIC_API_KEY) return { statusCode: 500, headers: h, body: JSON.stringify({ error: 'No API key' }) };
+const TEST_FLEET = [
+  {
+    id: 'V01',
+    vin: 'WAUZZZF49MN066275',
+    description: 'Audi A4 B9 2021',
+    expected: { make: 'AUDI' },
+    diagnostic: { query: 'Oil specification 0W-20', mustContain: ['VW 508', 'oil'], mustNot: [] }
+  },
+  {
+    id: 'V02',
+    vin: 'WVWAH7AJ7DW123456',
+    description: 'VW Golf GTI MK6 2013',
+    expected: { make: 'VOLKSWAGEN' },
+    diagnostic: { query: 'DSG mechatronic shudder', mustContain: ['DQ', 'mechatronic'], mustNot: [] }
+  },
+  {
+    id: 'V03',
+    vin: 'WAUZZZ8K0CA000000',
+    description: 'Audi S4 B8 (CREC EA837)',
+    expected: { make: 'AUDI' },
+    diagnostic: { query: 'Supercharger whine and water pump issue', mustContain: ['EA837', 'supercharged'], mustNot: ['biturbo'] }
+  },
+  {
+    id: 'V04',
+    vin: 'WUAUFCFC0DN000000',
+    description: 'Audi RS3 8V (5-cyl EA855)',
+    expected: { make: 'AUDI' },
+    diagnostic: { query: 'P0301 misfire cylinder 1 RS3', mustContain: ['EA855'], mustNot: ['4-cyl'] }
+  },
+  {
+    id: 'V05',
+    vin: 'WAUZZZ4G8DN123456',
+    description: 'Audi A6 C7 2013',
+    expected: { make: 'AUDI' },
+    diagnostic: { query: 'Air suspension sagging passenger rear', mustContain: ['suspension'], mustNot: [] }
+  }
+];
 
+async function decodeVIN(vin) {
   try {
-    const { vin, vehicle, queryType, query, sources } = JSON.parse(event.body || '{}');
-    if (!query) return { statusCode: 400, headers: h, body: JSON.stringify({ error: 'Query required' }) };
+    const r = await fetch(`https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/${vin}?format=json`);
+    if (!r.ok) return null;
+    const data = await r.json();
+    const get = key => {
+      const item = (data.Results || []).find(x => x.Variable === key);
+      return item && item.Value && item.Value !== 'Not Applicable' ? item.Value : null;
+    };
+    return {
+      make: get('Make'),
+      model: get('Model'),
+      year: get('Model Year'),
+      cyl: get('Engine Number of Cylinders'),
+      displacement: get('Displacement (L)')
+    };
+  } catch { return null; }
+}
 
-    let vinData = null;
-    if (vin && vin.length === 17) {
-      try {
-        const nhtsaR = await fetch(`https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/${vin}?format=json`);
-        if (nhtsaR.ok) {
-          const data = await nhtsaR.json();
-          const get = (key) => {
-            const r = (data.Results || []).find(r => r.Variable === key);
-            return r && r.Value && r.Value !== 'Not Applicable' ? r.Value : null;
-          };
-          vinData = {
-            make: get('Make'),
-            model: get('Model'),
-            year: get('Model Year'),
-            trim: get('Trim') || get('Series'),
-            displacement: get('Displacement (L)'),
-            cylinders: get('Engine Number of Cylinders'),
-            fuelType: get('Fuel Type - Primary'),
-            transmission: get('Transmission Style'),
-            drive: get('Drive Type'),
-            plant: get('Plant Country'),
-            bodyClass: get('Body Class')
-          };
-        }
-      } catch {}
-    }
-
-    const sys = `Senior VAG technical specialist. Workshop pros depend on accuracy.
-
-ENGINE TRUTH (only confirmed facts):
-EA837=V6 3.0 TFSI SUPERCHARGED (S4 B8, S5, Q7 4L, A6/A7 C7).
-EA839=V6 3.0/2.9 TFSI BITURBO (S4 B9, RS4, RS5, SQ5).
-EA855=2.5 TFSI 5-CYLINDER (RS3, TT RS) — ALWAYS 5-CYL, NEVER 4-CYL.
-EA888=2.0 TFSI 4-cyl turbo (Golf GTI/R, A4 base, A3, etc.).
-EA189=2.0 TDI Dieselgate. EA288=2.0 TDI modern.
-EA211=1.2/1.4/1.5 TSI modern.
-EA896/EA897=V6 3.0 TDI.
-
-FLUIDS: G 052 175 A2=Haldex (0.6L). G 052 529 A2=DQ381. G 055 005 A2=DQ250. G 052 182 A2=DQ200.
-
-NHTSA DATA RELIABILITY RULES — CRITICAL:
-- NHTSA is unreliable for VAG specifics. It often gets cylinder count, engine code, and trim WRONG.
-- If NHTSA says "4-cyl" but the model is a known 5-cyl (RS3, TT RS) → IGNORE NHTSA, use VAG truth table.
-- If NHTSA says "1.98L" for an RS3 → that's WRONG. RS3 = 2.5L 5-cyl EA855.
-- If NHTSA model is null/empty but VIN suggests RS3/RS5/S4/S5 etc. → use chassis code + plant + year to deduce.
-- Always cross-reference NHTSA data with your VAG knowledge. NHTSA is a hint, not gospel.
-- If NHTSA contradicts a known VAG fact, EXPLICITLY note: "⚠ NHTSA reports [X] but [model] uses [Y]".
-
-ABSOLUTE RULES:
-1. NEVER invent specs. Uncertain = "⚠ VERIFY: [what] against ElsaPro/VIN"
-2. NEVER cite percentages or stats. Use: very common / common / occasional / rare.
-3. Engine codes (DEAU, CREC, etc.) are ENGINE codes, not allocations.
-4. Start with ### Vehicle Confirmed (using VIN data BUT cross-checked with VAG truth)
-5. End with ### CONFIDENCE: HIGH/MEDIUM/LOW
-6. Use ### headers. Be direct.`;
-
-    let usr = '';
-    if (vinData && vinData.make) {
-      usr = `=== NHTSA VIN DECODE (HINT ONLY — verify against VAG truth) ===
-VIN: ${vin}
-NHTSA says: ${vinData.year || '?'} ${vinData.make || '?'} ${vinData.model || 'MODEL UNKNOWN'} ${vinData.trim || ''}
-NHTSA engine: ${vinData.displacement || '?'}L ${vinData.cylinders || '?'}-cyl ${vinData.fuelType || ''}
-NHTSA transmission: ${vinData.transmission || 'N/A'}
-NHTSA drive: ${vinData.drive || 'N/A'}
-NHTSA plant: ${vinData.plant || 'N/A'}
-
-⚠ NHTSA is often wrong for VAG specifics. Cross-check with VIN chassis position 7-8 and known VAG truth.
-
-`;
-    } else if (vehicle) {
-      usr = `Vehicle (user-provided): ${vehicle}\n\n`;
-    }
-
-    usr += `Query type: ${queryType}
-Question: ${query}
-Sources: ${(sources || []).slice(0, 3).join(', ')}
-
-Respond with:
-### Vehicle Confirmed
-(Decode VIN chassis code from positions 7-8 if NHTSA model is null. Cross-check with VAG truth. Flag NHTSA conflicts.)
-
-### Engine Verification
-(Identify VAG engine family — EA837/839/855/888/etc. Override NHTSA if it conflicts.)
-
-### Root Cause Analysis
-### VCDS Procedure
-### Most Likely Fixes (very common / common / occasional / rare)
-### Parts & Fluids
-### TSBs & Recalls
-### Canadian Context
-### CONFIDENCE: HIGH/MEDIUM/LOW`;
-
-    const r = await fetch('https://api.anthropic.com/v1/messages', {
+async function testDiagnostic(test) {
+  try {
+    const r = await fetch('https://eurotech-academy.ca/.netlify/functions/vag-api', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': process.env.ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: 'claude-haiku-4-5-20251001',
-        max_tokens: 1200,
-        system: sys,
-        messages: [{ role: 'user', content: usr }]
+        vin: test.vin,
+        queryType: 'dtc',
+        query: test.diagnostic.query,
+        sources: ['AudiWorld']
       })
     });
+    if (!r.ok) return { error: `HTTP ${r.status}` };
+    const data = await r.json();
+    return { response: data.result || '' };
+  } catch (e) { return { error: e.message }; }
+}
 
-    if (!r.ok) {
-      const e = await r.text();
-      return { statusCode: 500, headers: h, body: JSON.stringify({ error: 'API ' + r.status, detail: e }) };
-    }
+function scoreVIN(decoded, expected) {
+  if (!decoded) return { passed: false, issues: ['NHTSA returned null'] };
+  const issues = [];
+  if (expected.make && decoded.make !== expected.make) issues.push(`Make: got "${decoded.make}", expected "${expected.make}"`);
+  return { passed: issues.length === 0, issues, decoded };
+}
 
-    const d = await r.json();
-    const text = (d.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n').trim();
-    return { statusCode: 200, headers: h, body: JSON.stringify({ result: text, vinData, tokens: d.usage }) };
+function scoreDiagnostic(response, test) {
+  if (!response) return { passed: false, issues: ['No response'] };
+  const text = response.toLowerCase();
+  const issues = [];
+  test.diagnostic.mustContain.forEach(t => { if (!text.includes(t.toLowerCase())) issues.push(`MISSING: "${t}"`); });
+  test.diagnostic.mustNot.forEach(t => { if (text.includes(t.toLowerCase())) issues.push(`HALLUCINATION: "${t}"`); });
+  return { passed: issues.length === 0, issues };
+}
 
-  } catch (e) {
-    return { statusCode: 500, headers: h, body: JSON.stringify({ error: e.message }) };
+exports.handler = async (event) => {
+  const headers = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' };
+  const params = event.queryStringParameters || {};
+  const batch = parseInt(params.batch || '1');
+  const idx = batch - 1;
+
+  if (idx < 0 || idx >= TEST_FLEET.length) {
+    return {
+      statusCode: 200,
+      headers,
+      body: JSON.stringify({
+        message: batch > TEST_FLEET.length ? 'No more tests' : 'Invalid batch',
+        totalBatches: TEST_FLEET.length,
+        usage: 'Use ?batch=1 to ?batch=' + TEST_FLEET.length
+      })
+    };
   }
+
+  const test = TEST_FLEET[idx];
+  const decoded = await decodeVIN(test.vin);
+  const vinScore = scoreVIN(decoded, test.expected);
+  const diagResult = await testDiagnostic(test);
+  const diagScore = scoreDiagnostic(diagResult.response, test);
+
+  const result = {
+    id: test.id,
+    description: test.description,
+    vin: test.vin,
+    query: test.diagnostic.query,
+    vinPassed: vinScore.passed,
+    vinIssues: vinScore.issues,
+    decoded: vinScore.decoded,
+    diagPassed: diagScore.passed,
+    diagIssues: diagScore.issues,
+    overallPass: vinScore.passed && diagScore.passed,
+    preview: (diagResult.response || diagResult.error || '').substring(0, 350)
+  };
+
+  const isLast = batch >= TEST_FLEET.length;
+
+  return {
+    statusCode: 200,
+    headers,
+    body: JSON.stringify({
+      batch,
+      totalBatches: TEST_FLEET.length,
+      result,
+      nextUrl: isLast ? null : `/.netlify/functions/bot?batch=${batch + 1}`
+    }, null, 2)
+  };
 };
