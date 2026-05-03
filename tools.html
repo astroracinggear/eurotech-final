@@ -810,6 +810,202 @@ kbd {
 }
 
 /* RESPONSIVE */
+/* LANGUAGE SWITCH */
+.lang-switch {
+  display: flex;
+  border: 1px solid var(--b3);
+  overflow: hidden;
+}
+.lang-switch .lang-btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  padding: 0.4rem 0.7rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-right: 1px solid var(--b3);
+}
+.lang-switch .lang-btn:last-child { border-right: none; }
+.lang-switch .lang-btn.active {
+  background: var(--red);
+  color: white;
+}
+.lang-switch .lang-btn:hover:not(.active) {
+  color: var(--white);
+  background: rgba(255,255,255,0.05);
+}
+
+/* DISCLAIMER BANNER */
+.disclaimer-banner {
+  background: linear-gradient(90deg, rgba(255,184,0,0.08), rgba(255,184,0,0.03));
+  border-bottom: 1px solid rgba(255,184,0,0.25);
+  padding: 0.7rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.78rem;
+  color: var(--white2);
+  position: relative;
+  z-index: 40;
+}
+.disc-icon { color: var(--amber); font-size: 1rem; flex-shrink: 0; }
+.disc-text { flex: 1; line-height: 1.4; }
+.disc-text strong { color: var(--amber); }
+.disc-link {
+  color: var(--amber);
+  text-decoration: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  margin-left: 0.5rem;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+.disc-link:hover { text-decoration: underline; }
+.disc-close {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 1.3rem;
+  cursor: pointer;
+  padding: 0 0.3rem;
+  line-height: 1;
+}
+.disc-close:hover { color: var(--white); }
+
+/* HELP BUTTON IN NAV */
+.help-btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  background: transparent;
+  border: 1px solid var(--b3);
+  color: var(--white2);
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.help-btn:hover {
+  border-color: var(--red);
+  color: var(--red);
+}
+
+/* TUTORIAL MODAL */
+.tutorial-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(5,5,7,0.85);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  overflow-y: auto;
+}
+.tutorial-modal.active { display: flex; }
+.tutorial-content {
+  background: var(--d2);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--red);
+  max-width: 720px;
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.tutorial-header {
+  padding: 1.2rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--d1);
+}
+.tutorial-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.05em;
+  color: var(--white);
+}
+.tutorial-close {
+  background: none;
+  border: none;
+  color: var(--white2);
+  font-size: 1.8rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+}
+.tutorial-close:hover { color: var(--red); }
+.tutorial-body {
+  padding: 1.8rem 2rem;
+  overflow-y: auto;
+  color: var(--white2);
+  line-height: 1.7;
+  font-size: 0.92rem;
+}
+.tutorial-body h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.2rem;
+  color: var(--red);
+  margin: 1.5rem 0 0.5rem;
+  letter-spacing: 0.05em;
+}
+.tutorial-body h3:first-child { margin-top: 0; }
+.tutorial-body p { margin-bottom: 0.8rem; }
+.tutorial-body ul { padding-left: 1.5rem; margin-bottom: 1rem; }
+.tutorial-body ul li { margin-bottom: 0.4rem; }
+.tutorial-body code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  background: var(--d4);
+  padding: 0.1rem 0.4rem;
+  color: var(--amber);
+  border-radius: 2px;
+}
+.tutorial-body strong { color: var(--white); }
+.tutorial-body a { color: var(--red); text-decoration: none; }
+.tutorial-body a:hover { text-decoration: underline; }
+.conf-list { list-style: none !important; padding-left: 0 !important; }
+.conf-list li { padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
+.conf-h { color: var(--green); font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; }
+.conf-m { color: var(--amber); font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; }
+.conf-l { color: var(--red2); font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; }
+.tutorial-footer {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+.btn-got-it {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.9rem 2rem;
+  background: var(--red);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+}
+.btn-got-it:hover { background: #a00015; }
+
+@media(max-width:700px) {
+  .disclaimer-banner { font-size: 0.72rem; padding: 0.6rem 1rem; }
+  .disc-link { display: block; margin-left: 0; margin-top: 0.3rem; }
+  .help-btn { display: none; }
+  .tutorial-content { max-height: 100vh; }
+  .tutorial-body { padding: 1.2rem 1.3rem; }
+}
+
 @media(max-width:900px) {
   .main { grid-template-columns:1fr; }
   .panel-left { position:static; height:auto; }
@@ -844,10 +1040,138 @@ kbd {
       <div class="tool-id">VAG Diagnostic Engine v2.0</div>
     </div>
     <div class="topbar-right">
+      <div class="lang-switch">
+        <button class="lang-btn active" id="lang-en" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" id="lang-fr" onclick="setLang('fr')">FR</button>
+      </div>
+      <button class="help-btn" onclick="openTutorial()" data-en="📖 How to use" data-fr="📖 Mode d'emploi">📖 How to use</button>
       <div class="status-pill"><div class="pulse"></div> AI Online</div>
-      <a href="index.html" class="back-link">← Main site</a>
+      <a href="index.html" class="back-link" data-en="← Main site" data-fr="← Site principal">← Main site</a>
     </div>
   </header>
+
+  <!-- DISCLAIMER BANNER -->
+  <div class="disclaimer-banner">
+    <div class="disc-icon">⚠</div>
+    <div class="disc-text">
+      <span data-en="" data-fr="" class="disc-msg-en">
+        <strong>Reference tool only</strong> — Always validate with ElsaPro / ODIS / VIN-specific documentation before any repair. Eurotech Academy assumes no liability for diagnostics or repair decisions made using this tool.
+      </span>
+      <span class="disc-msg-fr" style="display:none;">
+        <strong>Outil de référence seulement</strong> — Toujours valider avec ElsaPro / ODIS / documentation spécifique au VIN avant toute réparation. Eurotech Academy n'assume aucune responsabilité pour les diagnostics ou décisions de réparation effectués à l'aide de cet outil.
+      </span>
+      <a href="#" onclick="openTutorial();return false;" class="disc-link" data-en="Read usage guide →" data-fr="Voir le mode d'emploi →">Read usage guide →</a>
+    </div>
+    <button class="disc-close" onclick="this.parentElement.style.display='none';localStorage.setItem('disc_dismissed','1');" title="Dismiss">×</button>
+  </div>
+
+  <!-- TUTORIAL MODAL -->
+  <div class="tutorial-modal" id="tutorialModal" onclick="if(event.target===this)closeTutorial()">
+    <div class="tutorial-content">
+      <div class="tutorial-header">
+        <div class="tutorial-title" data-en="How to use this tool" data-fr="Mode d'emploi de l'outil">How to use this tool</div>
+        <button class="tutorial-close" onclick="closeTutorial()">×</button>
+      </div>
+      <div class="tutorial-body">
+
+        <!-- EN VERSION -->
+        <div class="lang-content lang-en">
+          <h3>🎯 What this tool is — and isn't</h3>
+          <p>This is an <strong>AI-powered reference assistant</strong> trained on VAG technical data. It accelerates your diagnostic workflow by aggregating common knowledge from multiple sources. <strong>It is not a replacement for ElsaPro, ODIS, or hands-on inspection.</strong></p>
+
+          <h3>📊 Reading the CONFIDENCE rating</h3>
+          <p>Every response ends with a confidence self-assessment:</p>
+          <ul class="conf-list">
+            <li><span class="conf-h">CONFIDENCE: HIGH</span> — Cross-referenced from multiple verified sources. Safe to act on.</li>
+            <li><span class="conf-m">CONFIDENCE: MEDIUM</span> — General technical reasoning. Verify before ordering parts.</li>
+            <li><span class="conf-l">CONFIDENCE: LOW</span> — Speculative or incomplete data. <strong>Always verify</strong> with ElsaPro.</li>
+          </ul>
+
+          <h3>⚠ The "VERIFY" flag</h3>
+          <p>When you see <code>⚠ VERIFY: [something]</code> in a response, it means the AI is uncertain about that specific detail. Cross-check against ElsaPro before acting on those points.</p>
+
+          <h3>✅ Best practices</h3>
+          <ul>
+            <li><strong>Use VIN when possible</strong> — auto-decodes year/model/engine</li>
+            <li><strong>Be specific in queries</strong> — "P0299 above 3000 rpm WOT" beats "P0299"</li>
+            <li><strong>Mention symptoms together</strong> — "P0299 + rough idle + cold start"</li>
+            <li><strong>Confirm engine code</strong> — the tool may flag uncertainty if VIN/model conflict</li>
+            <li><strong>Cross-check with VCDS live data</strong> — never replace direct measurement</li>
+          </ul>
+
+          <h3>🚫 What NOT to use it for</h3>
+          <ul>
+            <li>❌ Final repair authorization without ElsaPro confirmation</li>
+            <li>❌ Specific torque specs or fluid capacities — always verify by VIN</li>
+            <li>❌ Wiring diagrams or pin assignments — refer to official docs</li>
+            <li>❌ Recall/TSB confirmation — check VW/Audi Canada portal with VIN</li>
+          </ul>
+
+          <h3>💡 When the AI says something wrong</h3>
+          <p>The AI can make mistakes, especially on rare engines or post-2024 models. If a response seems off:</p>
+          <ul>
+            <li>Look at the CONFIDENCE rating — LOW means trust it less</li>
+            <li>Check for ⚠ VERIFY flags</li>
+            <li>Re-run with more specific context (engine code, VIN)</li>
+            <li>Report wrong answers to <a href="mailto:astroracinggear@gmail.com">astroracinggear@gmail.com</a> — helps us improve the system</li>
+          </ul>
+
+          <h3>📈 Continuous improvement</h3>
+          <p>An automated test bot validates this tool daily against known VAG cases. Errors are tracked and the system prompt is refined weekly. Your feedback accelerates this process.</p>
+        </div>
+
+        <!-- FR VERSION -->
+        <div class="lang-content lang-fr" style="display:none;">
+          <h3>🎯 Ce que cet outil est — et n'est pas</h3>
+          <p>Il s'agit d'un <strong>assistant de référence propulsé par IA</strong> formé sur des données techniques VAG. Il accélère votre flux de travail diagnostique en agrégeant des connaissances communes provenant de multiples sources. <strong>Ce n'est pas un substitut à ElsaPro, ODIS, ou une inspection en personne.</strong></p>
+
+          <h3>📊 Lecture de l'indice de CONFIANCE</h3>
+          <p>Chaque réponse se termine par une auto-évaluation de confiance :</p>
+          <ul class="conf-list">
+            <li><span class="conf-h">CONFIDENCE: HIGH</span> — Recoupé de plusieurs sources vérifiées. Vous pouvez agir en toute sécurité.</li>
+            <li><span class="conf-m">CONFIDENCE: MEDIUM</span> — Raisonnement technique général. Vérifiez avant de commander des pièces.</li>
+            <li><span class="conf-l">CONFIDENCE: LOW</span> — Données spéculatives ou incomplètes. <strong>Toujours vérifier</strong> avec ElsaPro.</li>
+          </ul>
+
+          <h3>⚠ Le marqueur "VERIFY"</h3>
+          <p>Quand vous voyez <code>⚠ VERIFY: [élément]</code> dans une réponse, cela signifie que l'IA n'est pas certaine de ce détail spécifique. Recoupez avec ElsaPro avant d'agir sur ces points.</p>
+
+          <h3>✅ Bonnes pratiques</h3>
+          <ul>
+            <li><strong>Utilisez le VIN quand possible</strong> — décode automatiquement année/modèle/moteur</li>
+            <li><strong>Soyez spécifique</strong> — "P0299 au-dessus de 3000 rpm WOT" vaut mieux que "P0299"</li>
+            <li><strong>Mentionnez les symptômes ensemble</strong> — "P0299 + ralenti instable + démarrage à froid"</li>
+            <li><strong>Confirmez le code moteur</strong> — l'outil peut signaler une incertitude si VIN/modèle entrent en conflit</li>
+            <li><strong>Recoupez avec les données VCDS en direct</strong> — ne remplacez jamais une mesure directe</li>
+          </ul>
+
+          <h3>🚫 Ce pour quoi NE PAS l'utiliser</h3>
+          <ul>
+            <li>❌ Autorisation finale de réparation sans confirmation ElsaPro</li>
+            <li>❌ Spécifications de couple ou capacités de fluides spécifiques — toujours vérifier par VIN</li>
+            <li>❌ Schémas électriques ou affectations de broches — consulter les docs officielles</li>
+            <li>❌ Confirmation de rappel/TSB — vérifier le portail VW/Audi Canada avec le VIN</li>
+          </ul>
+
+          <h3>💡 Quand l'IA se trompe</h3>
+          <p>L'IA peut faire des erreurs, surtout sur des moteurs rares ou modèles post-2024. Si une réponse semble étrange :</p>
+          <ul>
+            <li>Regardez l'indice CONFIDENCE — LOW signifie moins de confiance</li>
+            <li>Cherchez les marqueurs ⚠ VERIFY</li>
+            <li>Relancez avec plus de contexte (code moteur, VIN)</li>
+            <li>Signalez les mauvaises réponses à <a href="mailto:astroracinggear@gmail.com">astroracinggear@gmail.com</a> — ça aide à améliorer le système</li>
+          </ul>
+
+          <h3>📈 Amélioration continue</h3>
+          <p>Un bot de test automatisé valide cet outil quotidiennement contre des cas VAG connus. Les erreurs sont suivies et le système est affiné chaque semaine. Vos commentaires accélèrent ce processus.</p>
+        </div>
+
+        <div class="tutorial-footer">
+          <button class="btn-got-it" onclick="closeTutorial()" data-en="Got it — let's diagnose" data-fr="Compris — diagnostiquons">Got it — let's diagnose</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="main">
 
@@ -999,6 +1323,143 @@ kbd {
 </div>
 
 <script>
+/* ═══════════════════════════
+   STATE
+═══════════════════════════ */
+/* ═══════════════════════════
+   LANGUAGE SWITCH
+═══════════════════════════ */
+function setLang(lang) {
+  document.documentElement.setAttribute('lang', lang);
+  localStorage.setItem('vag_lang', lang);
+
+  // Toggle lang buttons
+  document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+  document.getElementById('lang-fr').classList.toggle('active', lang === 'fr');
+
+  // Update all elements with data-en / data-fr
+  document.querySelectorAll('[data-en][data-fr]').forEach(el => {
+    el.textContent = lang === 'fr' ? el.dataset.fr : el.dataset.en;
+  });
+
+  // Toggle disclaimer message
+  const enMsg = document.querySelector('.disc-msg-en');
+  const frMsg = document.querySelector('.disc-msg-fr');
+  if (enMsg && frMsg) {
+    enMsg.style.display = lang === 'fr' ? 'none' : '';
+    frMsg.style.display = lang === 'fr' ? '' : 'none';
+  }
+
+  // Toggle tutorial content
+  document.querySelectorAll('.lang-en').forEach(el => {
+    if (!el.classList.contains('lang-btn')) el.style.display = lang === 'fr' ? 'none' : '';
+  });
+  document.querySelectorAll('.lang-fr').forEach(el => {
+    if (!el.classList.contains('lang-btn')) el.style.display = lang === 'fr' ? '' : 'none';
+  });
+
+  // Update placeholders and labels in form
+  updateFormLabels(lang);
+}
+
+function updateFormLabels(lang) {
+  const t = {
+    en: {
+      vehicle: 'Vehicle',
+      vinLabel: 'VIN (recommended — auto-decode)',
+      orManually: '— OR enter manually —',
+      brandModel: 'Brand / Model',
+      year: 'Year',
+      engineCode: 'Engine Code',
+      sources: 'Sources',
+      toggleAll: 'Toggle all',
+      recentSearches: 'Recent searches',
+      searchBtn: 'Search + AI Verify',
+      searching: 'Searching…',
+      shortcut: 'to search',
+      statusReady: 'Status: Ready',
+      clear: 'Clear',
+      copy: 'Copy',
+      newSearch: 'New Search',
+      diagReady: 'DIAGNOSTIC ENGINE READY',
+      diagSub: 'Enter vehicle info + query<br>Select sources · Hit search<br>AI verifies every result',
+      typeDtc: 'DTC Code',
+      typeSymptom: 'Symptom',
+      typeService: 'Service',
+      typePerf: 'Performance'
+    },
+    fr: {
+      vehicle: 'Véhicule',
+      vinLabel: 'VIN (recommandé — décodage auto)',
+      orManually: '— OU saisir manuellement —',
+      brandModel: 'Marque / Modèle',
+      year: 'Année',
+      engineCode: 'Code moteur',
+      sources: 'Sources',
+      toggleAll: 'Tout basculer',
+      recentSearches: 'Recherches récentes',
+      searchBtn: 'Rechercher + Vérif IA',
+      searching: 'Recherche…',
+      shortcut: 'pour rechercher',
+      statusReady: 'Statut : Prêt',
+      clear: 'Effacer',
+      copy: 'Copier',
+      newSearch: 'Nouvelle recherche',
+      diagReady: 'MOTEUR DE DIAGNOSTIC PRÊT',
+      diagSub: 'Entrez infos véhicule + question<br>Sélectionnez sources · Lancez recherche<br>L\'IA vérifie chaque résultat',
+      typeDtc: 'Code DTC',
+      typeSymptom: 'Symptôme',
+      typeService: 'Entretien',
+      typePerf: 'Performance'
+    }
+  };
+  const tr = t[lang] || t.en;
+
+  // Type selector buttons
+  const btnDtc = document.getElementById('btn-dtc');
+  const btnSymptom = document.getElementById('btn-symptom');
+  const btnMaintenance = document.getElementById('btn-maintenance');
+  const btnTuning = document.getElementById('btn-tuning');
+  if (btnDtc) btnDtc.querySelector('.type-label').textContent = tr.typeDtc;
+  if (btnSymptom) btnSymptom.querySelector('.type-label').textContent = tr.typeSymptom;
+  if (btnMaintenance) btnMaintenance.querySelector('.type-label').textContent = tr.typeService;
+  if (btnTuning) btnTuning.querySelector('.type-label').textContent = tr.typePerf;
+
+  // Search button
+  const btnText = document.getElementById('btn-text');
+  if (btnText && !document.getElementById('search-btn').disabled) {
+    btnText.textContent = tr.searchBtn;
+  }
+}
+
+// Init from saved preference
+const savedLang = localStorage.getItem('vag_lang') || 'en';
+setLang(savedLang);
+
+/* ═══════════════════════════
+   TUTORIAL MODAL
+═══════════════════════════ */
+function openTutorial() {
+  document.getElementById('tutorialModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeTutorial() {
+  document.getElementById('tutorialModal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+// Show tutorial on first visit
+if (!localStorage.getItem('tutorial_seen')) {
+  setTimeout(() => {
+    openTutorial();
+    localStorage.setItem('tutorial_seen', '1');
+  }, 800);
+}
+// Hide disclaimer if previously dismissed
+if (localStorage.getItem('disc_dismissed')) {
+  const banner = document.querySelector('.disclaimer-banner');
+  if (banner) banner.style.display = 'none';
+}
+
 /* ═══════════════════════════
    STATE
 ═══════════════════════════ */
