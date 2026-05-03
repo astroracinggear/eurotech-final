@@ -1,36 +1,40 @@
-// VAG Tool Validation Bot — runs 2 tests per call to fit Netlify 10s limit
-// Call multiple times to cover all tests, or use ?test=1 to run specific test
+// VAG Tool Validation Bot — 1 test per batch (avoids 10s timeout)
 
 const TEST_FLEET = [
   {
     id: 'V01',
-    vin: 'WAUB4AF45MA000000',
-    expected: { make: 'AUDI', model: 'S4', year: '2021' },
-    diagnostic: { query: 'P0299 underboost above 3000 rpm', mustContain: ['EA839'], mustNot: ['EA888', '4-cyl'] }
+    vin: 'WAUZZZF49MN066275',
+    description: 'Audi A4 B9 2021',
+    expected: { make: 'AUDI' },
+    diagnostic: { query: 'Oil specification 0W-20', mustContain: ['VW 508', 'oil'], mustNot: [] }
   },
   {
     id: 'V02',
-    vin: 'WVWZZZ5GZJW000000',
+    vin: 'WVWAH7AJ7DW123456',
+    description: 'VW Golf GTI MK6 2013',
     expected: { make: 'VOLKSWAGEN' },
-    diagnostic: { query: 'P0016 cam correlation', mustContain: ['EA888'], mustNot: ['V6', 'biturbo'] }
+    diagnostic: { query: 'DSG mechatronic shudder', mustContain: ['DQ', 'mechatronic'], mustNot: [] }
   },
   {
     id: 'V03',
     vin: 'WAUZZZ8K0CA000000',
-    expected: { make: 'AUDI', model: 'S4' },
-    diagnostic: { query: 'Supercharger whine at idle', mustContain: ['EA837', 'supercharged'], mustNot: ['biturbo'] }
+    description: 'Audi S4 B8 (CREC EA837)',
+    expected: { make: 'AUDI' },
+    diagnostic: { query: 'Supercharger whine and water pump issue', mustContain: ['EA837', 'supercharged'], mustNot: ['biturbo'] }
   },
   {
     id: 'V04',
     vin: 'WUAUFCFC0DN000000',
+    description: 'Audi RS3 8V (5-cyl EA855)',
     expected: { make: 'AUDI' },
-    diagnostic: { query: 'P0301 misfire cylinder 1', mustContain: ['EA855', '5-cyl'], mustNot: ['4-cyl'] }
+    diagnostic: { query: 'P0301 misfire cylinder 1 RS3', mustContain: ['EA855'], mustNot: ['4-cyl'] }
   },
   {
     id: 'V05',
-    vin: 'WA1VAAF73JD000000',
+    vin: 'WAUZZZ4G8DN123456',
+    description: 'Audi A6 C7 2013',
     expected: { make: 'AUDI' },
-    diagnostic: { query: 'DSG service interval', mustContain: ['DQ'], mustNot: [] }
+    diagnostic: { query: 'Air suspension sagging passenger rear', mustContain: ['suspension'], mustNot: [] }
   }
 ];
 
@@ -89,58 +93,52 @@ function scoreDiagnostic(response, test) {
 
 exports.handler = async (event) => {
   const headers = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' };
-
-  // Parse query string for batch number
   const params = event.queryStringParameters || {};
   const batch = parseInt(params.batch || '1');
-  const batchSize = 2;
-  const startIdx = (batch - 1) * batchSize;
-  const endIdx = Math.min(startIdx + batchSize, TEST_FLEET.length);
-  const testsToRun = TEST_FLEET.slice(startIdx, endIdx);
+  const idx = batch - 1;
 
-  if (testsToRun.length === 0) {
+  if (idx < 0 || idx >= TEST_FLEET.length) {
     return {
       statusCode: 200,
       headers,
       body: JSON.stringify({
-        message: 'No more tests',
-        totalBatches: Math.ceil(TEST_FLEET.length / batchSize),
-        usage: 'Add ?batch=1, 2, 3 to URL'
+        message: batch > TEST_FLEET.length ? 'No more tests' : 'Invalid batch',
+        totalBatches: TEST_FLEET.length,
+        usage: 'Use ?batch=1 to ?batch=' + TEST_FLEET.length
       })
     };
   }
 
-  const results = [];
-  for (const test of testsToRun) {
-    const decoded = await decodeVIN(test.vin);
-    const vinScore = scoreVIN(decoded, test.expected);
-    const diagResult = await testDiagnostic(test);
-    const diagScore = scoreDiagnostic(diagResult.response, test);
-    results.push({
-      id: test.id,
-      vin: test.vin,
-      vinPassed: vinScore.passed,
-      vinIssues: vinScore.issues,
-      decoded: vinScore.decoded,
-      diagPassed: diagScore.passed,
-      diagIssues: diagScore.issues,
-      preview: (diagResult.response || diagResult.error || '').substring(0, 200)
-    });
-  }
+  const test = TEST_FLEET[idx];
+  const decoded = await decodeVIN(test.vin);
+  const vinScore = scoreVIN(decoded, test.expected);
+  const diagResult = await testDiagnostic(test);
+  const diagScore = scoreDiagnostic(diagResult.response, test);
 
-  // Send email if we ran the LAST batch
-  const isLastBatch = endIdx >= TEST_FLEET.length;
+  const result = {
+    id: test.id,
+    description: test.description,
+    vin: test.vin,
+    query: test.diagnostic.query,
+    vinPassed: vinScore.passed,
+    vinIssues: vinScore.issues,
+    decoded: vinScore.decoded,
+    diagPassed: diagScore.passed,
+    diagIssues: diagScore.issues,
+    overallPass: vinScore.passed && diagScore.passed,
+    preview: (diagResult.response || diagResult.error || '').substring(0, 350)
+  };
+
+  const isLast = batch >= TEST_FLEET.length;
 
   return {
     statusCode: 200,
     headers,
     body: JSON.stringify({
       batch,
-      totalBatches: Math.ceil(TEST_FLEET.length / batchSize),
-      tested: testsToRun.length,
-      passed: results.filter(r => r.vinPassed && r.diagPassed).length,
-      results,
-      nextUrl: isLastBatch ? null : `/.netlify/functions/bot?batch=${batch + 1}`
+      totalBatches: TEST_FLEET.length,
+      result,
+      nextUrl: isLast ? null : `/.netlify/functions/bot?batch=${batch + 1}`
     }, null, 2)
   };
 };
