@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Real VAG Diagnostic Cases — Eurotech Performance Academy</title>
+<meta name="description" content="Real-world VAG diagnostic case studies: EA888 oil consumption, EA189 TDI P0237, Haldex AWD service, air suspension failures. Workshop-tested procedures with VCDS, optimized for Canadian climate.">
+<meta name="keywords" content="EA888 oil consumption, PCV failure VAG, Audi S3 8V, VW Golf R MK7, P0299, P0237, EA189 TDI, CJAA, G31 MAP sensor, Haldex service, AWD Golf R, air suspension Q7 4L, A8 air bag, Touareg suspension, Canadian winter VAG, VCDS diagnostic">
+<link rel="canonical" href="https://eurotech-academy.ca/cas-reels.html">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Real VAG Cases — EA888 Oil Consumption Diagnosis">
+<meta property="og:description" content="Workshop case study: 2016 Audi S3 with excessive oil consumption resolved through PCV diagnosis.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://eurotech-academy.ca/cas-reels.html">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --red: #C8001A; --red-dark: #8B0012; --black: #0A0A0A;
+  --dark: #111111; --dark2: #1A1A1A; --white: #F5F5F3;
+  --silver: #C0C0C0; --muted: #888; --border: rgba(255,255,255,0.06);
+  --green: #00E87A; --amber: #FFB800;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;line-height:1.7}
+
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0.3;
+  background-image:linear-gradient(rgba(200,0,26,0.04) 1px, transparent 1px),linear-gradient(90deg, rgba(200,0,26,0.04) 1px, transparent 1px);
+  background-size:48px 48px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;background:rgba(10,10,10,0.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(200,0,26,0.2)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:0.12em;color:var(--white);text-decoration:none}
+.nav-logo span{color:var(--red)}
+.nav-back{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);text-decoration:none}
+.nav-back:hover{color:var(--red)}
+.nav-lang{display:flex;gap:0.4rem}
+.lang-btn{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;padding:0.3rem 0.7rem;border:1px solid rgba(255,255,255,0.15);background:transparent;color:var(--silver);cursor:pointer}
+.lang-btn.active{border-color:var(--red);color:var(--white);background:rgba(200,0,26,0.1)}
+
+/* HERO */
+.hero{position:relative;z-index:1;padding:8rem 2rem 4rem;max-width:1100px;margin:0 auto;text-align:center}
+.hero-tag{font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--red);margin-bottom:1.5rem}
+h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,6vw,5rem);line-height:0.95;letter-spacing:0.02em;margin-bottom:1.5rem}
+h1 span{color:var(--red)}
+.hero-sub{font-size:1.1rem;color:rgba(245,245,243,0.65);max-width:680px;margin:0 auto 2rem;line-height:1.7}
+
+.hero-stats{display:flex;justify-content:center;gap:3rem;margin-top:2rem;flex-wrap:wrap}
+.stat{text-align:center}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;line-height:1}
+.stat-num span{color:var(--red)}
+.stat-label{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.15em;color:var(--muted);margin-top:0.3rem;text-transform:uppercase}
+
+.divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(200,0,26,0.3),transparent)}
+
+/* CASE CARDS */
+.cases-section{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:4rem 2rem}
+.case-card{background:var(--dark2);border:1px solid var(--border);border-left:3px solid var(--red);margin-bottom:3rem;padding:0;overflow:hidden;position:relative}
+
+.case-header{padding:2rem 2.5rem 1.5rem;background:linear-gradient(135deg,rgba(200,0,26,0.08),rgba(0,0,0,0));border-bottom:1px solid var(--border)}
+.case-tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);background:rgba(200,0,26,0.1);padding:0.3rem 0.8rem;margin-bottom:1rem}
+.case-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;line-height:1;letter-spacing:0.04em;margin-bottom:0.6rem}
+.case-meta{display:flex;flex-wrap:wrap;gap:1.5rem;margin-top:1rem}
+.case-meta-item{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--muted);letter-spacing:0.05em}
+.case-meta-item span{color:var(--white)}
+
+.case-body{padding:2rem 2.5rem}
+.case-body h2{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.05em;color:var(--red);margin:2rem 0 0.8rem;padding-bottom:0.4rem;border-bottom:1px solid var(--border)}
+.case-body h2:first-child{margin-top:0}
+.case-body h3{font-family:'DM Sans',sans-serif;font-size:1.05rem;font-weight:600;color:var(--white);margin:1.5rem 0 0.5rem}
+.case-body p{font-size:0.95rem;color:rgba(245,245,243,0.85);margin-bottom:1rem;line-height:1.7}
+.case-body strong{color:var(--white);font-weight:600}
+.case-body ul{padding-left:1.5rem;margin-bottom:1rem}
+.case-body li{margin-bottom:0.4rem;color:rgba(245,245,243,0.85)}
+.case-body li::marker{color:var(--red)}
+.case-body code{font-family:'JetBrains Mono',monospace;font-size:0.85rem;background:var(--dark);border:1px solid var(--border);padding:0.15rem 0.5rem;color:#FFB800}
+
+.symptom-box{background:rgba(255,184,0,0.06);border:1px solid rgba(255,184,0,0.25);border-left:3px solid var(--amber);padding:1rem 1.3rem;margin:1rem 0;font-size:0.92rem}
+.symptom-box strong{color:var(--amber)}
+.solution-box{background:rgba(0,232,122,0.06);border:1px solid rgba(0,232,122,0.25);border-left:3px solid var(--green);padding:1rem 1.3rem;margin:1rem 0;font-size:0.92rem}
+.solution-box strong{color:var(--green)}
+
+.steps-list{counter-reset:step;list-style:none;padding-left:0;margin:1rem 0}
+.steps-list li{counter-increment:step;padding:0.8rem 0 0.8rem 3rem;border-bottom:1px solid var(--border);position:relative}
+.steps-list li:last-child{border-bottom:none}
+.steps-list li::before{content:counter(step);position:absolute;left:0;top:0.6rem;width:2rem;height:2rem;background:var(--red);color:white;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;display:flex;align-items:center;justify-content:center;clip-path:polygon(0 0,calc(100% - 4px) 0,100% 4px,100% 100%,0 100%)}
+
+.case-footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);background:var(--dark);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.case-footer-time{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--muted);letter-spacing:0.05em}
+.case-footer-tags{display:flex;gap:0.5rem;flex-wrap:wrap}
+.tag-pill{font-family:'JetBrains Mono',monospace;font-size:0.6rem;padding:0.25rem 0.7rem;border:1px solid rgba(255,255,255,0.1);color:var(--muted);letter-spacing:0.05em}
+
+/* CTA */
+.cta-section{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:4rem 2rem;text-align:center}
+.cta-card{background:var(--dark2);border:1px solid rgba(200,0,26,0.3);padding:3rem;clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,0 100%)}
+.cta-card h2{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:0.04em;margin-bottom:1rem}
+.cta-card p{color:rgba(245,245,243,0.7);margin-bottom:2rem;max-width:520px;margin-left:auto;margin-right:auto}
+.btn-primary{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;padding:1rem 2.5rem;background:var(--red);color:var(--white);text-decoration:none;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%);transition:background 0.2s}
+.btn-primary:hover{background:var(--red-dark)}
+
+/* FOOTER */
+footer{background:var(--dark);border-top:1px solid var(--border);padding:2rem;text-align:center;position:relative;z-index:1}
+footer p{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;color:var(--muted);text-transform:uppercase}
+
+/* LANG */
+.fr-text{display:none}
+.en-text{display:block}
+body.fr .fr-text{display:block}
+body.fr .en-text{display:none}
+.en-inline{display:inline}
+.fr-inline{display:none}
+body.fr .en-inline{display:none}
+body.fr .fr-inline{display:inline}
+
+@media(max-width:700px){
+  nav{padding:0.8rem 1rem}
+  .hero{padding:6rem 1rem 3rem}
+  .cases-section,.cta-section{padding:2rem 1rem}
+  .case-card{margin-bottom:2rem}
+  .case-header,.case-body,.case-footer{padding-left:1.5rem;padding-right:1.5rem}
+  .case-meta{flex-direction:column;gap:0.5rem}
+  .hero-stats{gap:1.5rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">EUROTECH<span>.</span>ACADEMY</a>
+  <div style="display:flex;gap:1rem;align-items:center;">
+    <div class="nav-lang">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('fr')">FR</button>
+    </div>
+    <a href="index.html" class="nav-back">← <span class="en-inline">Main site</span><span class="fr-inline">Site principal</span></a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag en-text">Real Workshop Cases</div>
+  <div class="hero-tag fr-text">Cas Atelier Réels</div>
+  <h1 class="en-text">VAG DIAGNOSTICS<br><span>FROM THE WORKSHOP.</span></h1>
+  <h1 class="fr-text">DIAGNOSTICS VAG<br><span>DE L'ATELIER.</span></h1>
+  <p class="hero-sub en-text">Real cases solved by Eurotech Academy. Each case shows the symptoms, the diagnostic process with VCDS, and the verified fix. Built to help technicians recognize and resolve the same issues faster.</p>
+  <p class="hero-sub fr-text">Vrais cas résolus par Eurotech Academy. Chaque cas présente les symptômes, le processus diagnostique avec VCDS et la solution vérifiée. Conçu pour aider les techniciens à reconnaître et résoudre les mêmes problèmes plus rapidement.</p>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">4<span>+</span></div>
+      <div class="stat-label en-text">Cases documented</div>
+      <div class="stat-label fr-text">Cas documentés</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num"><span>100%</span></div>
+      <div class="stat-label en-text">Solved</div>
+      <div class="stat-label fr-text">Résolus</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">VCDS</div>
+      <div class="stat-label en-text">Diagnostic tool</div>
+      <div class="stat-label fr-text">Outil diagnostic</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CASE 1 -->
+<section class="cases-section">
+  <article class="case-card">
+
+    <div class="case-header">
+      <div class="case-tag">Case #001 · EA888 Gen3</div>
+      <h2 class="case-title en-text">Excessive Oil Consumption — 2016 Audi S3</h2>
+      <h2 class="case-title fr-text">Consommation d'Huile Excessive — Audi S3 2016</h2>
+      <div class="case-meta">
+        <div class="case-meta-item">Vehicle: <span>2016 Audi S3 (8V)</span></div>
+        <div class="case-meta-item">Engine: <span>EA888 Gen3 (CJXC)</span></div>
+        <div class="case-meta-item">Mileage: <span>~160,000 km</span></div>
+        <div class="case-meta-item en-inline">Issue: <span>Oil loss + unstable idle</span></div>
+        <div class="case-meta-item fr-inline">Problème: <span>Perte d'huile + ralenti instable</span></div>
+      </div>
+    </div>
+
+    <div class="case-body">
+
+      <!-- ENGLISH -->
+      <div class="en-text">
+        <h2>The Symptoms</h2>
+        <div class="symptom-box">
+          <strong>Customer complaint:</strong> "My car is burning oil — I'm adding 1 liter every 1,500 km. There's no leak under the car, no smoke from the exhaust, but the idle feels rough some mornings."
+        </div>
+        <p>On initial inspection, the diagnosis was anything but obvious. <strong>No external oil leaks</strong> on the engine block, transmission, or oil pan. <strong>No CEL — zero stored DTCs</strong> on first VCDS scan. The customer was clearly losing oil somewhere internal.</p>
+
+        <h2>The Investigation</h2>
+
+        <h3>Step 1 — Confirming oil consumption is internal</h3>
+        <p>With no external leaks and no exhaust smoke (which would suggest valve seals or piston rings), the next suspect on the EA888 Gen3 is always the <strong>PCV system</strong>. The crankcase ventilation is known to fail on this engine family — when the PCV diaphragm tears or sticks, oil gets pulled into the intake tract through the charge pipes.</p>
+
+        <h3>Step 2 — Quick PCV pressure test</h3>
+        <p>I removed the oil filler cap with the engine running at idle. <strong>The engine speed didn't change.</strong> On a healthy PCV system, pulling the cap should cause a slight drop in idle (broken vacuum seal). No change = the PCV is already pulling air from somewhere it shouldn't be — confirming PCV failure suspicion.</p>
+
+        <h3>Step 3 — Visual inspection of charge pipes</h3>
+        <p>Disconnected the charge pipe from the throttle body. <strong>Pipes were saturated with oil.</strong> This is the smoking gun — failed PCV diaphragm allowing crankcase oil mist to enter the intake tract, which then gets burned in the combustion chamber. Explains the consumption without external leaks or visible smoke.</p>
+
+        <h3>Step 4 — VCDS confirmation</h3>
+        <p>Connected VCDS and looked at long-term fuel trims (LTFT) under load:</p>
+        <ul>
+          <li>LTFT Bank 1 was working hard to compensate (significant correction values)</li>
+          <li>The engine was running rich-correction-rich constantly</li>
+          <li>Confirms unmetered oil entering the combustion mix</li>
+        </ul>
+      </div>
+
+      <!-- FRENCH -->
+      <div class="fr-text">
+        <h2>Les Symptômes</h2>
+        <div class="symptom-box">
+          <strong>Plainte du client :</strong> « Mon auto brûle de l'huile — j'ajoute 1 litre à tous les 1500 km. Aucune fuite sous l'auto, pas de fumée à l'échappement, mais le ralenti vibre certains matins. »
+        </div>
+        <p>À l'inspection initiale, le diagnostic était tout sauf évident. <strong>Aucune fuite d'huile externe</strong> visible sur le bloc, la transmission ou le carter. <strong>Pas de CEL — zéro DTC enregistré</strong> au premier scan VCDS. Le client perdait clairement de l'huile quelque part à l'interne.</p>
+
+        <h2>L'Investigation</h2>
+
+        <h3>Étape 1 — Confirmer que la consommation est interne</h3>
+        <p>Aucune fuite externe et aucune fumée à l'échappement (qui suggérerait des joints de queue de soupape ou des segments), le prochain suspect sur l'EA888 Gen3 est toujours le <strong>système PCV</strong>. La ventilation du carter est reconnue pour faire défaut sur cette famille de moteurs — quand le diaphragme PCV se déchire ou colle, l'huile est aspirée dans le tract d'admission via les charge pipes.</p>
+
+        <h3>Étape 2 — Test rapide de pression PCV</h3>
+        <p>J'ai enlevé le bouchon d'huile avec le moteur au ralenti. <strong>Le régime moteur n'a pas changé.</strong> Sur un système PCV sain, retirer le bouchon devrait causer une légère chute du ralenti (rupture de l'étanchéité du vide). Pas de changement = le PCV aspire déjà de l'air d'un endroit où il ne devrait pas — confirme la défaillance PCV.</p>
+
+        <h3>Étape 3 — Inspection visuelle des charge pipes</h3>
+        <p>J'ai débranché le charge pipe du papillon. <strong>Les conduits étaient saturés d'huile.</strong> C'est la preuve formelle — diaphragme PCV défectueux qui permet à la brume d'huile du carter d'entrer dans le tract d'admission, puis d'être brûlée dans la chambre de combustion. Ça explique la consommation sans fuite externe ni fumée visible.</p>
+
+        <h3>Étape 4 — Confirmation VCDS</h3>
+        <p>Branché le VCDS et regardé les fuel trims long terme (LTFT) sous charge :</p>
+        <ul>
+          <li>LTFT Banque 1 travaillait fort pour compenser (valeurs de correction significatives)</li>
+          <li>Le moteur tournait en correction-riche-correction constamment</li>
+          <li>Confirme l'huile non-mesurée qui entre dans le mélange de combustion</li>
+        </ul>
+      </div>
+
+      <h2 class="en-text">The Diagnosis Procedure</h2>
+      <h2 class="fr-text">La Procédure Diagnostique</h2>
+
+      <ol class="steps-list">
+        <li class="en-text"><strong>Visual external check</strong> — confirm no oil leaks at valve cover, oil pan, turbo seals, or rear main</li>
+        <li class="fr-text"><strong>Vérification visuelle externe</strong> — confirmer aucune fuite au couvercle de soupapes, carter, joints turbo ou principal arrière</li>
+
+        <li class="en-text"><strong>Exhaust observation</strong> — no smoke under acceleration rules out valve seals/rings</li>
+        <li class="fr-text"><strong>Observation échappement</strong> — pas de fumée à l'accélération exclut les joints de soupapes/segments</li>
+
+        <li class="en-text"><strong>PCV test (oil cap method)</strong> — engine running at idle, remove oil cap. RPM should drop slightly. No change = failed PCV</li>
+        <li class="fr-text"><strong>Test PCV (méthode bouchon d'huile)</strong> — moteur au ralenti, enlever le bouchon d'huile. Le RPM devrait descendre légèrement. Aucun changement = PCV défectueux</li>
+
+        <li class="en-text"><strong>Charge pipe inspection</strong> — disconnect both pipes. Oil pooling = PCV pulling oil through</li>
+        <li class="fr-text"><strong>Inspection charge pipes</strong> — débrancher les deux conduits. Huile accumulée = PCV qui aspire l'huile</li>
+
+        <li class="en-text"><strong>VCDS fuel trim analysis</strong> — log LTFT under load. Significant negative correction confirms unmetered fuel/oil entering combustion</li>
+        <li class="fr-text"><strong>Analyse fuel trim VCDS</strong> — enregistrer LTFT sous charge. Correction négative significative confirme du carburant/huile non-mesuré entrant dans la combustion</li>
+
+        <li class="en-text"><strong>Turbo inspection</strong> — verify turbo seals, especially on aftermarket turbos that may not be OEM-grade</li>
+        <li class="fr-text"><strong>Inspection turbo</strong> — vérifier les joints du turbo, particulièrement sur les turbos aftermarket qui ne sont pas nécessairement de qualité OEM</li>
+      </ol>
+
+      <h2 class="en-text">The Solution</h2>
+      <h2 class="fr-text">La Solution</h2>
+
+      <div class="solution-box en-text">
+        <strong>Fix:</strong> PCV valve replacement + turbo seal inspection. Critical detail — the customer had an <strong>aftermarket turbo</strong> installed previously, so verifying the turbo wasn't the source of pressurized oil overwhelming the PCV was essential.
+      </div>
+      <div class="solution-box fr-text">
+        <strong>Solution :</strong> Remplacement de la valve PCV + inspection des joints turbo. Détail critique — le client avait un <strong>turbo aftermarket</strong> installé précédemment, donc vérifier que le turbo n'était pas la source d'huile pressurisée surchargeant le PCV était essentiel.
+      </div>
+
+      <p class="en-text"><strong>Why this matters:</strong> A failed PCV is the most common cause of "phantom" oil consumption on EA888 Gen3 engines. But on modified vehicles with aftermarket turbos, the root cause might be a leaking turbo seal pushing oil into the crankcase faster than the PCV can handle, eventually destroying the PCV diaphragm. <strong>Replacing the PCV without checking the turbo is just buying time</strong> — the new PCV will fail again.</p>
+      <p class="fr-text"><strong>Pourquoi c'est important :</strong> Un PCV défectueux est la cause la plus commune de consommation d'huile « fantôme » sur les moteurs EA888 Gen3. Mais sur les véhicules modifiés avec des turbos aftermarket, la cause profonde peut être un joint de turbo qui fuit et pousse l'huile dans le carter plus rapidement que le PCV peut gérer, finissant par détruire le diaphragme PCV. <strong>Remplacer le PCV sans vérifier le turbo, c'est juste gagner du temps</strong> — le nouveau PCV tombera en panne aussi.</p>
+
+      <h3 class="en-text">Key Takeaways for Technicians</h3>
+      <h3 class="fr-text">Points Clés pour Techniciens</h3>
+
+      <ul class="en-text">
+        <li><strong>EA888 Gen3 PCV is a known weak point</strong> — always suspect it on internal oil consumption with no DTC</li>
+        <li><strong>The oil cap test is fast and free</strong> — should be your first check</li>
+        <li><strong>Charge pipes full of oil = definitive sign</strong> of PCV failure</li>
+        <li><strong>VCDS fuel trims tell the story</strong> — extra fuel correction confirms unmetered intake contamination</li>
+        <li><strong>On modified cars, check the modification first</strong> — aftermarket turbos can destroy stock PCV systems</li>
+        <li><strong>No DTC ≠ no problem</strong> — the ECU only flags what it's calibrated to detect</li>
+      </ul>
+
+      <ul class="fr-text">
+        <li><strong>Le PCV de l'EA888 Gen3 est un point faible connu</strong> — toujours le suspecter sur consommation d'huile interne sans DTC</li>
+        <li><strong>Le test du bouchon d'huile est rapide et gratuit</strong> — devrait être votre première vérification</li>
+        <li><strong>Charge pipes pleins d'huile = signe définitif</strong> de défaillance PCV</li>
+        <li><strong>Les fuel trims VCDS racontent l'histoire</strong> — correction de carburant supplémentaire confirme contamination non-mesurée à l'admission</li>
+        <li><strong>Sur les véhicules modifiés, vérifiez d'abord la modification</strong> — les turbos aftermarket peuvent détruire le système PCV d'origine</li>
+        <li><strong>Pas de DTC ≠ pas de problème</strong> — l'ECU ne signale que ce qu'il est calibré pour détecter</li>
+      </ul>
+
+    </div>
+
+    <div class="case-footer">
+      <div class="case-footer-time en-text">Diagnostic time: ~1.5h · Repair: ~1h</div>
+      <div class="case-footer-time fr-text">Temps diagnostic: ~1,5h · Réparation: ~1h</div>
+      <div class="case-footer-tags">
+        <span class="tag-pill">EA888</span>
+        <span class="tag-pill">PCV</span>
+        <span class="tag-pill">VCDS</span>
+        <span class="tag-pill">Audi S3</span>
+        <span class="tag-pill">Oil Consumption</span>
+      </div>
+    </div>
+
+  </article>
+
+  <!-- CASE 2 -->
+  <article class="case-card">
+
+    <div class="case-header">
+      <div class="case-tag">Case #002 · EA189 TDI · Canadian Winter</div>
+      <h2 class="case-title en-text">P0237 Boost Sensor Voltage Low — VW Golf TDI</h2>
+      <h2 class="case-title fr-text">P0237 Tension Capteur de Suralimentation Basse — VW Golf TDI</h2>
+      <div class="case-meta">
+        <div class="case-meta-item">Vehicle: <span>VW Golf TDI MK6</span></div>
+        <div class="case-meta-item">Engine: <span>EA189 (CJAA)</span></div>
+        <div class="case-meta-item en-inline">Code: <span>P0237 — MAP/G31</span></div>
+        <div class="case-meta-item fr-inline">Code: <span>P0237 — MAP/G31</span></div>
+        <div class="case-meta-item en-inline">Symptom: <span>Intermittent limp mode</span></div>
+        <div class="case-meta-item fr-inline">Symptôme: <span>Mode dégradé intermittent</span></div>
+      </div>
+    </div>
+
+    <div class="case-body">
+
+      <!-- ENGLISH -->
+      <div class="en-text">
+        <h2>The Symptoms</h2>
+        <div class="symptom-box">
+          <strong>Customer complaint:</strong> "My TDI keeps going into limp mode randomly — sometimes after 5 minutes of driving, sometimes after 30. It happens more in cold weather. P0237 keeps coming back."
+        </div>
+        <p>This is a <strong>classic Canadian winter case</strong> on the EA189 TDI platform. The CJAA engine code (and similar EA189 variants) is known for a specific failure mode that's amplified by our climate. The customer brought it in <strong>at the end of February</strong> — peak season for this exact issue.</p>
+
+        <h2>The Investigation</h2>
+
+        <h3>Step 1 — Reading the code and clearing it</h3>
+        <p>VCDS scan confirmed <code>P0237 - Manifold Absolute Pressure Sensor (G31) — Voltage Low</code>. I cleared the fault first to see if it would come back immediately. <strong>It didn't.</strong> That's already a clue — a hard-failed sensor would typically re-trigger within seconds of restart. An intermittent fault means the sensor is alive but reading bad data sometimes.</p>
+
+        <h3>Step 2 — Live data road test</h3>
+        <p>Connected VCDS in measuring blocks, monitoring boost pressure (MAP) live during a road test. For the first several minutes, the data looked clean — pressure values matched expected values for throttle position and load.</p>
+        <p>Then suddenly, <strong>the MAP value spiked to an impossible reading</strong> for a fraction of a second, and the ECU immediately threw the car into limp mode. Confirmed: the G31 sensor is working most of the time, but periodically reporting corrupted data.</p>
+
+        <h3>Step 3 — Suspecting Canadian winter contamination</h3>
+        <p>On EA189 TDIs in Canada, the boost pressure sensor (G31) lives in the charge pipe between the turbo and the throttle body. <strong>Cold-weather short trips create heavy condensation</strong> in the intake system. This water mixes with the residual oil mist (carryover from EGR + crankcase ventilation), creating a thick caramel-colored emulsion that coats everything in the intake tract — including the G31 sensor element.</p>
+        <p>When the sensor's pressure port gets partially clogged with this gunk, it can read accurately most of the time, but occasionally produce voltage spikes or drops as droplets shift around inside.</p>
+
+        <h3>Step 4 — Visual confirmation</h3>
+        <p>Removed the charge pipe just below the throttle body to inspect. <strong>The G31 sensor was completely covered in milky, caramel-colored sludge</strong> — classic oil + condensation emulsion that builds up over a Canadian winter of short cold-start trips.</p>
+      </div>
+
+      <!-- FRENCH -->
+      <div class="fr-text">
+        <h2>Les Symptômes</h2>
+        <div class="symptom-box">
+          <strong>Plainte du client :</strong> « Mon TDI tombe en mode dégradé sans raison — parfois après 5 minutes de route, parfois après 30. Ça arrive plus souvent par temps froid. Le P0237 revient toujours. »
+        </div>
+        <p>C'est un <strong>cas classique d'hiver canadien</strong> sur la plateforme EA189 TDI. Le code moteur CJAA (et les variantes EA189 similaires) est reconnu pour un mode de défaillance spécifique amplifié par notre climat. Le client est venu <strong>à la fin février</strong> — saison de pointe pour ce problème précis.</p>
+
+        <h2>L'Investigation</h2>
+
+        <h3>Étape 1 — Lire le code et l'effacer</h3>
+        <p>Scan VCDS a confirmé <code>P0237 - Capteur de Pression Absolue d'Admission (G31) — Tension Basse</code>. J'ai effacé la défaillance d'abord pour voir si elle reviendrait immédiatement. <strong>Elle n'est pas revenue.</strong> C'est déjà un indice — un capteur en panne dure se redéclencherait dans les secondes suivant le redémarrage. Une défaillance intermittente signifie que le capteur fonctionne mais lit parfois de mauvaises données.</p>
+
+        <h3>Étape 2 — Test routier avec données live</h3>
+        <p>VCDS branché en mesures live, surveillance de la pression de suralimentation (MAP) pendant un essai routier. Les premières minutes, les données semblaient propres — valeurs de pression correspondant à la position du papillon et à la charge.</p>
+        <p>Puis soudainement, <strong>la valeur MAP a sauté à une lecture impossible</strong> pendant une fraction de seconde, et l'ECU a immédiatement mis le véhicule en mode dégradé. Confirmé : le capteur G31 fonctionne la plupart du temps, mais rapporte périodiquement des données corrompues.</p>
+
+        <h3>Étape 3 — Soupçon de contamination d'hiver canadien</h3>
+        <p>Sur les TDI EA189 au Canada, le capteur de pression de suralimentation (G31) se trouve dans le charge pipe entre le turbo et le papillon. <strong>Les courts trajets par temps froid créent une condensation importante</strong> dans le système d'admission. Cette eau se mélange à la brume d'huile résiduelle (carryover EGR + ventilation du carter), créant une émulsion épaisse couleur caramel qui enrobe tout dans le tract d'admission — incluant l'élément du capteur G31.</p>
+        <p>Quand le port de pression du capteur est partiellement obstrué par cette saleté, il peut lire correctement la plupart du temps, mais produire occasionnellement des pics ou chutes de tension quand les gouttelettes bougent à l'intérieur.</p>
+
+        <h3>Étape 4 — Confirmation visuelle</h3>
+        <p>Retiré le charge pipe juste sous le papillon pour inspecter. <strong>Le capteur G31 était complètement recouvert d'une boue laiteuse couleur caramel</strong> — émulsion classique huile + condensation accumulée durant un hiver canadien de courts trajets à froid.</p>
+      </div>
+
+      <h2 class="en-text">The Diagnosis Procedure</h2>
+      <h2 class="fr-text">La Procédure Diagnostique</h2>
+
+      <ol class="steps-list">
+        <li class="en-text"><strong>VCDS scan</strong> — confirm P0237 (G31 voltage low) and clear it</li>
+        <li class="fr-text"><strong>Scan VCDS</strong> — confirmer P0237 (G31 tension basse) et l'effacer</li>
+
+        <li class="en-text"><strong>Watch for re-trigger</strong> — if code doesn't immediately come back, sensor is alive but intermittent</li>
+        <li class="fr-text"><strong>Surveiller le redéclenchement</strong> — si le code ne revient pas immédiatement, le capteur est vivant mais intermittent</li>
+
+        <li class="en-text"><strong>Live data road test</strong> — log MAP values in measuring blocks during normal driving</li>
+        <li class="fr-text"><strong>Test routier avec données live</strong> — enregistrer les valeurs MAP en blocs de mesure pendant la conduite normale</li>
+
+        <li class="en-text"><strong>Confirm intermittent fault</strong> — watch for sudden value spikes/drops that trigger limp mode</li>
+        <li class="fr-text"><strong>Confirmer la défaillance intermittente</strong> — surveiller les pics/chutes soudains qui déclenchent le mode dégradé</li>
+
+        <li class="en-text"><strong>Remove charge pipe</strong> — disconnect just below the throttle body for sensor access</li>
+        <li class="fr-text"><strong>Retirer le charge pipe</strong> — débrancher juste sous le papillon pour accès au capteur</li>
+
+        <li class="en-text"><strong>Visual inspection of G31</strong> — caramel/milky sludge confirms diagnosis</li>
+        <li class="fr-text"><strong>Inspection visuelle du G31</strong> — boue caramel/laiteuse confirme le diagnostic</li>
+
+        <li class="en-text"><strong>Clean sensor with MAP cleaner</strong> — never use harsh solvents, only sensor-safe cleaner</li>
+        <li class="fr-text"><strong>Nettoyer le capteur avec un nettoyant MAP</strong> — jamais de solvants agressifs, seulement un nettoyant sécuritaire pour capteurs</li>
+
+        <li class="en-text"><strong>Inspect intake tract</strong> — clean accumulated sludge from charge pipes if present</li>
+        <li class="fr-text"><strong>Inspecter le tract d'admission</strong> — nettoyer la saleté accumulée des charge pipes si présente</li>
+
+        <li class="en-text"><strong>Clean the intercooler</strong> — oil + condensation accumulates inside the intercooler core over winter; flush it out for full restoration</li>
+        <li class="fr-text"><strong>Nettoyer l'intercooler</strong> — l'huile + condensation s'accumulent dans le noyau de l'intercooler durant l'hiver; le rincer pour une restauration complète</li>
+      </ol>
+
+      <h2 class="en-text">The Solution</h2>
+      <h2 class="fr-text">La Solution</h2>
+
+      <div class="solution-box en-text">
+        <strong>Fix:</strong> Cleaned the G31 sensor with MAP sensor cleaner. Inspected and cleaned the charge pipe interior. Flushed the intercooler core to remove accumulated oil/water emulsion. <strong>No parts replaced — pure maintenance.</strong> Vehicle returned to normal operation immediately.
+      </div>
+      <div class="solution-box fr-text">
+        <strong>Solution :</strong> Nettoyé le capteur G31 avec un nettoyant pour capteur MAP. Inspecté et nettoyé l'intérieur du charge pipe. Rincé le noyau de l'intercooler pour éliminer l'émulsion huile/eau accumulée. <strong>Aucune pièce remplacée — pur entretien.</strong> Véhicule est retourné à un fonctionnement normal immédiatement.
+      </div>
+
+      <p class="en-text"><strong>Why this matters:</strong> Many shops will throw a new G31 sensor at this code (~$120-180 part) without checking why it failed. The sensor isn't the root cause — it's the messenger. The real cause is climate-driven contamination that will destroy the new sensor in another winter. <strong>Cleaning + preventive maintenance is the right answer.</strong></p>
+      <p class="fr-text"><strong>Pourquoi c'est important :</strong> Beaucoup de garages remplacent un nouveau capteur G31 sur ce code (~120-180$ la pièce) sans vérifier pourquoi il a échoué. Le capteur n'est pas la cause profonde — c'est le messager. La vraie cause est une contamination climatique qui détruira le nouveau capteur l'hiver suivant. <strong>Nettoyage + entretien préventif est la bonne réponse.</strong></p>
+
+      <h3 class="en-text">Canadian Winter Maintenance Tip</h3>
+      <h3 class="fr-text">Conseil d'Entretien Hiver Canadien</h3>
+
+      <div class="symptom-box en-text">
+        <strong>For all CJAA / EA189 TDI owners in Canada:</strong> After every winter (March-April), inspect the charge pipe, clean the G31 sensor, and flush the intercooler as preventive maintenance. Short cold-weather trips below -10°C cause heavy condensation that mixes with EGR oil carryover. Annual cleaning prevents P0237 codes, extends sensor life, and restores full boost response.
+      </div>
+      <div class="symptom-box fr-text">
+        <strong>Pour tous les propriétaires de CJAA / EA189 TDI au Canada :</strong> Après chaque hiver (mars-avril), inspectez le charge pipe, nettoyez le capteur G31 et rincez l'intercooler en entretien préventif. Les courts trajets par temps froid sous -10°C causent une forte condensation qui se mélange au carryover d'huile EGR. Un nettoyage annuel prévient les codes P0237, prolonge la vie du capteur et restaure la pleine réponse de suralimentation.
+      </div>
+
+      <h3 class="en-text">Key Takeaways for Technicians</h3>
+      <h3 class="fr-text">Points Clés pour Techniciens</h3>
+
+      <ul class="en-text">
+        <li><strong>P0237 on EA189 TDI in Canada is rarely a failed sensor</strong> — usually contamination</li>
+        <li><strong>Always road test with live data</strong> — intermittent faults need movement to reveal themselves</li>
+        <li><strong>Caramel/milky sludge in charge pipe = winter condensation + oil mix</strong> — pathognomonic for this engine family</li>
+        <li><strong>Use proper MAP sensor cleaner</strong> — brake cleaner or carb cleaner can damage the sensor element</li>
+        <li><strong>Educate the customer on annual cleaning</strong> — turn this into recurring revenue, not a one-time fix</li>
+        <li><strong>Consider EGR delete catch can</strong> for high-mileage TDIs in cold climates if customer is open to it (where legal)</li>
+      </ul>
+
+      <ul class="fr-text">
+        <li><strong>P0237 sur EA189 TDI au Canada est rarement un capteur défectueux</strong> — habituellement de la contamination</li>
+        <li><strong>Toujours faire un test routier avec données live</strong> — les défaillances intermittentes nécessitent du mouvement pour se révéler</li>
+        <li><strong>Boue caramel/laiteuse dans le charge pipe = condensation d'hiver + mélange d'huile</strong> — pathognomonique pour cette famille de moteurs</li>
+        <li><strong>Utiliser un nettoyant MAP approprié</strong> — un nettoyant à frein ou carburateur peut endommager l'élément du capteur</li>
+        <li><strong>Éduquer le client sur le nettoyage annuel</strong> — transformer ça en revenu récurrent, pas une réparation unique</li>
+        <li><strong>Considérer un catch can EGR delete</strong> pour les TDI à haut kilométrage en climat froid si le client est ouvert (où c'est légal)</li>
+      </ul>
+
+    </div>
+
+    <div class="case-footer">
+      <div class="case-footer-time en-text">Diagnostic time: ~1h · Cleaning: ~30min · Cost: $0 in parts</div>
+      <div class="case-footer-time fr-text">Temps diagnostic: ~1h · Nettoyage: ~30min · Coût: 0$ en pièces</div>
+      <div class="case-footer-tags">
+        <span class="tag-pill">EA189</span>
+        <span class="tag-pill">TDI</span>
+        <span class="tag-pill">P0237</span>
+        <span class="tag-pill">G31</span>
+        <span class="tag-pill">VCDS</span>
+        <span class="tag-pill">Intercooler</span>
+        <span class="tag-pill">Canadian Winter</span>
+      </div>
+    </div>
+
+  </article>
+
+  <!-- CASE 3 — HALDEX (Reference Case) -->
+  <article class="case-card">
+
+    <div class="case-header">
+      <div class="case-tag">Case #003 · Reference · Haldex AWD</div>
+      <h2 class="case-title en-text">Haldex Service Neglect — VW Golf R / Audi S3</h2>
+      <h2 class="case-title fr-text">Négligence Service Haldex — VW Golf R / Audi S3</h2>
+      <div class="case-meta">
+        <div class="case-meta-item">Platform: <span>MQB AWD (Gen 5 Haldex)</span></div>
+        <div class="case-meta-item">Engine: <span>EA888 Gen3 (Various)</span></div>
+        <div class="case-meta-item en-inline">Common range: <span>60,000 - 120,000 km</span></div>
+        <div class="case-meta-item fr-inline">Plage commune: <span>60 000 - 120 000 km</span></div>
+        <div class="case-meta-item en-inline">Type: <span>Reference case study</span></div>
+        <div class="case-meta-item fr-inline">Type: <span>Étude de cas de référence</span></div>
+      </div>
+    </div>
+
+    <div class="case-body">
+
+      <!-- ENGLISH -->
+      <div class="en-text">
+        <p style="background:rgba(0,232,122,0.05);border-left:2px solid var(--green);padding:0.8rem 1rem;font-size:0.85rem;margin-bottom:1.5rem;"><strong>Reference case:</strong> This documents a common Haldex failure pattern frequently seen across VAG forums and workshops. Use it as a diagnostic template when encountering similar symptoms.</p>
+
+        <h2>The Common Symptoms</h2>
+        <div class="symptom-box">
+          <strong>Typical customer complaint:</strong> "My Golf R / S3 doesn't feel like AWD anymore. It spins the front wheels in the rain, the rear isn't pulling like it used to. No warning lights though."
+        </div>
+        <p>The Gen 5 Haldex coupling on the MQB platform (Golf R MK7/MK7.5, Audi S3 8V, Audi RS3 8V, Tiguan, Atlas) is the <strong>most neglected service item in the VAG AWD lineup</strong>. VW's official service interval is 60,000 km for Haldex fluid replacement, but the actual real-world need is closer to <strong>every 40,000 km</strong> due to particulate accumulation in the wet clutch pack.</p>
+
+        <h2>The Common Investigation</h2>
+
+        <h3>Step 1 — VCDS Haldex measuring blocks</h3>
+        <p>Connect VCDS, navigate to module 22 (AWD Controller / Haldex). Check the live data measuring blocks:</p>
+        <ul>
+          <li><strong>Clutch slip percentage</strong> — should remain low (under 5%) under normal driving</li>
+          <li><strong>Coupling temperature</strong> — should stay below 90°C in normal driving; over 100°C indicates fluid degradation</li>
+          <li><strong>Pump duty cycle</strong> — erratic readings suggest fluid contamination affecting solenoid response</li>
+        </ul>
+        <p style="background:rgba(255,184,0,0.05);border-left:2px solid var(--amber);padding:0.8rem 1rem;font-size:0.88rem;"><strong>⚠ VERIFY:</strong> Exact Haldex measuring block numbers vary by chassis and software version. Always confirm specific block IDs in ElsaPro or Ross-Tech Wiki for your exact vehicle.</p>
+
+        <h3>Step 2 — Inspect the drained fluid</h3>
+        <p>The fluid pulled from a neglected Haldex tells the story:</p>
+        <ul>
+          <li><strong>Healthy fluid:</strong> Clear amber, almost translucent</li>
+          <li><strong>Slightly degraded:</strong> Darker amber, still translucent</li>
+          <li><strong>Time for service:</strong> Dark brown, slight cloudiness</li>
+          <li><strong>Past due:</strong> Black, opaque, possibly with metallic glitter (clutch wear particles)</li>
+        </ul>
+      </div>
+
+      <!-- FRENCH -->
+      <div class="fr-text">
+        <p style="background:rgba(0,232,122,0.05);border-left:2px solid var(--green);padding:0.8rem 1rem;font-size:0.85rem;margin-bottom:1.5rem;"><strong>Cas de référence :</strong> Ceci documente un schéma de défaillance Haldex couramment observé sur les forums VAG et en atelier. Utilisez-le comme modèle diagnostique lorsque vous rencontrez des symptômes similaires.</p>
+
+        <h2>Les Symptômes Communs</h2>
+        <div class="symptom-box">
+          <strong>Plainte typique du client :</strong> « Ma Golf R / S3 ne ressent plus le AWD. Les roues avant patinent sous la pluie, l'arrière ne tire plus comme avant. Aucun voyant d'avertissement par contre. »
+        </div>
+        <p>Le coupleur Haldex Gen 5 sur la plateforme MQB (Golf R MK7/MK7.5, Audi S3 8V, Audi RS3 8V, Tiguan, Atlas) est <strong>l'item de service le plus négligé de la gamme AWD VAG</strong>. L'intervalle de service officiel de VW est de 60 000 km pour le remplacement du fluide Haldex, mais le besoin réel est plus proche de <strong>tous les 40 000 km</strong> en raison de l'accumulation de particules dans l'embrayage humide.</p>
+
+        <h2>L'Investigation Commune</h2>
+
+        <h3>Étape 1 — Blocs de mesure VCDS Haldex</h3>
+        <p>Branchez VCDS, naviguez au module 22 (Contrôleur AWD / Haldex). Vérifiez les blocs de mesure de données live :</p>
+        <ul>
+          <li><strong>Pourcentage de glissement d'embrayage</strong> — devrait rester bas (sous 5%) en conduite normale</li>
+          <li><strong>Température du coupleur</strong> — devrait rester sous 90°C en conduite normale; au-dessus de 100°C indique une dégradation du fluide</li>
+          <li><strong>Cycle de service de la pompe</strong> — lectures erratiques suggèrent une contamination du fluide affectant la réponse du solénoïde</li>
+        </ul>
+        <p style="background:rgba(255,184,0,0.05);border-left:2px solid var(--amber);padding:0.8rem 1rem;font-size:0.88rem;"><strong>⚠ VÉRIFIER :</strong> Les numéros exacts de blocs de mesure Haldex varient selon le châssis et la version logicielle. Toujours confirmer les ID de blocs spécifiques dans ElsaPro ou le wiki Ross-Tech pour votre véhicule exact.</p>
+
+        <h3>Étape 2 — Inspecter le fluide vidangé</h3>
+        <p>Le fluide retiré d'un Haldex négligé raconte l'histoire :</p>
+        <ul>
+          <li><strong>Fluide sain :</strong> Ambre clair, presque translucide</li>
+          <li><strong>Légèrement dégradé :</strong> Ambre plus foncé, encore translucide</li>
+          <li><strong>Temps pour service :</strong> Brun foncé, légère opacité</li>
+          <li><strong>En retard :</strong> Noir, opaque, possiblement avec paillettes métalliques (particules d'usure d'embrayage)</li>
+        </ul>
+      </div>
+
+      <h2 class="en-text">The Service Procedure</h2>
+      <h2 class="fr-text">La Procédure de Service</h2>
+
+      <ol class="steps-list">
+        <li class="en-text"><strong>Vehicle on level ground</strong> — engine cold or after 30+ min rest</li>
+        <li class="fr-text"><strong>Véhicule sur surface plane</strong> — moteur froid ou après 30+ min de repos</li>
+
+        <li class="en-text"><strong>Remove drain plug</strong> on Haldex housing (typically under rear differential), let drain completely</li>
+        <li class="fr-text"><strong>Retirer le bouchon de vidange</strong> du boîtier Haldex (généralement sous le différentiel arrière), laisser vidanger complètement</li>
+
+        <li class="en-text"><strong>Replace Haldex filter</strong> — accessible through dedicated filter port; mandatory part of service</li>
+        <li class="fr-text"><strong>Remplacer le filtre Haldex</strong> — accessible via port de filtre dédié; partie obligatoire du service</li>
+
+        <li class="en-text"><strong>Refill with exact spec fluid</strong> — Genuine VW <code>G 052 175 A2</code>, capacity 0.6 L (always verify by VIN)</li>
+        <li class="fr-text"><strong>Remplir avec fluide de spec exacte</strong> — VW d'origine <code>G 052 175 A2</code>, capacité 0,6 L (toujours vérifier par VIN)</li>
+
+        <li class="en-text"><strong>Reset adaptation in VCDS</strong> — module 22, basic settings to recalibrate clutch pressure curve</li>
+        <li class="fr-text"><strong>Réinitialiser l'adaptation dans VCDS</strong> — module 22, réglages de base pour recalibrer la courbe de pression d'embrayage</li>
+
+        <li class="en-text"><strong>Test drive on gravel or loose surface</strong> — verify torque transfer feels solid and clutch engages smoothly</li>
+        <li class="fr-text"><strong>Essai routier sur gravier ou surface meuble</strong> — vérifier que le transfert de couple semble solide et que l'embrayage s'engage en douceur</li>
+      </ol>
+
+      <h2 class="en-text">The Solution</h2>
+      <h2 class="fr-text">La Solution</h2>
+
+      <div class="solution-box en-text">
+        <strong>Fix:</strong> Complete Haldex service — fluid + filter replacement, followed by VCDS adaptation reset. On vehicles past the 80,000 km mark, this is often the difference between a fully functional AWD system and one that's silently degraded.
+      </div>
+      <div class="solution-box fr-text">
+        <strong>Solution :</strong> Service Haldex complet — remplacement fluide + filtre, suivi d'une réinitialisation d'adaptation VCDS. Sur les véhicules au-delà des 80 000 km, c'est souvent la différence entre un système AWD pleinement fonctionnel et un qui s'est dégradé silencieusement.
+      </div>
+
+      <p class="en-text"><strong>Why this matters:</strong> Unlike major mechanical failures, neglected Haldex degradation is silent — no DTCs, no warning lights, no obvious symptoms until you push the car hard. By then, the clutch pack is often worn enough that fluid service alone won't fully restore performance. <strong>Preventive service every 40,000 km is the difference between a 200,000 km Haldex and a 100,000 km Haldex.</strong></p>
+      <p class="fr-text"><strong>Pourquoi c'est important :</strong> Contrairement aux pannes mécaniques majeures, la dégradation négligée du Haldex est silencieuse — pas de DTC, pas de voyant, pas de symptôme évident jusqu'à ce que vous poussiez le véhicule fort. À ce moment, le pack d'embrayage est souvent assez usé que le service du fluide seul ne restaurera pas pleinement la performance. <strong>Un service préventif tous les 40 000 km est la différence entre un Haldex de 200 000 km et un de 100 000 km.</strong></p>
+
+      <h3 class="en-text">Key Takeaways for Technicians</h3>
+      <h3 class="fr-text">Points Clés pour Techniciens</h3>
+
+      <ul class="en-text">
+        <li><strong>Customer complaint of "AWD feels weak"</strong> with no DTC = suspect Haldex fluid first</li>
+        <li><strong>Always replace the filter</strong> — fluid-only service is a half-job</li>
+        <li><strong>Genuine G 052 175 A2 fluid only</strong> — generic transmission fluid will damage the wet clutch</li>
+        <li><strong>VCDS adaptation reset is mandatory</strong> after service to recalibrate pressure curves</li>
+        <li><strong>Sell the service preventively</strong> at 40,000 km intervals — explain the clutch wear math to the customer</li>
+        <li><strong>Document the old fluid color</strong> with a photo — proves the service was needed and builds customer trust</li>
+      </ul>
+
+      <ul class="fr-text">
+        <li><strong>Plainte client de "AWD semble faible"</strong> sans DTC = soupçonner d'abord le fluide Haldex</li>
+        <li><strong>Toujours remplacer le filtre</strong> — un service fluide seul est un demi-travail</li>
+        <li><strong>Fluide G 052 175 A2 d'origine seulement</strong> — un fluide de transmission générique endommagera l'embrayage humide</li>
+        <li><strong>La réinitialisation d'adaptation VCDS est obligatoire</strong> après le service pour recalibrer les courbes de pression</li>
+        <li><strong>Vendre le service de façon préventive</strong> aux intervalles de 40 000 km — expliquer le calcul d'usure d'embrayage au client</li>
+        <li><strong>Documenter la couleur du vieux fluide</strong> avec une photo — prouve que le service était nécessaire et bâtit la confiance du client</li>
+      </ul>
+
+    </div>
+
+    <div class="case-footer">
+      <div class="case-footer-time en-text">Service time: ~1.5h · Parts: ~$80 fluid + filter · Recommended every 40,000 km</div>
+      <div class="case-footer-time fr-text">Temps service: ~1,5h · Pièces: ~80$ fluide + filtre · Recommandé tous les 40 000 km</div>
+      <div class="case-footer-tags">
+        <span class="tag-pill">Haldex</span>
+        <span class="tag-pill">AWD</span>
+        <span class="tag-pill">MQB</span>
+        <span class="tag-pill">Golf R</span>
+        <span class="tag-pill">S3 / RS3</span>
+        <span class="tag-pill">VCDS</span>
+      </div>
+    </div>
+
+  </article>
+
+  <!-- CASE 4 — AIR SUSPENSION (Reference Case) -->
+  <article class="case-card">
+
+    <div class="case-header">
+      <div class="case-tag">Case #004 · Reference · Air Suspension</div>
+      <h2 class="case-title en-text">Air Suspension Sag — Audi Q7 4L / A8 / Touareg</h2>
+      <h2 class="case-title fr-text">Affaissement Suspension à Air — Audi Q7 4L / A8 / Touareg</h2>
+      <div class="case-meta">
+        <div class="case-meta-item">Platform: <span>Q7 4L, A8 D3/D4, VW Touareg 7L/7P</span></div>
+        <div class="case-meta-item en-inline">Common at: <span>120,000+ km / 8+ years</span></div>
+        <div class="case-meta-item fr-inline">Commun à: <span>120 000+ km / 8+ ans</span></div>
+        <div class="case-meta-item en-inline">Climate factor: <span>Severe in Canadian winters</span></div>
+        <div class="case-meta-item fr-inline">Facteur climatique: <span>Sévère en hivers canadiens</span></div>
+        <div class="case-meta-item en-inline">Type: <span>Reference case study</span></div>
+        <div class="case-meta-item fr-inline">Type: <span>Étude de cas de référence</span></div>
+      </div>
+    </div>
+
+    <div class="case-body">
+
+      <!-- ENGLISH -->
+      <div class="en-text">
+        <p style="background:rgba(0,232,122,0.05);border-left:2px solid var(--green);padding:0.8rem 1rem;font-size:0.85rem;margin-bottom:1.5rem;"><strong>Reference case:</strong> This documents the most common air suspension failure pattern on aging VAG platforms in Canadian climate. Use it as a diagnostic template.</p>
+
+        <h2>The Common Symptoms</h2>
+        <div class="symptom-box">
+          <strong>Typical customer complaint:</strong> "I parked it last night and this morning the rear passenger side is sitting on the ground. It comes back up after I drive a bit. Sometimes there's a clicking from the compressor running for a long time."
+        </div>
+        <p>Air suspension on aging VAG vehicles (Q7 4L 2007-2015, A8 D3/D4, VW Touareg 7L/7P) is a known wear item. The rubber bellows of the air bags degrade with UV exposure, ozone, road salt, and cold-weather flexing. <strong>In Canadian winters, salt accelerates rubber breakdown</strong>, and -30°C cold makes already-compromised bags crack or develop micro-leaks.</p>
+
+        <h2>The Common Investigation</h2>
+
+        <h3>Step 1 — VCDS scan of suspension module</h3>
+        <p>Connect VCDS, scan module 34 (Level Control). Look for:</p>
+        <ul>
+          <li>Codes like "Air loss detected at corner X"</li>
+          <li>Compressor run-time data — excessive runtime indicates the system is constantly trying to refill</li>
+          <li>Pressure sensor readings — uneven pressure between corners suggests leak location</li>
+        </ul>
+        <p style="background:rgba(255,184,0,0.05);border-left:2px solid var(--amber);padding:0.8rem 1rem;font-size:0.88rem;"><strong>⚠ VERIFY:</strong> Specific measuring block IDs vary by chassis. Reference ElsaPro for your vehicle's air suspension control unit documentation.</p>
+
+        <h3>Step 2 — Cold soak test (Canadian specialty)</h3>
+        <p>The most diagnostic test for air suspension issues in Canada is leaving the vehicle parked overnight in cold weather. If a specific corner is sagging by morning, that air bag is leaking. <strong>The cold contracts the rubber and exposes micro-leaks</strong> that don't show in warm temperatures.</p>
+
+        <h3>Step 3 — Soapy water leak detection</h3>
+        <p>With the suspension at full ride height and engine running, spray soapy water on each air bag, the air lines, valve block, and compressor outlet. Bubbles form where air is escaping. Common leak points:</p>
+        <ul>
+          <li><strong>Air bag bellows</strong> — usually visible cracks in the rubber fold</li>
+          <li><strong>Compressor outlet hose</strong> — heat cycles + cold flex causes splits</li>
+          <li><strong>Valve block O-rings</strong> — internal leaks transferring air between circuits</li>
+          <li><strong>Hard line connections</strong> — vibration loosens fittings over time</li>
+        </ul>
+
+        <h3>Step 4 — Compressor health check</h3>
+        <p>Even if the leak is found and fixed, an overworked compressor from months of compensating for leaks may be near end-of-life. Listen for:</p>
+        <ul>
+          <li>Excessive run-time after restart</li>
+          <li>High-pitched whine indicating worn piston</li>
+          <li>Inability to reach normal ride height in reasonable time</li>
+        </ul>
+      </div>
+
+      <!-- FRENCH -->
+      <div class="fr-text">
+        <p style="background:rgba(0,232,122,0.05);border-left:2px solid var(--green);padding:0.8rem 1rem;font-size:0.85rem;margin-bottom:1.5rem;"><strong>Cas de référence :</strong> Ceci documente le schéma de défaillance de suspension à air le plus commun sur les plateformes VAG vieillissantes en climat canadien. Utilisez-le comme modèle diagnostique.</p>
+
+        <h2>Les Symptômes Communs</h2>
+        <div class="symptom-box">
+          <strong>Plainte typique du client :</strong> « Je l'ai stationné hier soir et ce matin le côté passager arrière est au sol. Ça remonte après quelques minutes de conduite. Parfois j'entends un cliquetis du compresseur qui tourne longtemps. »
+        </div>
+        <p>La suspension à air sur les véhicules VAG vieillissants (Q7 4L 2007-2015, A8 D3/D4, VW Touareg 7L/7P) est un item d'usure connu. Les soufflets en caoutchouc des coussins d'air se dégradent avec l'exposition aux UV, l'ozone, le sel routier et la flexion par temps froid. <strong>En hiver canadien, le sel accélère la décomposition du caoutchouc</strong>, et le froid de -30°C fait fendre les coussins déjà compromis ou développer des micro-fuites.</p>
+
+        <h2>L'Investigation Commune</h2>
+
+        <h3>Étape 1 — Scan VCDS du module de suspension</h3>
+        <p>Branchez VCDS, scannez le module 34 (Contrôle de Niveau). Cherchez :</p>
+        <ul>
+          <li>Codes comme "Perte d'air détectée au coin X"</li>
+          <li>Données de durée de fonctionnement du compresseur — un temps de fonctionnement excessif indique que le système tente constamment de se recharger</li>
+          <li>Lectures des capteurs de pression — pression inégale entre coins suggère l'emplacement de la fuite</li>
+        </ul>
+        <p style="background:rgba(255,184,0,0.05);border-left:2px solid var(--amber);padding:0.8rem 1rem;font-size:0.88rem;"><strong>⚠ VÉRIFIER :</strong> Les ID de blocs de mesure spécifiques varient selon le châssis. Référez-vous à ElsaPro pour la documentation de l'unité de contrôle de suspension à air de votre véhicule.</p>
+
+        <h3>Étape 2 — Test de séjour à froid (spécialité canadienne)</h3>
+        <p>Le test le plus diagnostique pour les problèmes de suspension à air au Canada est de laisser le véhicule stationné pendant la nuit par temps froid. Si un coin spécifique s'affaisse au matin, ce coussin d'air fuit. <strong>Le froid contracte le caoutchouc et expose les micro-fuites</strong> qui ne se manifestent pas à température chaude.</p>
+
+        <h3>Étape 3 — Détection de fuite à l'eau savonneuse</h3>
+        <p>Avec la suspension à pleine hauteur de conduite et le moteur tournant, vaporisez de l'eau savonneuse sur chaque coussin d'air, les conduites d'air, le bloc de valves et la sortie du compresseur. Des bulles se forment où l'air s'échappe. Points de fuite communs :</p>
+        <ul>
+          <li><strong>Soufflets des coussins d'air</strong> — généralement fissures visibles dans le pli du caoutchouc</li>
+          <li><strong>Tuyau de sortie du compresseur</strong> — cycles thermiques + flexion à froid causent des fissures</li>
+          <li><strong>Joints toriques du bloc de valves</strong> — fuites internes transférant l'air entre circuits</li>
+          <li><strong>Connexions de conduite rigide</strong> — la vibration desserre les raccords avec le temps</li>
+        </ul>
+
+        <h3>Étape 4 — Vérification de santé du compresseur</h3>
+        <p>Même si la fuite est trouvée et réparée, un compresseur surchargé de mois à compenser pour les fuites peut être proche de la fin de vie. Écoutez pour :</p>
+        <ul>
+          <li>Temps de fonctionnement excessif après redémarrage</li>
+          <li>Sifflement aigu indiquant un piston usé</li>
+          <li>Incapacité d'atteindre la hauteur de conduite normale en un temps raisonnable</li>
+        </ul>
+      </div>
+
+      <h2 class="en-text">The Diagnostic Procedure</h2>
+      <h2 class="fr-text">La Procédure Diagnostique</h2>
+
+      <ol class="steps-list">
+        <li class="en-text"><strong>VCDS full scan</strong> — module 34, retrieve all stored codes including history</li>
+        <li class="fr-text"><strong>Scan VCDS complet</strong> — module 34, récupérer tous les codes enregistrés incluant l'historique</li>
+
+        <li class="en-text"><strong>Document current ride height</strong> at each corner using VCDS measuring blocks</li>
+        <li class="fr-text"><strong>Documenter la hauteur actuelle de conduite</strong> à chaque coin en utilisant les blocs de mesure VCDS</li>
+
+        <li class="en-text"><strong>Cold soak test</strong> — leave overnight in cold conditions, document corner heights at startup</li>
+        <li class="fr-text"><strong>Test de séjour à froid</strong> — laisser pendant la nuit en conditions froides, documenter les hauteurs des coins au démarrage</li>
+
+        <li class="en-text"><strong>Pressurize and apply soapy water</strong> — system at full pressure, spray and watch for bubbles</li>
+        <li class="fr-text"><strong>Mettre sous pression et appliquer eau savonneuse</strong> — système à pleine pression, vaporiser et surveiller les bulles</li>
+
+        <li class="en-text"><strong>Inspect air bag rubber</strong> visually — look for cracks, especially in the lower fold</li>
+        <li class="fr-text"><strong>Inspecter visuellement le caoutchouc des coussins</strong> — chercher des fissures, surtout dans le pli inférieur</li>
+
+        <li class="en-text"><strong>Check compressor amp draw</strong> with clamp meter — excessive current = worn motor or stuck piston</li>
+        <li class="fr-text"><strong>Vérifier l'ampérage du compresseur</strong> avec une pince ampèremétrique — courant excessif = moteur usé ou piston coincé</li>
+
+        <li class="en-text"><strong>Inspect valve block</strong> — corrosion from road salt is common; test each solenoid function</li>
+        <li class="fr-text"><strong>Inspecter le bloc de valves</strong> — la corrosion due au sel routier est commune; tester chaque fonction de solénoïde</li>
+      </ol>
+
+      <h2 class="en-text">The Solution</h2>
+      <h2 class="fr-text">La Solution</h2>
+
+      <div class="solution-box en-text">
+        <strong>Common fix:</strong> Replace the failed air bag(s). On Canadian vehicles, consider replacing both rear or both front bags simultaneously — the second one is likely close to failure if the first has failed. After replacement, perform VCDS basic settings to recalibrate ride height.
+      </div>
+      <div class="solution-box fr-text">
+        <strong>Solution commune :</strong> Remplacer le(s) coussin(s) d'air défectueux. Sur les véhicules canadiens, considérer remplacer les deux coussins arrière ou les deux avant simultanément — le second est probablement proche de la défaillance si le premier a échoué. Après remplacement, effectuer les réglages de base VCDS pour recalibrer la hauteur de conduite.
+      </div>
+
+      <p class="en-text"><strong>Why this matters:</strong> Air suspension problems are progressive. A small leak today becomes a destroyed compressor tomorrow because the system never stops trying to maintain pressure. <strong>Early intervention saves the compressor</strong> — replacing an air bag is far cheaper than replacing a compressor that died from overwork.</p>
+      <p class="fr-text"><strong>Pourquoi c'est important :</strong> Les problèmes de suspension à air sont progressifs. Une petite fuite aujourd'hui devient un compresseur détruit demain car le système n'arrête jamais d'essayer de maintenir la pression. <strong>Une intervention précoce sauve le compresseur</strong> — remplacer un coussin d'air est bien moins cher que remplacer un compresseur qui est mort d'épuisement.</p>
+
+      <h3 class="en-text">Canadian Climate Considerations</h3>
+      <h3 class="fr-text">Considérations Climat Canadien</h3>
+
+      <div class="symptom-box en-text">
+        <strong>For VAG owners with air suspension in Quebec/Ontario:</strong> Rinse the undercarriage frequently in winter to remove salt buildup around the air bags and valve block. Inspect rubber bellows annually (spring is the best time) for early signs of cracking. The shortened service life caused by Canadian climate is real — plan for air bag replacement around 130,000-160,000 km rather than the 200,000+ km seen in milder climates.
+      </div>
+      <div class="symptom-box fr-text">
+        <strong>Pour les propriétaires VAG avec suspension à air au Québec/Ontario :</strong> Rincez fréquemment le dessous du véhicule en hiver pour enlever l'accumulation de sel autour des coussins d'air et du bloc de valves. Inspectez les soufflets en caoutchouc annuellement (le printemps est le meilleur moment) pour les signes précoces de fissuration. La durée de vie raccourcie causée par le climat canadien est réelle — planifiez le remplacement des coussins d'air autour de 130 000-160 000 km plutôt que les 200 000+ km observés dans les climats plus doux.
+      </div>
+
+      <h3 class="en-text">Key Takeaways for Technicians</h3>
+      <h3 class="fr-text">Points Clés pour Techniciens</h3>
+
+      <ul class="en-text">
+        <li><strong>Air suspension failures are climate-accelerated</strong> in Canada — plan diagnosis around cold soak tests</li>
+        <li><strong>Soapy water is your best friend</strong> — old-school but unbeatable for locating leaks</li>
+        <li><strong>Always check compressor health</strong> after fixing a leak — it may have been silently damaged</li>
+        <li><strong>Replace in pairs when possible</strong> — second bag is likely degraded too</li>
+        <li><strong>Educate customer on winter washing</strong> — salt buildup is the #1 enemy of these components</li>
+        <li><strong>Aftermarket bags vary widely in quality</strong> — Arnott and Bilstein are commonly accepted alternatives to OEM</li>
+      </ul>
+
+      <ul class="fr-text">
+        <li><strong>Les défaillances de suspension à air sont accélérées par le climat</strong> au Canada — planifier le diagnostic autour des tests de séjour à froid</li>
+        <li><strong>L'eau savonneuse est votre meilleure amie</strong> — méthode classique mais imbattable pour localiser les fuites</li>
+        <li><strong>Toujours vérifier la santé du compresseur</strong> après avoir réparé une fuite — il peut avoir été endommagé silencieusement</li>
+        <li><strong>Remplacer en paires quand possible</strong> — le second coussin est probablement dégradé aussi</li>
+        <li><strong>Éduquer le client sur le lavage hivernal</strong> — l'accumulation de sel est l'ennemi #1 de ces composants</li>
+        <li><strong>Les coussins aftermarket varient largement en qualité</strong> — Arnott et Bilstein sont des alternatives communément acceptées à OEM</li>
+      </ul>
+
+    </div>
+
+    <div class="case-footer">
+      <div class="case-footer-time en-text">Diagnostic: ~2h · Bag replacement: ~2-3h per corner</div>
+      <div class="case-footer-time fr-text">Diagnostic: ~2h · Remplacement coussin: ~2-3h par coin</div>
+      <div class="case-footer-tags">
+        <span class="tag-pill">Q7 4L</span>
+        <span class="tag-pill">A8</span>
+        <span class="tag-pill">Touareg</span>
+        <span class="tag-pill">Air Suspension</span>
+        <span class="tag-pill">Canadian Climate</span>
+        <span class="tag-pill">VCDS</span>
+      </div>
+    </div>
+
+  </article>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-card">
+    <h2 class="en-text">WANT MORE CASES LIKE THIS?</h2>
+    <h2 class="fr-text">PLUS DE CAS COMME CELUI-CI ?</h2>
+    <p class="en-text">Eurotech Academy members get 45+ in-depth modules, real diagnostic cases, and access to our AI-powered VAG research tool. Built for serious technicians.</p>
+    <p class="fr-text">Les membres Eurotech Academy ont accès à 45+ modules approfondis, des cas diagnostiques réels et notre outil de recherche VAG propulsé par IA. Conçu pour les techniciens sérieux.</p>
+    <a href="https://www.skool.com/vag-academy-quebec-2369" target="_blank" class="btn-primary">
+      <span class="en-inline">Join Eurotech — 9.99$/mo</span>
+      <span class="fr-inline">Rejoindre Eurotech — 9.99$/mois</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Eurotech Performance Academy · <span class="en-inline">All rights reserved</span><span class="fr-inline">Tous droits réservés</span> · Quebec, Canada</p>
+</footer>
+
+<script>
+function setLang(lang){
+  document.body.classList.toggle('fr', lang === 'fr');
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+  });
+  localStorage.setItem('lang', lang);
+}
+const saved = localStorage.getItem('lang');
+if (saved === 'fr') setLang('fr');
+</script>
+
+</body>
+</html>
