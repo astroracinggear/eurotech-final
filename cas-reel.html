@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Real VAG Diagnostic Cases — Eurotech Performance Academy</title>
-<meta name="description" content="Real-world VAG diagnostic case studies: EA888 oil consumption, EA189 TDI P0237, Haldex AWD service, air suspension failures. Workshop-tested procedures with VCDS, optimized for Canadian climate.">
-<meta name="keywords" content="EA888 oil consumption, PCV failure VAG, Audi S3 8V, VW Golf R MK7, P0299, P0237, EA189 TDI, CJAA, G31 MAP sensor, Haldex service, AWD Golf R, air suspension Q7 4L, A8 air bag, Touareg suspension, Canadian winter VAG, VCDS diagnostic">
+<meta name="description" content="10 real-world VAG diagnostic case studies: EA888 oil consumption, EA189 TDI P0237, Haldex AWD, air suspension, DQ250 DSG, EA837 water pump, timing chain, EA855 5-cyl, EGR cooler, MEB HV battery. Workshop-tested with VCDS, optimized for Canadian climate.">
+<meta name="keywords" content="EA888 oil consumption, PCV failure VAG, Audi S3 8V, VW Golf R MK7, P0299, P0237, EA189 TDI, CJAA, G31 MAP sensor, Haldex service, AWD Golf R, air suspension Q7 4L, A8 air bag, Touareg suspension, DQ250 mechatronic, DSG hard shift, EA837 water pump, S4 B8, EA888 timing chain, P0011, P0014, P0016, EA855 RS3 misfire, P0301, EGR cooler TDI, hydro-lock, MEB battery, ID.4, HV cell balance, Canadian winter VAG, VCDS diagnostic">
 <link rel="canonical" href="https://eurotech-academy.ca/cas-reels.html">
 
 <!-- Open Graph -->
@@ -94,6 +94,82 @@ h1 span{color:var(--red)}
 .case-footer-tags{display:flex;gap:0.5rem;flex-wrap:wrap}
 .tag-pill{font-family:'JetBrains Mono',monospace;font-size:0.6rem;padding:0.25rem 0.7rem;border:1px solid rgba(255,255,255,0.1);color:var(--muted);letter-spacing:0.05em}
 
+/* HERO CTA */
+.hero-cta{display:flex;gap:1rem;justify-content:center;margin-top:3rem;flex-wrap:wrap}
+.btn-hero-primary,.btn-hero-secondary{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;padding:0.9rem 1.8rem;text-decoration:none;transition:all 0.2s;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%)}
+.btn-hero-primary{background:var(--red);color:white}
+.btn-hero-primary:hover{background:var(--red-dark)}
+.btn-hero-secondary{background:transparent;border:1px solid rgba(255,255,255,0.15);color:var(--silver)}
+.btn-hero-secondary:hover{border-color:var(--red);color:var(--white)}
+
+/* FILTER BAR (sticky) */
+.filter-bar{position:sticky;top:64px;z-index:50;background:rgba(10,10,10,0.95);backdrop-filter:blur(16px);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1rem 0}
+.filter-bar-inner{max-width:1100px;margin:0 auto;padding:0 2rem;display:flex;gap:1.5rem;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.search-wrap{position:relative;flex:1;min-width:240px;max-width:380px}
+.search-wrap input{width:100%;background:var(--dark2);border:1px solid var(--border);color:var(--white);font-family:'DM Sans',sans-serif;font-size:0.85rem;padding:0.7rem 4rem 0.7rem 1rem;outline:none;transition:border-color 0.2s}
+.search-wrap input:focus{border-color:var(--red)}
+.search-count{position:absolute;right:0.8rem;top:50%;transform:translateY(-50%);font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--muted);letter-spacing:0.05em;pointer-events:none}
+.filter-tags{display:flex;gap:0.5rem;flex-wrap:wrap}
+.filter-tag{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.45rem 0.9rem;background:transparent;border:1px solid var(--border);color:var(--silver);cursor:pointer;transition:all 0.2s}
+.filter-tag:hover{border-color:var(--red);color:var(--white)}
+.filter-tag.active{background:var(--red);border-color:var(--red);color:white}
+
+/* NO RESULTS */
+.no-results{max-width:600px;margin:0 auto;padding:4rem 2rem;text-align:center;position:relative;z-index:1}
+.no-results-icon{font-size:3rem;margin-bottom:1rem;opacity:0.4}
+.no-results p{color:var(--silver);font-size:1.05rem;line-height:1.7}
+
+/* ROADMAP */
+.roadmap-section{position:relative;z-index:1;background:linear-gradient(180deg,transparent,rgba(200,0,26,0.03),transparent);padding:5rem 2rem;border-top:1px solid var(--border)}
+.roadmap-inner{max-width:1100px;margin:0 auto}
+.section-header{text-align:center;margin-bottom:3rem}
+.section-tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--red);padding:0.4rem 1rem;border:1px solid rgba(200,0,26,0.3);background:rgba(200,0,26,0.05);margin-bottom:1.2rem}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3rem);letter-spacing:0.03em;line-height:0.95;margin-bottom:1rem}
+.section-title span{color:var(--red)}
+.section-sub{color:rgba(245,245,243,0.65);max-width:580px;margin:0 auto;line-height:1.7;font-size:0.95rem}
+
+.roadmap-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-top:2.5rem}
+.roadmap-card{background:var(--dark2);border:1px solid var(--border);padding:1.3rem;display:flex;gap:1rem;align-items:center;transition:all 0.2s;position:relative;overflow:hidden}
+.roadmap-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:2px;background:var(--muted);transition:background 0.3s}
+.roadmap-card:hover{border-color:rgba(200,0,26,0.25);transform:translateY(-2px)}
+.roadmap-card:hover::before{background:var(--red)}
+.roadmap-num{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--muted);letter-spacing:0.02em;flex-shrink:0;line-height:1}
+.roadmap-content{flex:1}
+.roadmap-title{font-family:'DM Sans',sans-serif;font-weight:500;font-size:0.92rem;color:var(--white);margin-bottom:0.5rem;line-height:1.4}
+.roadmap-tags{display:flex;gap:0.3rem;flex-wrap:wrap}
+.roadmap-tags span{font-family:'JetBrains Mono',monospace;font-size:0.55rem;letter-spacing:0.05em;color:var(--muted);background:var(--dark);padding:0.2rem 0.5rem;text-transform:uppercase}
+.roadmap-note{text-align:center;margin-top:2rem;color:var(--muted);font-size:0.85rem}
+.roadmap-note a{color:var(--red);text-decoration:none;border-bottom:1px solid rgba(200,0,26,0.4)}
+.roadmap-note a:hover{border-bottom-color:var(--red)}
+
+/* SUBMIT SECTION */
+.submit-section{position:relative;z-index:1;padding:5rem 2rem;border-top:1px solid var(--border)}
+.submit-inner{max-width:900px;margin:0 auto;text-align:center}
+.submit-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin:3rem 0 2rem;text-align:left}
+.submit-step{background:var(--dark2);border:1px solid var(--border);padding:1.5rem;display:flex;gap:1rem;align-items:flex-start;position:relative}
+.submit-step-num{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--red);line-height:1;flex-shrink:0}
+.submit-step-text{color:rgba(245,245,243,0.85);font-size:0.92rem;line-height:1.6;padding-top:0.3rem}
+.submit-step-text a{color:var(--red);text-decoration:none;border-bottom:1px solid rgba(200,0,26,0.4)}
+.submit-step-text a:hover{border-bottom-color:var(--red)}
+.btn-submit{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;padding:1.1rem 2.5rem;background:var(--red);color:var(--white);text-decoration:none;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%);transition:background 0.2s;margin-top:1rem}
+.btn-submit:hover{background:var(--red-dark)}
+
+/* CASE HIDE/SHOW for filters */
+.case-card.hidden{display:none}
+
+@media(max-width:700px){
+  .filter-bar{top:56px;padding:0.7rem 0}
+  .filter-bar-inner{padding:0 1rem;gap:0.8rem;flex-direction:column;align-items:stretch}
+  .search-wrap{max-width:100%}
+  .filter-tags{justify-content:center}
+  .filter-tag{font-size:0.55rem;padding:0.4rem 0.7rem}
+  .roadmap-section,.submit-section{padding:3rem 1rem}
+  .roadmap-grid{grid-template-columns:1fr}
+  .submit-steps{grid-template-columns:1fr;gap:0.8rem}
+  .hero-cta{flex-direction:column;width:100%;max-width:280px;margin-left:auto;margin-right:auto}
+  .btn-hero-primary,.btn-hero-secondary{width:100%;text-align:center}
+}
+
 /* CTA */
 .cta-section{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:4rem 2rem;text-align:center}
 .cta-card{background:var(--dark2);border:1px solid rgba(200,0,26,0.3);padding:3rem;clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,0 100%)}
@@ -151,27 +227,58 @@ body.fr .fr-inline{display:inline}
 
   <div class="hero-stats">
     <div class="stat">
-      <div class="stat-num">4<span>+</span></div>
-      <div class="stat-label en-text">Cases documented</div>
-      <div class="stat-label fr-text">Cas documentés</div>
+      <div class="stat-num">EA888</div>
+      <div class="stat-label en-text">2.0 TFSI Gen3</div>
+      <div class="stat-label fr-text">2.0 TFSI Gen3</div>
     </div>
     <div class="stat">
-      <div class="stat-num"><span>100%</span></div>
-      <div class="stat-label en-text">Solved</div>
-      <div class="stat-label fr-text">Résolus</div>
+      <div class="stat-num">EA189</div>
+      <div class="stat-label en-text">2.0 TDI</div>
+      <div class="stat-label fr-text">2.0 TDI</div>
     </div>
     <div class="stat">
-      <div class="stat-num">VCDS</div>
-      <div class="stat-label en-text">Diagnostic tool</div>
-      <div class="stat-label fr-text">Outil diagnostic</div>
+      <div class="stat-num">MQB</div>
+      <div class="stat-label en-text">Haldex AWD</div>
+      <div class="stat-label fr-text">Haldex AWD</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">Q7·A8</div>
+      <div class="stat-label en-text">Air suspension</div>
+      <div class="stat-label fr-text">Suspension à air</div>
     </div>
   </div>
+
+  <div class="hero-cta">
+    <a href="#cases-grid" class="btn-hero-primary"><span class="en-inline">Browse all cases ↓</span><span class="fr-inline">Voir tous les cas ↓</span></a>
+    <a href="#submit-case" class="btn-hero-secondary"><span class="en-inline">Submit your case</span><span class="fr-inline">Soumettre votre cas</span></a>
+  </div>
 </section>
+
+<!-- FILTER + SEARCH BAR -->
+<div class="filter-bar" id="filter-bar">
+  <div class="filter-bar-inner">
+    <div class="search-wrap">
+      <input type="text" id="case-search" placeholder="Search cases... (P0299, EA888, Haldex)" data-en-placeholder="Search cases... (P0299, EA888, Haldex)" data-fr-placeholder="Rechercher des cas... (P0299, EA888, Haldex)">
+      <span class="search-count" id="search-count">10 / 10</span>
+    </div>
+    <div class="filter-tags">
+      <button class="filter-tag active" data-filter="all" data-en="All" data-fr="Tous">All</button>
+      <button class="filter-tag" data-filter="EA888">EA888</button>
+      <button class="filter-tag" data-filter="EA189">EA189</button>
+      <button class="filter-tag" data-filter="TDI">TDI</button>
+      <button class="filter-tag" data-filter="DSG">DSG</button>
+      <button class="filter-tag" data-filter="Haldex">Haldex</button>
+      <button class="filter-tag" data-filter="Suspension">Air Susp.</button>
+      <button class="filter-tag" data-filter="EV">EV</button>
+      <button class="filter-tag" data-filter="Canadian Winter" data-en="Winter" data-fr="Hiver">Winter</button>
+    </div>
+  </div>
+</div>
 
 <div class="divider"></div>
 
 <!-- CASE 1 -->
-<section class="cases-section">
+<section class="cases-section" id="cases-grid">
   <article class="case-card">
 
     <div class="case-header">
@@ -826,6 +933,1266 @@ body.fr .fr-inline{display:inline}
     </div>
 
   </article>
+
+  <!-- CASE 5 — DQ250 DSG MECHATRONIC (Reference Case) -->
+  <article class="case-card">
+
+    <div class="case-header">
+      <div class="case-tag">Case #005 · Reference · DQ250 DSG</div>
+      <h2 class="case-title en-text">DQ250 Mechatronic Hard Shifts — Golf GTI / R MK6</h2>
+      <h2 class="case-title fr-text">Changements Brusques DQ250 — Golf GTI / R MK6</h2>
+      <div class="case-meta">
+        <div class="case-meta-item">Transmission: <span>DQ250 (02E) 6-speed wet DSG</span></div>
+        <div class="case-meta-item">Common platforms: <span>Golf GTI/R MK5-MK6, A3 8P, TT 8J</span></div>
+        <div class="case-meta-item en-inline">Common range: <span>100,000 - 180,000 km</span></div>
+        <div class="case-meta-item fr-inline">Plage commune: <span>100 000 - 180 000 km</span></div>
+        <div class="case-meta-item en-inline">Type: <span>Reference case study</span></div>
+        <div class="case-meta-item fr-inline">Type: <span>Étude de cas de référence</span></div>
+      </div>
+    </div>
+
+    <div class="case-body">
+
+      <!-- ENGLISH -->
+      <div class="en-text">
+        <p style="background:rgba(0,232,122,0.05);border-left:2px solid var(--green);padding:0.8rem 1rem;font-size:0.85rem;margin-bottom:1.5rem;"><strong>Reference case:</strong> Documents the most common DQ250 mechatronic failure pattern. Verify all part numbers and VCDS procedures against ElsaPro for the specific VIN before acting.</p>
+
+        <h2>The Symptoms</h2>
+        <div class="symptom-box">
+          <strong>Typical customer complaint:</strong> "My Golf GTI shifts hard from 1st to 2nd when it's cold, slams into 1st from a stop, sometimes flashes PRNDS on the dash. It feels like a 6-speed automatic from the 90s, not a DSG."
+        </div>
+        <p>The DQ250 (02E) 6-speed wet-clutch DSG is the <strong>first generation dual-clutch transmission</strong> Volkswagen mass-produced. It was an engineering breakthrough in 2003 but the technology has aged. By 100,000 km, mechatronic-related issues become common — solenoid wear, hydraulic pressure loss, and clutch adaptation drift are the usual suspects.</p>
+
+        <h2>The Investigation</h2>
+
+        <h3>Step 1 — Read DSG-specific fault codes</h3>
+        <p>Connect VCDS, scan module 02 (Auto Trans). Common DQ250 mechatronic codes to look for:</p>
+        <ul>
+          <li><code>P17BF</code> — Gear selector lever fault</li>
+          <li><code>P0841</code> — Transmission fluid pressure sensor</li>
+          <li><code>P177F</code> — Hydraulic pressure regulation</li>
+          <li><code>P1823 - P1840</code> — Pressure control solenoids (N217, N218, N233, N371)</li>
+          <li><code>P2711</code> — Unexpected mechanical gear disengagement</li>
+        </ul>
+        <p>Multiple solenoid codes across different pressure circuits = strong indication of internal mechatronic wear, not just a single bad solenoid.</p>
+
+        <h3>Step 2 — Check the fluid first (before condemning anything)</h3>
+        <p>The DQ250 wet-clutch system depends entirely on clean fluid at the correct level. <strong>Many "mechatronic failures" are actually neglected fluid services.</strong> Warm the transmission to 35-45°C, then check:</p>
+        <ul>
+          <li><strong>Fluid color:</strong> Should be red/amber. Dark brown or black = contaminated</li>
+          <li><strong>Fluid smell:</strong> Burnt smell indicates clutch slippage and overheating</li>
+          <li><strong>Metal particles:</strong> Drop the pan — heavy ferrous debris on the magnet means worn internals</li>
+        </ul>
+
+        <h3>Step 3 — VCDS clutch adaptation read</h3>
+        <p>Navigate to module 02 → Adaptation → read clutch adaptation values. Clutch packs that have drifted significantly from factory values indicate the mechatronic has been compensating for wear. <strong>⚠ VERIFY exact channel numbers in ElsaPro for your specific software version.</strong></p>
+
+        <h3>Step 4 — Test battery and voltage stability</h3>
+        <p>The DQ250 mechatronic is voltage-sensitive. A weak battery, failing alternator, or poor grounds can trigger false mechatronic faults. <strong>Always test the charging system before condemning the transmission</strong> — saves customers from unnecessary $2000+ repairs.</p>
+      </div>
+
+      <!-- FRENCH -->
+      <div class="fr-text">
+        <p style="background:rgba(0,232,122,0.05);border-left:2px solid var(--green);padding:0.8rem 1rem;font-size:0.85rem;margin-bottom:1.5rem;"><strong>Cas de référence :</strong> Documente le schéma de défaillance le plus commun du mécatronique DQ250. Vérifier tous les numéros de pièces et procédures VCDS contre ElsaPro pour le VIN spécifique avant d'agir.</p>
+
+        <h2>Les Symptômes</h2>
+        <div class="symptom-box">
+          <strong>Plainte typique du client :</strong> « Ma Golf GTI change brusquement de 1ère à 2ème quand c'est froid, embraye fort en 1ère à l'arrêt, parfois fait clignoter PRNDS au tableau. On dirait une auto à 6 vitesses des années 90, pas un DSG. »
+        </div>
+        <p>Le DQ250 (02E) DSG 6 vitesses à embrayage humide est la <strong>première génération de transmission à double embrayage</strong> produite en masse par Volkswagen. C'était une percée d'ingénierie en 2003 mais la technologie a vieilli. À 100 000 km, les problèmes liés au mécatronique deviennent communs — usure des solénoïdes, perte de pression hydraulique, et dérive d'adaptation d'embrayage sont les suspects habituels.</p>
+
+        <h2>L'Investigation</h2>
+
+        <h3>Étape 1 — Lire les codes DSG spécifiques</h3>
+        <p>Brancher VCDS, scanner le module 02 (Trans Auto). Codes mécatroniques DQ250 communs à chercher :</p>
+        <ul>
+          <li><code>P17BF</code> — Défaillance du levier sélecteur</li>
+          <li><code>P0841</code> — Capteur de pression du fluide de transmission</li>
+          <li><code>P177F</code> — Régulation de pression hydraulique</li>
+          <li><code>P1823 - P1840</code> — Solénoïdes de contrôle de pression (N217, N218, N233, N371)</li>
+          <li><code>P2711</code> — Désengagement mécanique inattendu</li>
+        </ul>
+        <p>Plusieurs codes de solénoïdes à travers différents circuits de pression = forte indication d'usure mécatronique interne, pas juste un solénoïde défectueux.</p>
+
+        <h3>Étape 2 — Vérifier le fluide en premier (avant de condamner quoi que ce soit)</h3>
+        <p>Le système à embrayage humide DQ250 dépend entièrement d'un fluide propre au niveau correct. <strong>Plusieurs « défaillances mécatroniques » sont en fait des services de fluide négligés.</strong> Réchauffer la transmission à 35-45°C, puis vérifier :</p>
+        <ul>
+          <li><strong>Couleur du fluide :</strong> Devrait être rouge/ambre. Brun foncé ou noir = contaminé</li>
+          <li><strong>Odeur du fluide :</strong> Une odeur de brûlé indique du glissement d'embrayage et surchauffe</li>
+          <li><strong>Particules métalliques :</strong> Déposer le carter — débris ferreux lourds sur l'aimant signifie internes usés</li>
+        </ul>
+
+        <h3>Étape 3 — Lecture VCDS d'adaptation d'embrayage</h3>
+        <p>Naviguer au module 02 → Adaptation → lire les valeurs d'adaptation d'embrayage. Des packs d'embrayage qui ont dérivé significativement des valeurs usine indiquent que le mécatronique a compensé pour l'usure. <strong>⚠ VÉRIFIER les numéros de canaux exacts dans ElsaPro pour votre version logicielle spécifique.</strong></p>
+
+        <h3>Étape 4 — Tester la batterie et la stabilité de tension</h3>
+        <p>Le mécatronique DQ250 est sensible à la tension. Une batterie faible, un alternateur défectueux ou de mauvaises masses peuvent déclencher de fausses défaillances mécatroniques. <strong>Toujours tester le système de charge avant de condamner la transmission</strong> — sauve les clients de réparations inutiles de 2000$+.</p>
+      </div>
+
+      <h2 class="en-text">The Diagnostic Procedure</h2>
+      <h2 class="fr-text">La Procédure Diagnostique</h2>
+
+      <ol class="steps-list">
+        <li class="en-text"><strong>Full VCDS scan</strong> — record all stored AND history codes from module 02</li>
+        <li class="fr-text"><strong>Scan VCDS complet</strong> — enregistrer tous les codes stockés ET historiques du module 02</li>
+
+        <li class="en-text"><strong>Battery and charging test</strong> — confirm 12.6V resting, 13.8-14.4V running</li>
+        <li class="fr-text"><strong>Test de batterie et de charge</strong> — confirmer 12,6V au repos, 13,8-14,4V en marche</li>
+
+        <li class="en-text"><strong>Road test with live data</strong> — log clutch slip, hydraulic pressure, fluid temp during normal driving</li>
+        <li class="fr-text"><strong>Test routier avec données live</strong> — enregistrer le glissement d'embrayage, pression hydraulique, température du fluide en conduite normale</li>
+
+        <li class="en-text"><strong>Drop the pan for inspection</strong> — examine the magnet, fluid condition, filter saturation</li>
+        <li class="fr-text"><strong>Déposer le carter pour inspection</strong> — examiner l'aimant, condition du fluide, saturation du filtre</li>
+
+        <li class="en-text"><strong>Fluid service first</strong> — replace fluid + filter, perform VCDS adaptation, then re-test</li>
+        <li class="fr-text"><strong>Service du fluide en premier</strong> — remplacer fluide + filtre, effectuer adaptation VCDS, puis re-tester</li>
+
+        <li class="en-text"><strong>Only escalate to mechatronic work</strong> if symptoms persist after fluid service and adaptation</li>
+        <li class="fr-text"><strong>Escalader vers le travail mécatronique seulement</strong> si les symptômes persistent après service du fluide et adaptation</li>
+      </ol>
+
+      <h2 class="en-text">The Solution Hierarchy</h2>
+      <h2 class="fr-text">La Hiérarchie des Solutions</h2>
+
+      <div class="solution-box en-text">
+        <strong>Tiered approach:</strong> 1) DSG fluid + filter service with VCDS adaptation (~$300-500), 2) Mechatronic rebuild by specialist (~$900-1,800), 3) Mechatronic replacement reman OEM (~$1,400-2,800). Always start with #1 — solves a surprising number of cases.
+      </div>
+      <div class="solution-box fr-text">
+        <strong>Approche par paliers :</strong> 1) Service fluide + filtre DSG avec adaptation VCDS (~300-500$), 2) Reconstruction mécatronique par spécialiste (~900-1800$), 3) Remplacement mécatronique reman OEM (~1400-2800$). Toujours commencer par #1 — résout un nombre surprenant de cas.
+      </div>
+
+      <p class="en-text"><strong>Why this matters:</strong> The DQ250 mechatronic has gotten a bad reputation because many shops jump straight to replacement when the actual fix is a $300 fluid service. Even when the mechatronic genuinely is failing, a specialist rebuild often solves it at half the cost of an OEM replacement. <strong>Hierarchical diagnosis saves your customers thousands.</strong></p>
+      <p class="fr-text"><strong>Pourquoi c'est important :</strong> Le mécatronique DQ250 a une mauvaise réputation parce que beaucoup de garages sautent directement au remplacement quand la vraie solution est un service de fluide à 300$. Même quand le mécatronique est vraiment défaillant, une reconstruction par spécialiste résout souvent à moitié prix d'un remplacement OEM. <strong>Le diagnostic hiérarchique économise des milliers à vos clients.</strong></p>
+
+      <h3 class="en-text">Canadian Considerations</h3>
+      <h3 class="fr-text">Considérations Canadiennes</h3>
+
+      <div class="symptom-box en-text">
+        <strong>Quebec/Ontario DSG owners:</strong> Cold-weather cold starts stress the DQ250 mechatronic significantly. The hydraulic pressure builds slowly when oil is at -20°C, causing harsh first shifts that get blamed on a failing mechatronic when it's actually just normal cold-fluid behavior. Wait 2-3 minutes of warmup before aggressive driving in winter. Service fluid every 60,000 km (more conservative than VW's 80,000 km official interval) due to harsher cold-weather duty cycles.
+      </div>
+      <div class="symptom-box fr-text">
+        <strong>Propriétaires DSG au Québec/Ontario :</strong> Les démarrages à froid stressent significativement le mécatronique DQ250. La pression hydraulique se construit lentement quand l'huile est à -20°C, causant des premiers changements brusques qu'on blâme sur un mécatronique défectueux alors que c'est juste un comportement normal d'huile froide. Attendre 2-3 minutes de réchauffement avant la conduite agressive en hiver. Service du fluide tous les 60 000 km (plus conservateur que l'intervalle officiel VW de 80 000 km) à cause des cycles plus durs par temps froid.
+      </div>
+
+      <h3 class="en-text">Key Takeaways for Technicians</h3>
+      <h3 class="fr-text">Points Clés pour Techniciens</h3>
+
+      <ul class="en-text">
+        <li><strong>Always service fluid first</strong> — many "mechatronic failures" are neglected maintenance</li>
+        <li><strong>Test the battery and charging system</strong> before condemning the transmission</li>
+        <li><strong>Multiple solenoid codes</strong> = likely internal mechatronic wear vs single solenoid code = possibly repairable</li>
+        <li><strong>Use only G 055 005 A2 fluid</strong> on DQ250 — wrong fluid destroys the wet clutch pack</li>
+        <li><strong>VCDS adaptation after every fluid service</strong> — mandatory, not optional</li>
+        <li><strong>Educate customer on cold-weather warmup</strong> — 2-3 min in winter saves the mechatronic</li>
+        <li><strong>Specialist rebuild often beats OEM replacement</strong> on cost and reliability — find a trusted DSG specialist</li>
+      </ul>
+
+      <ul class="fr-text">
+        <li><strong>Toujours faire le service du fluide en premier</strong> — beaucoup de « défaillances mécatroniques » sont de l'entretien négligé</li>
+        <li><strong>Tester la batterie et le système de charge</strong> avant de condamner la transmission</li>
+        <li><strong>Multiples codes de solénoïdes</strong> = probablement usure mécatronique interne vs code de solénoïde unique = possiblement réparable</li>
+        <li><strong>Utiliser uniquement le fluide G 055 005 A2</strong> sur DQ250 — un mauvais fluide détruit le pack d'embrayage humide</li>
+        <li><strong>Adaptation VCDS après chaque service de fluide</strong> — obligatoire, pas optionnel</li>
+        <li><strong>Éduquer le client sur le réchauffement par temps froid</strong> — 2-3 min en hiver sauve le mécatronique</li>
+        <li><strong>La reconstruction par spécialiste bat souvent le remplacement OEM</strong> en coût et fiabilité — trouver un spécialiste DSG de confiance</li>
+      </ul>
+
+    </div>
+
+    <div class="case-footer">
+      <div class="case-footer-time en-text">Diagnosis: ~2h · Fluid service: ~3h · Mechatronic rebuild: 4-6 weeks turnaround</div>
+      <div class="case-footer-time fr-text">Diagnostic: ~2h · Service fluide: ~3h · Reconstruction mécatronique: 4-6 semaines délai</div>
+      <div class="case-footer-tags">
+        <span class="tag-pill">DQ250</span>
+        <span class="tag-pill">DSG</span>
+        <span class="tag-pill">Mechatronic</span>
+        <span class="tag-pill">Golf GTI</span>
+        <span class="tag-pill">Golf R MK6</span>
+        <span class="tag-pill">VCDS</span>
+      </div>
+    </div>
+
+  </article>
+
+  <!-- CASE 6 — EA837 WATER PUMP (Reference Case) -->
+  <article class="case-card">
+
+    <div class="case-header">
+      <div class="case-tag">Case #006 · Reference · EA837 V6 TFSI Supercharged</div>
+      <h2 class="case-title en-text">Water Pump Failure — Audi S4 B8 / S5 / Q7 4L</h2>
+      <h2 class="case-title fr-text">Défaillance Pompe à Eau — Audi S4 B8 / S5 / Q7 4L</h2>
+      <div class="case-meta">
+        <div class="case-meta-item">Engine: <span>EA837 3.0 TFSI Supercharged (CREC/CCBA)</span></div>
+        <div class="case-meta-item">Platforms: <span>S4 B8/B8.5, S5, Q7 4L, A6/A7 C7</span></div>
+        <div class="case-meta-item en-inline">Common range: <span>40,000 - 130,000 km</span></div>
+        <div class="case-meta-item fr-inline">Plage commune: <span>40 000 - 130 000 km</span></div>
+        <div class="case-meta-item en-inline">Type: <span>Reference case · Known defect</span></div>
+        <div class="case-meta-item fr-inline">Type: <span>Cas de référence · Défaut connu</span></div>
+      </div>
+    </div>
+
+    <div class="case-body">
+
+      <!-- ENGLISH -->
+      <div class="en-text">
+        <p style="background:rgba(0,232,122,0.05);border-left:2px solid var(--green);padding:0.8rem 1rem;font-size:0.85rem;margin-bottom:1.5rem;"><strong>Reference case:</strong> Documents the well-known EA837 water pump defect (subject to ongoing class action litigation). Always verify part numbers and revision history by VIN.</p>
+
+        <h2>The Symptoms</h2>
+        <div class="symptom-box">
+          <strong>Typical customer complaint:</strong> "My S4 has a slight burning smell when I park, and I noticed the coolant reservoir is getting low. Sometimes the temperature gauge spikes for a few seconds on highway runs, then goes back to normal."
+        </div>
+        <p>The EA837 water pump is one of the most documented design defects in modern Audi history. The <strong>original Revision 1 pump used a plastic housing</strong> that cracks and weeps coolant, often catastrophically. Some failures occur as early as 30,000 miles, with multiple owners reporting going through 2-3 pumps before the platform was redesigned. <strong>Audi has updated the part to Revision 2 (aluminum)</strong>, but many vehicles still on the road have the original failure-prone pump.</p>
+
+        <h2>The Investigation</h2>
+
+        <h3>Step 1 — Visual inspection (the weep hole tells the story)</h3>
+        <p>Audi engineered a deliberate <strong>weep hole in the water pump housing</strong> as an early warning system. When the internal seal starts to fail, coolant drips out the weep hole before catastrophic failure. Look for:</p>
+        <ul>
+          <li><strong>Pink coolant residue</strong> on the supercharger underside or front of the engine</li>
+          <li><strong>Crusty pink/white deposits</strong> on the front timing cover (dried coolant)</li>
+          <li><strong>Coolant reservoir level dropping</strong> with no visible external leak (until it's catastrophic)</li>
+          <li><strong>Slight burning smell</strong> after driving — coolant evaporating off hot components</li>
+        </ul>
+
+        <h3>Step 2 — VCDS coolant system check</h3>
+        <p>Connect VCDS, scan module 01 (Engine). Live data to monitor:</p>
+        <ul>
+          <li><strong>Coolant temperature</strong> at idle and under load — erratic readings suggest air in the system from a leak</li>
+          <li><strong>Thermostat status</strong> — common to fail alongside the water pump (often replaced together)</li>
+          <li><strong>Heater core temperature</strong> — drops when coolant level is low</li>
+        </ul>
+        <p><strong>⚠ VERIFY:</strong> Specific measuring block channel numbers vary by software version. Confirm in ElsaPro for your specific VIN.</p>
+
+        <h3>Step 3 — Identify pump revision (critical for diagnosis)</h3>
+        <p>You need to know which revision pump is installed before planning the repair. Two ways to identify:</p>
+        <ul>
+          <li><strong>Visual:</strong> Pull the supercharger inspection cover. Rev 1 = black plastic housing. Rev 2 = aluminum housing with reinforced impeller</li>
+          <li><strong>Part number lookup:</strong> Use the VIN in ETKA to check the current part number against the original build sheet — supersession history shows revisions</li>
+        </ul>
+        <p>If a Rev 1 pump is still in place on a 2009-2012 car, replacement is a matter of <strong>when, not if</strong>.</p>
+
+        <h3>Step 4 — Check for coolant in oil (worst case scenario)</h3>
+        <p>If the customer reports the car running poorly along with coolant loss, check the oil dipstick and oil cap for:</p>
+        <ul>
+          <li><strong>Milky/foamy oil</strong> — coolant has entered the crankcase</li>
+          <li><strong>Sweet smell on the dipstick</strong></li>
+          <li><strong>Pressurized coolant reservoir</strong> when cold — combustion gases entering coolant</li>
+        </ul>
+        <p>Coolant in oil on an EA837 can indicate water pump failure compromising the front cover seal, or worse — a head gasket failure. <strong>Do not start the engine if coolant is in the oil</strong> until you understand the source.</p>
+      </div>
+
+      <!-- FRENCH -->
+      <div class="fr-text">
+        <p style="background:rgba(0,232,122,0.05);border-left:2px solid var(--green);padding:0.8rem 1rem;font-size:0.85rem;margin-bottom:1.5rem;"><strong>Cas de référence :</strong> Documente le défaut bien connu de la pompe à eau EA837 (sujet à un litige en recours collectif en cours). Toujours vérifier les numéros de pièces et l'historique de révision par VIN.</p>
+
+        <h2>Les Symptômes</h2>
+        <div class="symptom-box">
+          <strong>Plainte typique du client :</strong> « Ma S4 a une légère odeur de brûlé quand je stationne, et j'ai remarqué que le réservoir de coolant baisse. Parfois la jauge de température monte quelques secondes sur l'autoroute, puis revient à la normale. »
+        </div>
+        <p>La pompe à eau EA837 est l'un des défauts de conception les plus documentés de l'histoire récente d'Audi. La <strong>pompe Révision 1 originale utilisait un boîtier en plastique</strong> qui fissure et laisse suinter le coolant, souvent de manière catastrophique. Certaines défaillances surviennent dès 50 000 km, avec plusieurs propriétaires rapportant 2-3 pompes avant la refonte de la plateforme. <strong>Audi a mis à jour la pièce vers la Révision 2 (aluminium)</strong>, mais beaucoup de véhicules sur la route ont encore la pompe d'origine sujette aux défaillances.</p>
+
+        <h2>L'Investigation</h2>
+
+        <h3>Étape 1 — Inspection visuelle (le trou de suintement raconte l'histoire)</h3>
+        <p>Audi a délibérément conçu un <strong>trou de suintement dans le boîtier de la pompe à eau</strong> comme système d'alerte précoce. Quand le joint interne commence à faire défaut, le coolant goutte par le trou de suintement avant la défaillance catastrophique. Cherchez :</p>
+        <ul>
+          <li><strong>Résidus de coolant rose</strong> sur le dessous du compresseur ou l'avant du moteur</li>
+          <li><strong>Dépôts croustillants roses/blancs</strong> sur le couvercle de distribution avant (coolant séché)</li>
+          <li><strong>Niveau du réservoir de coolant qui baisse</strong> sans fuite externe visible (jusqu'à ce que ce soit catastrophique)</li>
+          <li><strong>Légère odeur de brûlé</strong> après conduite — coolant s'évaporant sur les composants chauds</li>
+        </ul>
+
+        <h3>Étape 2 — Vérification VCDS du système de refroidissement</h3>
+        <p>Branchez VCDS, scannez le module 01 (Moteur). Données live à surveiller :</p>
+        <ul>
+          <li><strong>Température du coolant</strong> au ralenti et sous charge — lectures erratiques suggèrent de l'air dans le système dû à une fuite</li>
+          <li><strong>Statut du thermostat</strong> — défaillance commune en même temps que la pompe à eau (souvent remplacés ensemble)</li>
+          <li><strong>Température du noyau de chauffage</strong> — baisse quand le niveau de coolant est bas</li>
+        </ul>
+        <p><strong>⚠ VÉRIFIER :</strong> Les numéros de canaux de blocs de mesure spécifiques varient selon la version logicielle. Confirmer dans ElsaPro pour votre VIN spécifique.</p>
+
+        <h3>Étape 3 — Identifier la révision de la pompe (critique pour le diagnostic)</h3>
+        <p>Vous devez savoir quelle révision de pompe est installée avant de planifier la réparation. Deux façons d'identifier :</p>
+        <ul>
+          <li><strong>Visuel :</strong> Retirer le couvercle d'inspection du compresseur. Rev 1 = boîtier plastique noir. Rev 2 = boîtier aluminium avec impulseur renforcé</li>
+          <li><strong>Recherche de numéro de pièce :</strong> Utiliser le VIN dans ETKA pour vérifier le numéro de pièce actuel contre la fiche de construction originale — l'historique de supersession montre les révisions</li>
+        </ul>
+        <p>Si une pompe Rev 1 est encore en place sur une voiture 2009-2012, le remplacement est une question de <strong>quand, pas si</strong>.</p>
+
+        <h3>Étape 4 — Vérifier le coolant dans l'huile (pire scénario)</h3>
+        <p>Si le client rapporte que la voiture fonctionne mal en plus de la perte de coolant, vérifier la jauge d'huile et le bouchon d'huile pour :</p>
+        <ul>
+          <li><strong>Huile laiteuse/mousseuse</strong> — le coolant est entré dans le carter</li>
+          <li><strong>Odeur sucrée sur la jauge</strong></li>
+          <li><strong>Réservoir de coolant pressurisé</strong> à froid — gaz de combustion entrant dans le coolant</li>
+        </ul>
+        <p>Du coolant dans l'huile sur un EA837 peut indiquer une défaillance de pompe à eau compromettant le joint de couvercle avant, ou pire — une défaillance de joint de culasse. <strong>Ne pas démarrer le moteur si du coolant est dans l'huile</strong> jusqu'à comprendre la source.</p>
+      </div>
+
+      <h2 class="en-text">The Repair Procedure</h2>
+      <h2 class="fr-text">La Procédure de Réparation</h2>
+
+      <ol class="steps-list">
+        <li class="en-text"><strong>Vehicle cold</strong> — never work on a hot cooling system; risk of severe burns from pressurized steam</li>
+        <li class="fr-text"><strong>Véhicule froid</strong> — ne jamais travailler sur un système de refroidissement chaud; risque de brûlures graves dues à la vapeur sous pression</li>
+
+        <li class="en-text"><strong>Drain coolant</strong> — capture for proper disposal; G13 spec only (verify by VIN)</li>
+        <li class="fr-text"><strong>Vidanger le coolant</strong> — récupérer pour élimination appropriée; spec G13 uniquement (vérifier par VIN)</li>
+
+        <li class="en-text"><strong>Remove supercharger</strong> — required for water pump access on EA837; this is the most labor-intensive step</li>
+        <li class="fr-text"><strong>Retirer le compresseur</strong> — requis pour accès à la pompe à eau sur EA837; c'est l'étape la plus exigeante en main-d'œuvre</li>
+
+        <li class="en-text"><strong>Replace water pump AND thermostat together</strong> — labor cost makes it non-negotiable; never just one</li>
+        <li class="fr-text"><strong>Remplacer pompe à eau ET thermostat ensemble</strong> — le coût de main-d'œuvre rend ça non-négociable; jamais juste un seul</li>
+
+        <li class="en-text"><strong>Inspect supercharger components</strong> while accessible — supercharger oil, gaskets, intake manifold seals</li>
+        <li class="fr-text"><strong>Inspecter les composants du compresseur</strong> pendant qu'ils sont accessibles — huile compresseur, joints, joints du collecteur d'admission</li>
+
+        <li class="en-text"><strong>Use Revision 2 (aluminum) pump only</strong> — never reinstall the original plastic Rev 1 design</li>
+        <li class="fr-text"><strong>Utiliser uniquement la pompe Révision 2 (aluminium)</strong> — ne jamais réinstaller le design plastique Rev 1 original</li>
+
+        <li class="en-text"><strong>Refill with G13 coolant</strong> — bleed air properly using the bleed valve on the radiator</li>
+        <li class="fr-text"><strong>Remplir avec coolant G13</strong> — purger l'air correctement en utilisant la valve de purge sur le radiateur</li>
+
+        <li class="en-text"><strong>VCDS pressure test</strong> — verify no leaks under operating pressure; check thermostat opens at correct temperature</li>
+        <li class="fr-text"><strong>Test de pression VCDS</strong> — vérifier aucune fuite sous pression de fonctionnement; vérifier que le thermostat ouvre à la température correcte</li>
+      </ol>
+
+      <h2 class="en-text">The Solution</h2>
+      <h2 class="fr-text">La Solution</h2>
+
+      <div class="solution-box en-text">
+        <strong>Fix:</strong> Complete water pump and thermostat replacement using the Revision 2 (aluminum) pump assembly. Labor is significant due to required supercharger removal — typically 4-6 hours of shop time. Plan for additional 1-2 hours if doing recommended ancillary services while supercharger is off (PCV check, supercharger oil change).
+      </div>
+      <div class="solution-box fr-text">
+        <strong>Solution :</strong> Remplacement complet de la pompe à eau et du thermostat utilisant l'assemblage de pompe Révision 2 (aluminium). La main-d'œuvre est significative en raison du retrait requis du compresseur — typiquement 4-6 heures de temps d'atelier. Prévoir 1-2 heures additionnelles si on fait les services auxiliaires recommandés pendant que le compresseur est retiré (vérification PCV, vidange huile compresseur).
+      </div>
+
+      <p class="en-text"><strong>Why this matters:</strong> The EA837 water pump failure is now subject to an active class action investigation (Sauder Schelkopf, ongoing). Some owners have qualified for warranty coverage extensions or partial reimbursement. <strong>Always document the failure thoroughly</strong> — photos of the leak, OEM part numbers replaced, mileage. This protects both you and the customer if warranty claims become possible.</p>
+      <p class="fr-text"><strong>Pourquoi c'est important :</strong> La défaillance de pompe à eau EA837 fait maintenant l'objet d'une enquête active de recours collectif (Sauder Schelkopf, en cours). Certains propriétaires ont obtenu des prolongations de garantie ou un remboursement partiel. <strong>Toujours documenter la défaillance soigneusement</strong> — photos de la fuite, numéros de pièces OEM remplacés, kilométrage. Cela protège vous et le client si des réclamations de garantie deviennent possibles.</p>
+
+      <h3 class="en-text">Canadian Considerations</h3>
+      <h3 class="fr-text">Considérations Canadiennes</h3>
+
+      <div class="symptom-box en-text">
+        <strong>Quebec/Ontario S4 B8 owners:</strong> Cold weather thermal cycling accelerates the failure of Rev 1 plastic pump housings. The repeated expansion/contraction from -30°C cold starts to operating temperature causes microcracks to propagate faster. If your customer's vehicle still has the Rev 1 pump and 80,000+ km, proactively recommend replacement before catastrophic failure on a cold morning when towing options are limited. Also check coolant condition annually — Canadian salt and ice melt can contaminate the system through small leaks.
+      </div>
+      <div class="symptom-box fr-text">
+        <strong>Propriétaires S4 B8 au Québec/Ontario :</strong> Le cyclage thermique du temps froid accélère la défaillance des boîtiers de pompes Rev 1 en plastique. L'expansion/contraction répétée des démarrages à -30°C à la température de fonctionnement cause des micro-fissures à se propager plus vite. Si le véhicule du client a encore la pompe Rev 1 et 80 000+ km, recommander proactivement le remplacement avant la défaillance catastrophique un matin froid où les options de remorquage sont limitées. Vérifier aussi annuellement la condition du coolant — le sel canadien et les fondants peuvent contaminer le système par de petites fuites.
+      </div>
+
+      <h3 class="en-text">Key Takeaways for Technicians</h3>
+      <h3 class="fr-text">Points Clés pour Techniciens</h3>
+
+      <ul class="en-text">
+        <li><strong>Pink residue on the supercharger underside</strong> is the smoking gun — inspect every 3.0T at oil change</li>
+        <li><strong>Always replace water pump AND thermostat together</strong> — labor makes single-component replacement uneconomical</li>
+        <li><strong>Only install Revision 2 (aluminum) pumps</strong> — never reinstall the failure-prone Rev 1</li>
+        <li><strong>Document everything thoroughly</strong> — class action settlements may provide reimbursement</li>
+        <li><strong>Combine with PCV check and supercharger oil change</strong> — opportunity to add value while supercharger is off</li>
+        <li><strong>Educate the customer on the weep hole</strong> — teach them what to watch for to catch the next failure early</li>
+        <li><strong>Sell the service preventively</strong> on cars at 80,000+ km with Rev 1 pumps still installed</li>
+      </ul>
+
+      <ul class="fr-text">
+        <li><strong>Résidus roses sous le compresseur</strong> est la preuve formelle — inspecter chaque 3.0T au changement d'huile</li>
+        <li><strong>Toujours remplacer pompe à eau ET thermostat ensemble</strong> — la main-d'œuvre rend le remplacement d'une seule pièce non-rentable</li>
+        <li><strong>Installer uniquement des pompes Révision 2 (aluminium)</strong> — ne jamais réinstaller la Rev 1 sujette aux défaillances</li>
+        <li><strong>Documenter tout soigneusement</strong> — les règlements de recours collectif peuvent fournir un remboursement</li>
+        <li><strong>Combiner avec vérification PCV et vidange huile compresseur</strong> — opportunité d'ajouter de la valeur pendant que le compresseur est retiré</li>
+        <li><strong>Éduquer le client sur le trou de suintement</strong> — leur enseigner ce à quoi faire attention pour attraper la prochaine défaillance tôt</li>
+        <li><strong>Vendre le service de façon préventive</strong> sur les voitures de 80 000+ km avec pompes Rev 1 encore installées</li>
+      </ul>
+
+    </div>
+
+    <div class="case-footer">
+      <div class="case-footer-time en-text">Diagnostic: ~30min · Repair: 4-6h · Parts: $400-700 (pump + thermostat + coolant)</div>
+      <div class="case-footer-time fr-text">Diagnostic: ~30min · Réparation: 4-6h · Pièces: 400-700$ (pompe + thermostat + coolant)</div>
+      <div class="case-footer-tags">
+        <span class="tag-pill">EA837</span>
+        <span class="tag-pill">3.0 TFSI</span>
+        <span class="tag-pill">Supercharged</span>
+        <span class="tag-pill">S4 B8</span>
+        <span class="tag-pill">Water Pump</span>
+        <span class="tag-pill">Class Action</span>
+      </div>
+    </div>
+
+  </article>
+
+  <!-- CASE 7 — EA888 P0011/P0014 TIMING CHAIN (Reference Case) -->
+  <article class="case-card">
+
+    <div class="case-header">
+      <div class="case-tag">Case #007 · Reference · EA888 Timing Chain</div>
+      <h2 class="case-title en-text">P0011/P0014 Camshaft Timing — EA888 Gen1-Gen2</h2>
+      <h2 class="case-title fr-text">P0011/P0014 Calage Arbres à Cames — EA888 Gen1-Gen2</h2>
+      <div class="case-meta">
+        <div class="case-meta-item">Engine: <span>EA888 Gen1/Gen2 (CCTA, CAEB, CPLA)</span></div>
+        <div class="case-meta-item">Platforms: <span>MK6 GTI, MK5 Jetta GLI, A4 B8, A5, TT MK2, Tiguan MK1</span></div>
+        <div class="case-meta-item en-inline">Common range: <span>80,000 - 200,000 km</span></div>
+        <div class="case-meta-item fr-inline">Plage commune: <span>80 000 - 200 000 km</span></div>
+        <div class="case-meta-item en-inline">Type: <span>Reference · Major design defect</span></div>
+        <div class="case-meta-item fr-inline">Type: <span>Référence · Défaut majeur</span></div>
+      </div>
+    </div>
+
+    <div class="case-body">
+
+      <!-- ENGLISH -->
+      <div class="en-text">
+        <p style="background:rgba(0,232,122,0.05);border-left:2px solid var(--green);padding:0.8rem 1rem;font-size:0.85rem;margin-bottom:1.5rem;"><strong>Reference case:</strong> The EA888 Gen1/Gen2 timing chain tensioner defect resulted in a class-action lawsuit and warranty extension (10 years / 100,000 miles in many regions). Always verify by VIN.</p>
+
+        <h2>The Symptoms</h2>
+        <div class="symptom-box">
+          <strong>Typical customer complaint:</strong> "My Golf GTI rattles for 2-3 seconds on cold startup, then runs fine. Yesterday the check engine light came on and the dealer scanned a P0016 code. They want to replace the timing chain and gave me a $3,500 quote."
+        </div>
+        <p>The EA888 Gen1/Gen2 timing chain failure is one of the most well-documented engine defects in modern VAG history. The <strong>original "pin-style" timing chain tensioner</strong> fails to maintain consistent hydraulic pressure, allowing chain slack during low-pressure events (cold starts especially). Over time, this slack causes <strong>chain stretching, jumped teeth, and in worst cases, piston-to-valve contact</strong>.</p>
+
+        <h2>The Investigation</h2>
+
+        <h3>Step 1 — Confirm via VCDS measuring block 93</h3>
+        <p>Connect VCDS, scan module 01 (Engine). Navigate to measuring blocks → block 93 (Camshaft Adaptation / Phase Position). Monitor the <strong>"Phase Position Bank 1 Intake"</strong> value in degrees:</p>
+        <ul>
+          <li><strong>Green zone:</strong> 0 to -2° (healthy chain)</li>
+          <li><strong>Yellow zone:</strong> -2 to -4° (monitor closely, prepare for replacement)</li>
+          <li><strong>Red zone:</strong> -4° and below (chain is stretched significantly, replace ASAP)</li>
+        </ul>
+        <p>Values below -5° indicate severe stretch with imminent risk of jumping teeth. <strong>⚠ VERIFY:</strong> Specific channel may vary by software version; confirm in ElsaPro for the exact VIN.</p>
+
+        <h3>Step 2 — Inspection plug for tensioner check</h3>
+        <p>The definitive test is visual inspection of the timing chain tensioner. Remove the <strong>black inspection plug (P/N 06H103485A)</strong> on the lower timing cover. Using a mirror and inspection light:</p>
+        <ul>
+          <li><strong>Old "pin-style" tensioner (06H109467T):</strong> Should be replaced regardless of condition — it's the defective design</li>
+          <li><strong>New "ratchet-style" tensioner:</strong> Count visible ridges. Less than 4 ridges = OK, 5-6 = monitor, more than 6-7 = chain stretched, full replacement needed</li>
+        </ul>
+
+        <h3>Step 3 — Listen for the diagnostic cold-start rattle</h3>
+        <p>The classic symptom: <strong>a 1-3 second rattle/grinding noise on cold startup</strong>, then silence as oil pressure builds and the tensioner extends. The longer this rattle persists, the more chain slack exists. A rattle that lasts more than 4 seconds means failure is imminent.</p>
+
+        <h3>Step 4 — Scan for related codes</h3>
+        <p>Beyond P0011/P0014 (intake/exhaust cam timing over-advanced Bank 1), look for accompanying codes:</p>
+        <ul>
+          <li><code>P0016</code> — Cam-crank position correlation (most common companion)</li>
+          <li><code>P0017</code> — Cam-crank correlation Bank 1 Sensor B (exhaust side)</li>
+          <li><code>P0341</code> — Camshaft position sensor circuit (chain slap can interfere with sensor signal)</li>
+          <li><code>P0300-P0304</code> — Multi-cylinder misfires (severe cases where timing has jumped)</li>
+        </ul>
+      </div>
+
+      <!-- FRENCH -->
+      <div class="fr-text">
+        <p style="background:rgba(0,232,122,0.05);border-left:2px solid var(--green);padding:0.8rem 1rem;font-size:0.85rem;margin-bottom:1.5rem;"><strong>Cas de référence :</strong> Le défaut du tendeur de chaîne EA888 Gen1/Gen2 a résulté en un recours collectif et une prolongation de garantie (10 ans / 160 000 km dans plusieurs régions). Toujours vérifier par VIN.</p>
+
+        <h2>Les Symptômes</h2>
+        <div class="symptom-box">
+          <strong>Plainte typique du client :</strong> « Ma Golf GTI cliquette pendant 2-3 secondes au démarrage à froid, puis tourne bien. Hier le voyant moteur s'est allumé et le concessionnaire a scanné un code P0016. Ils veulent remplacer la chaîne de distribution et m'ont donné une soumission de 3500$. »
+        </div>
+        <p>La défaillance de chaîne de distribution EA888 Gen1/Gen2 est l'un des défauts moteurs les plus documentés de l'histoire récente VAG. Le <strong>tendeur "pin-style" original</strong> ne maintient pas une pression hydraulique constante, permettant du jeu dans la chaîne pendant les événements de basse pression (démarrages à froid surtout). Avec le temps, ce jeu cause <strong>l'étirement de la chaîne, des sauts de dents, et dans les pires cas, contact piston-soupape</strong>.</p>
+
+        <h2>L'Investigation</h2>
+
+        <h3>Étape 1 — Confirmer via bloc de mesure VCDS 93</h3>
+        <p>Branchez VCDS, scannez le module 01 (Moteur). Naviguez aux blocs de mesure → bloc 93 (Adaptation Arbre à Cames / Position de Phase). Surveillez la valeur <strong>"Position de Phase Banque 1 Admission"</strong> en degrés :</p>
+        <ul>
+          <li><strong>Zone verte :</strong> 0 à -2° (chaîne en santé)</li>
+          <li><strong>Zone jaune :</strong> -2 à -4° (surveiller de près, préparer le remplacement)</li>
+          <li><strong>Zone rouge :</strong> -4° et moins (chaîne étirée significativement, remplacer immédiatement)</li>
+        </ul>
+        <p>Des valeurs sous -5° indiquent un étirement sévère avec risque imminent de saut de dents. <strong>⚠ VÉRIFIER :</strong> Le canal spécifique peut varier selon la version logicielle; confirmer dans ElsaPro pour le VIN exact.</p>
+
+        <h3>Étape 2 — Bouchon d'inspection pour vérification du tendeur</h3>
+        <p>Le test définitif est l'inspection visuelle du tendeur de chaîne. Retirez le <strong>bouchon d'inspection noir (P/N 06H103485A)</strong> sur le couvercle de distribution inférieur. Avec un miroir et une lampe d'inspection :</p>
+        <ul>
+          <li><strong>Vieux tendeur "pin-style" (06H109467T) :</strong> Doit être remplacé peu importe la condition — c'est le design défectueux</li>
+          <li><strong>Nouveau tendeur "ratchet-style" :</strong> Compter les crans visibles. Moins de 4 crans = OK, 5-6 = surveiller, plus de 6-7 = chaîne étirée, remplacement complet requis</li>
+        </ul>
+
+        <h3>Étape 3 — Écouter le cliquetis diagnostique au démarrage à froid</h3>
+        <p>Le symptôme classique : <strong>un bruit de cliquetis/grincement de 1-3 secondes au démarrage à froid</strong>, puis le silence quand la pression d'huile monte et le tendeur s'étend. Plus ce cliquetis persiste, plus il y a de jeu dans la chaîne. Un cliquetis qui dure plus de 4 secondes signifie une défaillance imminente.</p>
+
+        <h3>Étape 4 — Scanner les codes liés</h3>
+        <p>Au-delà de P0011/P0014 (calage cam admission/échappement trop avancé Banque 1), chercher les codes accompagnateurs :</p>
+        <ul>
+          <li><code>P0016</code> — Corrélation cam-vilebrequin (compagnon le plus commun)</li>
+          <li><code>P0017</code> — Corrélation cam-vilebrequin Banque 1 Capteur B (côté échappement)</li>
+          <li><code>P0341</code> — Circuit du capteur de position de l'arbre à cames (le battement de la chaîne peut interférer avec le signal du capteur)</li>
+          <li><code>P0300-P0304</code> — Ratés multi-cylindres (cas sévères où le calage a sauté)</li>
+        </ul>
+      </div>
+
+      <h2 class="en-text">The Repair Procedure</h2>
+      <h2 class="fr-text">La Procédure de Réparation</h2>
+
+      <ol class="steps-list">
+        <li class="en-text"><strong>Check warranty eligibility first</strong> — VW/Audi extended warranty to 10 years/100,000 miles for many 2008-2014 TSI engines. Confirm VIN at dealer</li>
+        <li class="fr-text"><strong>Vérifier l'éligibilité de garantie en premier</strong> — VW/Audi a prolongé la garantie à 10 ans/160 000 km pour plusieurs moteurs TSI 2008-2014. Confirmer VIN au concessionnaire</li>
+
+        <li class="en-text"><strong>Order complete timing chain kit</strong> — chain, tensioner (updated ratchet style), guides, sprockets, all gaskets. Single-component fixes don't last</li>
+        <li class="fr-text"><strong>Commander un kit complet de chaîne</strong> — chaîne, tendeur (style ratchet mis à jour), guides, pignons, tous les joints. Les réparations partielles ne durent pas</li>
+
+        <li class="en-text"><strong>Mark engine position at TDC</strong> — never trust factory marks alone; verify with custom marks before disassembly</li>
+        <li class="fr-text"><strong>Marquer la position du moteur au PMH</strong> — ne jamais faire confiance qu'aux marques d'usine; vérifier avec des marques personnalisées avant le démontage</li>
+
+        <li class="en-text"><strong>Inspect cam bearings while accessible</strong> — wear here often accompanies chain stretch</li>
+        <li class="fr-text"><strong>Inspecter les paliers de cames pendant qu'ils sont accessibles</strong> — l'usure ici accompagne souvent l'étirement de la chaîne</li>
+
+        <li class="en-text"><strong>Replace VVT solenoid (N205) if specified</strong> — sometimes seized from oil contamination during the failure period</li>
+        <li class="fr-text"><strong>Remplacer le solénoïde VVT (N205) si spécifié</strong> — parfois grippé par contamination d'huile pendant la période de défaillance</li>
+
+        <li class="en-text"><strong>Fresh oil and filter</strong> — high-quality VW 502/507-spec oil; chain debris may be in the system</li>
+        <li class="fr-text"><strong>Huile et filtre frais</strong> — huile haute qualité spec VW 502/507; débris de chaîne possibles dans le système</li>
+
+        <li class="en-text"><strong>VCDS adaptation reset</strong> — clear codes, reset cam adaptation values, then re-monitor MVB 93</li>
+        <li class="fr-text"><strong>Réinitialisation adaptation VCDS</strong> — effacer les codes, réinitialiser les valeurs d'adaptation cam, puis re-surveiller MVB 93</li>
+      </ol>
+
+      <h2 class="en-text">The Solution</h2>
+      <h2 class="fr-text">La Solution</h2>
+
+      <div class="solution-box en-text">
+        <strong>Fix:</strong> Complete timing chain service with updated ratchet-style tensioner. Total parts cost typically $300-$600 for the kit, labor 6-10 hours depending on engine variant. Always verify the customer's warranty status first — many of these repairs qualify for VW goodwill or extended warranty coverage.
+      </div>
+      <div class="solution-box fr-text">
+        <strong>Solution :</strong> Service complet de chaîne de distribution avec tendeur ratchet mis à jour. Coût total des pièces typiquement 300-600$ pour le kit, main-d'œuvre 6-10 heures selon la variante moteur. Toujours vérifier le statut de garantie du client d'abord — plusieurs de ces réparations qualifient pour la couverture de bonne volonté VW ou la garantie prolongée.
+      </div>
+
+      <h3 class="en-text">Key Takeaways for Technicians</h3>
+      <h3 class="fr-text">Points Clés pour Techniciens</h3>
+
+      <ul class="en-text">
+        <li><strong>Cold-start rattle on EA888 Gen1/Gen2</strong> = timing chain investigation priority #1</li>
+        <li><strong>Always check warranty extension eligibility</strong> via VIN at VW dealer first</li>
+        <li><strong>VCDS MVB 93 phase position</strong> is the fastest non-invasive diagnostic</li>
+        <li><strong>Tensioner inspection plug</strong> tells the definitive story — old pin-style = always replace</li>
+        <li><strong>Replace as a complete kit</strong> — single chain replacements lead to comeback</li>
+        <li><strong>Educate customers</strong> on the warranty extension — many don't know they qualify</li>
+        <li><strong>Documentation matters</strong> — class action settlements still being processed</li>
+      </ul>
+
+      <ul class="fr-text">
+        <li><strong>Cliquetis au démarrage à froid sur EA888 Gen1/Gen2</strong> = priorité d'investigation chaîne #1</li>
+        <li><strong>Toujours vérifier l'éligibilité de prolongation de garantie</strong> via VIN au concessionnaire VW d'abord</li>
+        <li><strong>VCDS MVB 93 position de phase</strong> est le diagnostic non-invasif le plus rapide</li>
+        <li><strong>Bouchon d'inspection du tendeur</strong> raconte l'histoire définitive — vieux style pin = toujours remplacer</li>
+        <li><strong>Remplacer comme un kit complet</strong> — les remplacements de chaîne seule mènent à des retours</li>
+        <li><strong>Éduquer les clients</strong> sur la prolongation de garantie — plusieurs ne savent pas qu'ils qualifient</li>
+        <li><strong>La documentation compte</strong> — les règlements de recours collectif sont encore en cours de traitement</li>
+      </ul>
+
+    </div>
+
+    <div class="case-footer">
+      <div class="case-footer-time en-text">Diagnostic: ~1h · Repair: 6-10h · Parts: $300-600 (complete kit) · Warranty: Often covered</div>
+      <div class="case-footer-time fr-text">Diagnostic: ~1h · Réparation: 6-10h · Pièces: 300-600$ (kit complet) · Garantie: Souvent couverte</div>
+      <div class="case-footer-tags">
+        <span class="tag-pill">EA888</span>
+        <span class="tag-pill">Timing Chain</span>
+        <span class="tag-pill">P0011</span>
+        <span class="tag-pill">P0014</span>
+        <span class="tag-pill">P0016</span>
+        <span class="tag-pill">Class Action</span>
+      </div>
+    </div>
+
+  </article>
+
+  <!-- CASE 8 — EA855 RS3 MISFIRE (Reference Case) -->
+  <article class="case-card">
+
+    <div class="case-header">
+      <div class="case-tag">Case #008 · Reference · EA855 5-Cylinder TFSI</div>
+      <h2 class="case-title en-text">P0301 Cylinder 1 Misfire — Audi RS3 / TT RS</h2>
+      <h2 class="case-title fr-text">P0301 Raté Cylindre 1 — Audi RS3 / TT RS</h2>
+      <div class="case-meta">
+        <div class="case-meta-item">Engine: <span>EA855 2.5 TFSI 5-cylinder</span></div>
+        <div class="case-meta-item">Platforms: <span>RS3 8P/8V/8Y, TT RS 8J/8S, RSQ3</span></div>
+        <div class="case-meta-item en-inline">Common range: <span>60,000 - 200,000 km</span></div>
+        <div class="case-meta-item fr-inline">Plage commune: <span>60 000 - 200 000 km</span></div>
+        <div class="case-meta-item en-inline">Note: <span>Unique 5-cyl architecture</span></div>
+        <div class="case-meta-item fr-inline">Note: <span>Architecture 5-cyl unique</span></div>
+      </div>
+    </div>
+
+    <div class="case-body">
+
+      <!-- ENGLISH -->
+      <div class="en-text">
+        <p style="background:rgba(0,232,122,0.05);border-left:2px solid var(--green);padding:0.8rem 1rem;font-size:0.85rem;margin-bottom:1.5rem;"><strong>Reference case:</strong> The EA855 is Audi's iconic 2.5L 5-cylinder turbocharged engine — unique in modern VAG lineup. Diagnostic approach differs from standard EA888 4-cylinder workflows.</p>
+
+        <h2>The Symptoms</h2>
+        <div class="symptom-box">
+          <strong>Typical customer complaint:</strong> "My RS3 throws a P0301 intermittently. Engine feels rough at idle when cold, smooths out after warm-up. Power feels slightly down but the car still runs. Other techs told me it's a 4-cylinder engine — that's how I knew they didn't know what they were talking about."
+        </div>
+        <p>The Audi EA855 is the spiritual successor to Audi's legendary 5-cylinder turbo heritage (Quattro rally engines). It uses an <strong>uneven 1-2-4-5-3 firing order</strong> producing the iconic warbling exhaust note. This unique architecture means standard 4-cylinder diagnostic patterns don't always apply — and many shops misdiagnose due to unfamiliarity.</p>
+
+        <h2>The Investigation</h2>
+
+        <h3>Step 1 — Verify you're working with a 5-cylinder (the foundation)</h3>
+        <p>Before anything else, <strong>confirm the engine architecture</strong>. The EA855 has <strong>5 spark plugs, 5 coil packs, 5 injectors</strong>. If you're looking at parts diagrams expecting 4 cylinders, stop and re-verify the VIN. Many parts websites incorrectly show 4-cyl data for some RS3 VINs — always cross-reference with ETKA.</p>
+
+        <h3>Step 2 — Coil-on-plug swap test (proven 5-cyl diagnostic)</h3>
+        <p>The fastest diagnostic for any cylinder-specific misfire:</p>
+        <ul>
+          <li>Note current misfire location (P0301 = cylinder 1)</li>
+          <li><strong>Swap the coil pack from cylinder 1 to cylinder 3</strong> (different position to track movement)</li>
+          <li>Clear codes, drive 5-10 minutes</li>
+          <li>If misfire moves to cylinder 3 → faulty coil pack confirmed</li>
+          <li>If misfire stays on cylinder 1 → not the coil; investigate further</li>
+        </ul>
+
+        <h3>Step 3 — Spark plug inspection (EA855-specific notes)</h3>
+        <p>EA855 spark plug intervals are typically <strong>30,000-50,000 km on tuned vehicles, 60,000-80,000 km on stock</strong>. Look for:</p>
+        <ul>
+          <li><strong>Oil fouling:</strong> Suggests valve cover gasket leak or worse</li>
+          <li><strong>Excess gap:</strong> Plug electrode wear (most common cause of intermittent P0301)</li>
+          <li><strong>Carbon buildup:</strong> Direct injection deposits affecting spark quality</li>
+          <li><strong>Cracked porcelain:</strong> Plug failure from over-torquing during last service</li>
+        </ul>
+        <p><strong>⚠ VERIFY part number:</strong> EA855 uses specific OEM plugs — generic upgrades can cause misfires. Check ETKA for current spec.</p>
+
+        <h3>Step 4 — Injector test for sustained misfires</h3>
+        <p>If ignition is verified good, the next suspect is the fuel injector for cylinder 1. EA855 uses direct injection — injectors can carbon up internally or develop weak spray patterns:</p>
+        <ul>
+          <li>VCDS measuring blocks for injector pulse width and fuel trim</li>
+          <li>Compare bank-wide fuel trim values — cylinder 1 over-trimming suggests injector issue</li>
+          <li>Consider injector flow test (off-vehicle) for definitive answer</li>
+        </ul>
+      </div>
+
+      <!-- FRENCH -->
+      <div class="fr-text">
+        <p style="background:rgba(0,232,122,0.05);border-left:2px solid var(--green);padding:0.8rem 1rem;font-size:0.85rem;margin-bottom:1.5rem;"><strong>Cas de référence :</strong> Le EA855 est le moteur turbocharger 2,5L 5-cylindres iconique d'Audi — unique dans la gamme VAG moderne. L'approche diagnostique diffère des flux de travail standards EA888 4-cylindres.</p>
+
+        <h2>Les Symptômes</h2>
+        <div class="symptom-box">
+          <strong>Plainte typique du client :</strong> « Mon RS3 affiche un P0301 par intermittence. Le moteur vibre au ralenti à froid, se stabilise au chaud. La puissance semble légèrement diminuée mais l'auto roule encore. D'autres techniciens m'ont dit que c'est un 4-cylindres — c'est comme ça que j'ai su qu'ils ne savaient pas de quoi ils parlaient. »
+        </div>
+        <p>Le Audi EA855 est le successeur spirituel de l'héritage 5-cylindres turbo légendaire d'Audi (moteurs de rallye Quattro). Il utilise un <strong>ordre d'allumage inégal 1-2-4-5-3</strong> produisant le son d'échappement iconique en gargouillement. Cette architecture unique signifie que les patrons diagnostiques 4-cylindres standards ne s'appliquent pas toujours — et plusieurs garages diagnostiquent mal par manque de familiarité.</p>
+
+        <h2>L'Investigation</h2>
+
+        <h3>Étape 1 — Vérifier que vous travaillez avec un 5-cylindres (la fondation)</h3>
+        <p>Avant tout, <strong>confirmer l'architecture du moteur</strong>. Le EA855 a <strong>5 bougies, 5 bobines, 5 injecteurs</strong>. Si vous regardez des schémas de pièces attendant 4 cylindres, arrêtez et re-vérifiez le VIN. Plusieurs sites de pièces affichent incorrectement des données 4-cyl pour certains VIN RS3 — toujours recouper avec ETKA.</p>
+
+        <h3>Étape 2 — Test d'échange bobine-sur-bougie (diagnostic 5-cyl éprouvé)</h3>
+        <p>Le diagnostic le plus rapide pour tout raté spécifique à un cylindre :</p>
+        <ul>
+          <li>Noter l'emplacement actuel du raté (P0301 = cylindre 1)</li>
+          <li><strong>Échanger la bobine du cylindre 1 avec celle du cylindre 3</strong> (position différente pour suivre le mouvement)</li>
+          <li>Effacer les codes, conduire 5-10 minutes</li>
+          <li>Si le raté se déplace au cylindre 3 → bobine défectueuse confirmée</li>
+          <li>Si le raté reste au cylindre 1 → pas la bobine; investiguer plus loin</li>
+        </ul>
+
+        <h3>Étape 3 — Inspection des bougies (notes spécifiques EA855)</h3>
+        <p>Les intervalles de bougies EA855 sont typiquement <strong>30 000-50 000 km sur véhicules tunés, 60 000-80 000 km sur stock</strong>. Chercher :</p>
+        <ul>
+          <li><strong>Encrassement d'huile :</strong> Suggère fuite du joint de couvercle de soupapes ou pire</li>
+          <li><strong>Espacement excessif :</strong> Usure de l'électrode de bougie (cause la plus commune de P0301 intermittent)</li>
+          <li><strong>Accumulation de carbone :</strong> Dépôts d'injection directe affectant la qualité de l'étincelle</li>
+          <li><strong>Porcelaine fissurée :</strong> Défaillance de bougie due au sur-serrage lors du dernier service</li>
+        </ul>
+        <p><strong>⚠ VÉRIFIER numéro de pièce :</strong> EA855 utilise des bougies OEM spécifiques — les améliorations génériques peuvent causer des ratés. Vérifier ETKA pour la spec actuelle.</p>
+
+        <h3>Étape 4 — Test d'injecteur pour ratés soutenus</h3>
+        <p>Si l'allumage est vérifié bon, le prochain suspect est l'injecteur du cylindre 1. EA855 utilise l'injection directe — les injecteurs peuvent s'encrasser internement ou développer de faibles patrons de pulvérisation :</p>
+        <ul>
+          <li>Blocs de mesure VCDS pour largeur d'impulsion d'injecteur et fuel trim</li>
+          <li>Comparer les valeurs de fuel trim de la banque — cylindre 1 sur-correction suggère un problème d'injecteur</li>
+          <li>Considérer un test de débit d'injecteur (hors-véhicule) pour réponse définitive</li>
+        </ul>
+      </div>
+
+      <h2 class="en-text">The Solution Approach</h2>
+      <h2 class="fr-text">L'Approche de Solution</h2>
+
+      <div class="solution-box en-text">
+        <strong>Fix hierarchy:</strong> 1) Swap-test the coil pack ($100-200 if confirmed bad), 2) Replace spark plugs as a full set ($150-300), 3) Investigate injector cleaning or replacement ($200-800), 4) Compression test if mechanical suspected ($150 diagnostic). Always start with the cheapest, fastest test.
+      </div>
+      <div class="solution-box fr-text">
+        <strong>Hiérarchie de solution :</strong> 1) Test d'échange de la bobine (100-200$ si confirmée mauvaise), 2) Remplacer les bougies en jeu complet (150-300$), 3) Investiguer le nettoyage ou remplacement d'injecteur (200-800$), 4) Test de compression si mécanique suspecté (150$ diagnostic). Toujours commencer par le test le moins cher et le plus rapide.
+      </div>
+
+      <h3 class="en-text">Canadian Considerations</h3>
+      <h3 class="fr-text">Considérations Canadiennes</h3>
+
+      <div class="symptom-box en-text">
+        <strong>Quebec/Ontario RS3 owners:</strong> Cold starts at -25°C stress ignition components disproportionately on the EA855 — coil packs fail more frequently in winter. The 5-cylinder firing order also creates unique stress patterns. Recommend annual ignition system inspection at the spring service. Use only OEM or premium OEM-equivalent coils — many aftermarket replacements fail rapidly in extreme cold.
+      </div>
+      <div class="symptom-box fr-text">
+        <strong>Propriétaires RS3 au Québec/Ontario :</strong> Les démarrages à -25°C stressent les composants d'allumage de manière disproportionnée sur le EA855 — les bobines tombent en panne plus fréquemment en hiver. L'ordre d'allumage 5-cylindres crée aussi des patrons de stress uniques. Recommander une inspection annuelle du système d'allumage au service de printemps. Utiliser uniquement des bobines OEM ou équivalent OEM premium — plusieurs remplacements aftermarket tombent rapidement en panne en froid extrême.
+      </div>
+
+      <h3 class="en-text">Key Takeaways for Technicians</h3>
+      <h3 class="fr-text">Points Clés pour Techniciens</h3>
+
+      <ul class="en-text">
+        <li><strong>EA855 is 5-cylinder, period</strong> — verify before diagnosing or parts ordering</li>
+        <li><strong>Coil swap test is the fastest diagnostic</strong> — costs nothing, isolates the cause in 15 minutes</li>
+        <li><strong>OEM spark plugs only</strong> on EA855 — generic plugs fail prematurely</li>
+        <li><strong>NHTSA VIN decoder lies sometimes</strong> — may report 4-cyl/2.0L for RS3; ignore and trust ETKA</li>
+        <li><strong>Direct injection means carbon</strong> — every 50,000 km consider intake valve cleaning</li>
+        <li><strong>Tuned cars need more frequent service</strong> — Stage 1+ doubles ignition system stress</li>
+      </ul>
+
+      <ul class="fr-text">
+        <li><strong>EA855 est 5-cylindres, point</strong> — vérifier avant de diagnostiquer ou commander des pièces</li>
+        <li><strong>Le test d'échange de bobine est le diagnostic le plus rapide</strong> — ne coûte rien, isole la cause en 15 minutes</li>
+        <li><strong>Bougies OEM uniquement</strong> sur EA855 — les bougies génériques tombent en panne prématurément</li>
+        <li><strong>Le décodeur VIN NHTSA ment parfois</strong> — peut rapporter 4-cyl/2,0L pour RS3; ignorer et faire confiance à ETKA</li>
+        <li><strong>L'injection directe signifie du carbone</strong> — à tous les 50 000 km considérer le nettoyage des soupapes d'admission</li>
+        <li><strong>Les véhicules tunés ont besoin de service plus fréquent</strong> — Stage 1+ double le stress du système d'allumage</li>
+      </ul>
+
+    </div>
+
+    <div class="case-footer">
+      <div class="case-footer-time en-text">Diagnostic: 30min-1h · Coil swap: 15min · Plug service: 1.5h · Parts: $100-800</div>
+      <div class="case-footer-time fr-text">Diagnostic: 30min-1h · Échange bobine: 15min · Service bougies: 1,5h · Pièces: 100-800$</div>
+      <div class="case-footer-tags">
+        <span class="tag-pill">EA855</span>
+        <span class="tag-pill">5-cyl</span>
+        <span class="tag-pill">RS3</span>
+        <span class="tag-pill">TT RS</span>
+        <span class="tag-pill">P0301</span>
+        <span class="tag-pill">VCDS</span>
+      </div>
+    </div>
+
+  </article>
+
+  <!-- CASE 9 — EA189 EGR COOLER (Reference Case) -->
+  <article class="case-card">
+
+    <div class="case-header">
+      <div class="case-tag">Case #009 · Reference · EA189 TDI EGR Cooler</div>
+      <h2 class="case-title en-text">EGR Cooler Internal Leak — Diesel Coolant Loss</h2>
+      <h2 class="case-title fr-text">Fuite Interne Refroidisseur EGR — Perte Coolant Diesel</h2>
+      <div class="case-meta">
+        <div class="case-meta-item">Engines: <span>EA189 / EA288 TDI, V6 3.0 TDI EA897</span></div>
+        <div class="case-meta-item">Platforms: <span>Golf TDI, Jetta TDI, Passat TDI, Q7 3.0 TDI, Touareg V6 TDI</span></div>
+        <div class="case-meta-item en-inline">Common range: <span>100,000 - 250,000 km</span></div>
+        <div class="case-meta-item fr-inline">Plage commune: <span>100 000 - 250 000 km</span></div>
+        <div class="case-meta-item en-inline">Risk level: <span>⚠ HYDRO-LOCK POTENTIAL</span></div>
+        <div class="case-meta-item fr-inline">Niveau risque: <span>⚠ POTENTIEL HYDRO-LOCK</span></div>
+      </div>
+    </div>
+
+    <div class="case-body">
+
+      <!-- ENGLISH -->
+      <div class="en-text">
+        <p style="background:rgba(255,184,0,0.08);border-left:2px solid var(--amber);padding:0.8rem 1rem;font-size:0.85rem;margin-bottom:1.5rem;"><strong>⚠ Reference case with safety concern:</strong> EGR cooler internal leaks can cause catastrophic engine hydro-locking on VAG TDI engines. Only 15ml of coolant in a cylinder can destroy the engine on startup. Treat this diagnosis with urgency.</p>
+
+        <h2>The Symptoms</h2>
+        <div class="symptom-box">
+          <strong>Typical customer complaint:</strong> "My TDI keeps losing coolant — about a liter every week. No leaks under the car, no smoke from the exhaust, no overheating. The engine runs normally. Just disappearing coolant."
+        </div>
+        <p>Internal EGR cooler failures are one of the most dangerous TDI issues because they progress silently until catastrophic failure. The EGR cooler is a heat exchanger where engine coolant absorbs heat from recirculated exhaust gases. When the internal partition cracks, <strong>coolant leaks into the exhaust stream or directly into the intake tract</strong>. The car may run fine for weeks while building up to a hydro-lock event.</p>
+
+        <h2>The Investigation</h2>
+
+        <h3>Step 1 — Rule out external leaks first</h3>
+        <p>Before suspecting internal failure, verify there's no external coolant loss. Inspect:</p>
+        <ul>
+          <li>Water pump weep hole</li>
+          <li>Radiator hoses and connections</li>
+          <li>Coolant reservoir cap and seal</li>
+          <li>Heater core area inside the cabin (sweet smell, foggy windows)</li>
+          <li>Oil cooler (some TDIs are prone to oil-cooler-to-coolant leaks)</li>
+        </ul>
+        <p>If no external leak is found and coolant continues dropping, suspect internal failure pathways.</p>
+
+        <h3>Step 2 — Check for white exhaust smoke</h3>
+        <p>If the EGR cooler crack is on the <strong>exhaust side</strong>, coolant evaporates in the hot exhaust gases and exits as white steam from the tailpipe. This is more visible during cold starts. <strong>However, many internal leaks are subtle</strong> — coolant enters the intake side during low-pressure events and burns inconspicuously.</p>
+
+        <h3>Step 3 — Pressure test the cooling system</h3>
+        <p>Use a cooling system pressure tester. Pressurize to 1.4 bar (20 psi) with the engine off. If pressure drops with no visible external leak, you have an internal leak somewhere. Then:</p>
+        <ul>
+          <li>Remove the air intake just before the EGR connection</li>
+          <li>Look for coolant pooling in the low point of the intake tract</li>
+          <li>If found → EGR cooler is the culprit</li>
+          <li>If empty → continue investigating (head gasket, cracked head)</li>
+        </ul>
+
+        <h3>Step 4 — Visual inspection at the intake</h3>
+        <p>Remove the charge pipe between the intercooler and intake manifold. Look for:</p>
+        <ul>
+          <li><strong>Coolant residue</strong> — pink/orange dried film inside the pipe</li>
+          <li><strong>Pooled fluid</strong> at the low point of the intake — even a teaspoon is significant</li>
+          <li><strong>Soot mixed with moisture</strong> — characteristic "wet soot" appearance</li>
+        </ul>
+        <p><strong>⚠ Critical:</strong> If you find pooled coolant in the intake tract on a TDI that hasn't been started recently, DO NOT START THE ENGINE. The coolant in the cylinder will hydro-lock and bend connecting rods.</p>
+
+        <h3>Step 5 — VCDS coolant temperature and EGR data</h3>
+        <p>Monitor in module 01 (Engine):</p>
+        <ul>
+          <li>Coolant temperature behavior — erratic readings suggest air pockets from leaks</li>
+          <li>EGR valve position vs. coolant temperature correlation</li>
+          <li>EGR cooler bypass valve status (if equipped)</li>
+        </ul>
+      </div>
+
+      <!-- FRENCH -->
+      <div class="fr-text">
+        <p style="background:rgba(255,184,0,0.08);border-left:2px solid var(--amber);padding:0.8rem 1rem;font-size:0.85rem;margin-bottom:1.5rem;"><strong>⚠ Cas de référence avec préoccupation de sécurité :</strong> Les fuites internes du refroidisseur EGR peuvent causer un hydro-locking catastrophique du moteur sur les TDI VAG. Seulement 15ml de coolant dans un cylindre peut détruire le moteur au démarrage. Traiter ce diagnostic avec urgence.</p>
+
+        <h2>Les Symptômes</h2>
+        <div class="symptom-box">
+          <strong>Plainte typique du client :</strong> « Mon TDI perd du coolant — environ un litre par semaine. Aucune fuite sous l'auto, pas de fumée à l'échappement, pas de surchauffe. Le moteur tourne normalement. Le coolant disparaît juste. »
+        </div>
+        <p>Les défaillances internes du refroidisseur EGR sont l'un des problèmes TDI les plus dangereux car ils progressent silencieusement jusqu'à la défaillance catastrophique. Le refroidisseur EGR est un échangeur de chaleur où le coolant du moteur absorbe la chaleur des gaz d'échappement recirculés. Quand la cloison interne fissure, <strong>le coolant fuit dans le flux d'échappement ou directement dans le tract d'admission</strong>. L'auto peut rouler normalement pendant des semaines avant un événement d'hydro-lock.</p>
+
+        <h2>L'Investigation</h2>
+
+        <h3>Étape 1 — Éliminer les fuites externes d'abord</h3>
+        <p>Avant de soupçonner une défaillance interne, vérifier qu'il n'y a pas de perte de coolant externe. Inspecter :</p>
+        <ul>
+          <li>Trou de suintement de la pompe à eau</li>
+          <li>Boyaux de radiateur et connexions</li>
+          <li>Bouchon et joint du réservoir de coolant</li>
+          <li>Zone du noyau de chauffage à l'intérieur de la cabine (odeur sucrée, fenêtres embuées)</li>
+          <li>Refroidisseur d'huile (certains TDI sont sujets aux fuites refroidisseur-d'huile-vers-coolant)</li>
+        </ul>
+        <p>Si aucune fuite externe trouvée et le coolant continue de baisser, soupçonner les voies de défaillance interne.</p>
+
+        <h3>Étape 2 — Vérifier la fumée blanche d'échappement</h3>
+        <p>Si la fissure du refroidisseur EGR est du <strong>côté échappement</strong>, le coolant s'évapore dans les gaz d'échappement chauds et sort comme vapeur blanche du tuyau d'échappement. C'est plus visible aux démarrages à froid. <strong>Cependant, plusieurs fuites internes sont subtiles</strong> — le coolant entre du côté admission pendant les événements de basse pression et brûle de façon non visible.</p>
+
+        <h3>Étape 3 — Test de pression du système de refroidissement</h3>
+        <p>Utiliser un testeur de pression du système de refroidissement. Pressuriser à 1,4 bar (20 psi) avec le moteur arrêté. Si la pression chute sans fuite externe visible, il y a une fuite interne quelque part. Puis :</p>
+        <ul>
+          <li>Retirer l'admission d'air juste avant la connexion EGR</li>
+          <li>Chercher l'accumulation de coolant au point bas du tract d'admission</li>
+          <li>Si trouvé → le refroidisseur EGR est le coupable</li>
+          <li>Si vide → continuer l'investigation (joint de culasse, culasse fissurée)</li>
+        </ul>
+
+        <h3>Étape 4 — Inspection visuelle à l'admission</h3>
+        <p>Retirer le charge pipe entre l'intercooler et le collecteur d'admission. Chercher :</p>
+        <ul>
+          <li><strong>Résidus de coolant</strong> — film séché rose/orange à l'intérieur du conduit</li>
+          <li><strong>Fluide accumulé</strong> au point bas de l'admission — même une cuillère à thé est significative</li>
+          <li><strong>Suie mélangée à de l'humidité</strong> — apparence caractéristique de "suie humide"</li>
+        </ul>
+        <p><strong>⚠ Critique :</strong> Si vous trouvez du coolant accumulé dans le tract d'admission sur un TDI qui n'a pas été démarré récemment, NE PAS DÉMARRER LE MOTEUR. Le coolant dans le cylindre va hydro-locker et tordre les bielles.</p>
+
+        <h3>Étape 5 — Données de température coolant et EGR VCDS</h3>
+        <p>Surveiller dans le module 01 (Moteur) :</p>
+        <ul>
+          <li>Comportement de la température du coolant — lectures erratiques suggèrent des poches d'air dues à des fuites</li>
+          <li>Corrélation position de la valve EGR vs température du coolant</li>
+          <li>Statut de la valve de contournement du refroidisseur EGR (si équipé)</li>
+        </ul>
+      </div>
+
+      <h2 class="en-text">The Repair Procedure</h2>
+      <h2 class="fr-text">La Procédure de Réparation</h2>
+
+      <ol class="steps-list">
+        <li class="en-text"><strong>If coolant in cylinders suspected, remove glow plugs/spark plugs first</strong> — crank engine slowly to expel any liquid before normal startup</li>
+        <li class="fr-text"><strong>Si coolant suspecté dans les cylindres, retirer d'abord les bougies de préchauffage/bougies</strong> — démarrer le moteur lentement pour expulser tout liquide avant un démarrage normal</li>
+
+        <li class="en-text"><strong>Drain cooling system completely</strong> — collect for proper disposal; verify G13 spec coolant for replacement</li>
+        <li class="fr-text"><strong>Vidanger complètement le système de refroidissement</strong> — récupérer pour élimination appropriée; vérifier coolant spec G13 pour le remplacement</li>
+
+        <li class="en-text"><strong>Remove the EGR cooler assembly</strong> — typically requires removing intake manifold and EGR valve first</li>
+        <li class="fr-text"><strong>Retirer l'assemblage du refroidisseur EGR</strong> — nécessite typiquement de retirer d'abord le collecteur d'admission et la valve EGR</li>
+
+        <li class="en-text"><strong>Replace with new OEM unit</strong> — aftermarket EGR coolers are common point of failure; spend the extra for OEM</li>
+        <li class="fr-text"><strong>Remplacer par une nouvelle unité OEM</strong> — les refroidisseurs EGR aftermarket sont un point de défaillance commun; dépenser plus pour OEM</li>
+
+        <li class="en-text"><strong>Replace EGR valve gaskets and clamps</strong> — never reuse old hardware</li>
+        <li class="fr-text"><strong>Remplacer les joints et colliers de la valve EGR</strong> — ne jamais réutiliser l'ancien matériel</li>
+
+        <li class="en-text"><strong>Clean the intake tract thoroughly</strong> — remove any pooled coolant residue that could contaminate the new system</li>
+        <li class="fr-text"><strong>Nettoyer le tract d'admission soigneusement</strong> — retirer tout résidu de coolant accumulé qui pourrait contaminer le nouveau système</li>
+
+        <li class="en-text"><strong>Refill with G13 coolant</strong> and bleed air properly</li>
+        <li class="fr-text"><strong>Remplir avec coolant G13</strong> et purger l'air correctement</li>
+
+        <li class="en-text"><strong>Post-repair pressure test</strong> — verify the new system holds pressure over 30+ minutes</li>
+        <li class="fr-text"><strong>Test de pression post-réparation</strong> — vérifier que le nouveau système tient la pression sur 30+ minutes</li>
+      </ol>
+
+      <h2 class="en-text">The Solution</h2>
+      <h2 class="fr-text">La Solution</h2>
+
+      <div class="solution-box en-text">
+        <strong>Fix:</strong> OEM EGR cooler replacement with all related gaskets and seals. Parts cost $400-800 (OEM, varies by engine). Labor 4-8 hours depending on engine accessibility. Some V6 TDI applications (Q7, Touareg, A6) are significantly more labor-intensive. <strong>Always do this repair before catastrophic failure</strong> — engine replacement from hydro-lock costs $8,000+.
+      </div>
+      <div class="solution-box fr-text">
+        <strong>Solution :</strong> Remplacement OEM du refroidisseur EGR avec tous les joints et joints d'étanchéité reliés. Coût des pièces 400-800$ (OEM, varie par moteur). Main-d'œuvre 4-8 heures selon l'accessibilité du moteur. Certaines applications V6 TDI (Q7, Touareg, A6) sont significativement plus exigeantes en main-d'œuvre. <strong>Toujours faire cette réparation avant la défaillance catastrophique</strong> — un remplacement de moteur dû à un hydro-lock coûte 8000$+.
+      </div>
+
+      <h3 class="en-text">Canadian Considerations</h3>
+      <h3 class="fr-text">Considérations Canadiennes</h3>
+
+      <div class="symptom-box en-text">
+        <strong>Canadian TDI owners:</strong> Cold weather thermal cycling accelerates EGR cooler internal fatigue. The repeated expansion/contraction from -30°C cold to operating temperature causes microcracks that grow over winters. If your customer's TDI is approaching 150,000 km and is driven primarily in cold climate, recommend annual cooling system pressure testing as preventive measure. Catch the failure before hydro-lock — far cheaper than a destroyed engine in a January parking lot.
+      </div>
+      <div class="symptom-box fr-text">
+        <strong>Propriétaires TDI canadiens :</strong> Le cyclage thermique du temps froid accélère la fatigue interne du refroidisseur EGR. L'expansion/contraction répétée du froid -30°C à la température de fonctionnement cause des micro-fissures qui grandissent au fil des hivers. Si le TDI de votre client approche 150 000 km et est conduit principalement en climat froid, recommander un test de pression annuel du système de refroidissement comme mesure préventive. Attraper la défaillance avant l'hydro-lock — bien moins cher qu'un moteur détruit dans un stationnement en janvier.
+      </div>
+
+      <h3 class="en-text">Key Takeaways for Technicians</h3>
+      <h3 class="fr-text">Points Clés pour Techniciens</h3>
+
+      <ul class="en-text">
+        <li><strong>Mystery coolant loss on TDI</strong> = EGR cooler is suspect #1 after external leak check</li>
+        <li><strong>Hydro-lock risk is REAL</strong> — never start a TDI with suspected internal coolant leak</li>
+        <li><strong>Pressure test the system</strong> — fastest non-invasive diagnostic</li>
+        <li><strong>Check the charge pipe low point</strong> for pooled coolant — pathognomonic finding</li>
+        <li><strong>OEM EGR cooler only</strong> — aftermarket units fail in less than half the time</li>
+        <li><strong>Annual preventive checks</strong> on high-mileage Canadian TDIs are worth the time</li>
+        <li><strong>Educate the customer</strong> — they need to understand why coolant disappearing is urgent</li>
+      </ul>
+
+      <ul class="fr-text">
+        <li><strong>Perte mystérieuse de coolant sur TDI</strong> = refroidisseur EGR est suspect #1 après vérification de fuite externe</li>
+        <li><strong>Le risque d'hydro-lock est RÉEL</strong> — ne jamais démarrer un TDI avec suspicion de fuite interne de coolant</li>
+        <li><strong>Tester la pression du système</strong> — diagnostic non-invasif le plus rapide</li>
+        <li><strong>Vérifier le point bas du charge pipe</strong> pour coolant accumulé — découverte pathognomonique</li>
+        <li><strong>Refroidisseur EGR OEM uniquement</strong> — les unités aftermarket tombent en panne en moins de la moitié du temps</li>
+        <li><strong>Vérifications préventives annuelles</strong> sur les TDI canadiens à haut kilométrage valent le temps</li>
+        <li><strong>Éduquer le client</strong> — il doit comprendre pourquoi du coolant qui disparaît est urgent</li>
+      </ul>
+
+    </div>
+
+    <div class="case-footer">
+      <div class="case-footer-time en-text">Diagnostic: 1-2h · Repair: 4-8h · Parts: $400-800 OEM · Engine save: $8,000+</div>
+      <div class="case-footer-time fr-text">Diagnostic: 1-2h · Réparation: 4-8h · Pièces: 400-800$ OEM · Économie moteur: 8000$+</div>
+      <div class="case-footer-tags">
+        <span class="tag-pill">EA189</span>
+        <span class="tag-pill">EA897</span>
+        <span class="tag-pill">TDI</span>
+        <span class="tag-pill">EGR Cooler</span>
+        <span class="tag-pill">Hydro-lock</span>
+        <span class="tag-pill">Canadian Winter</span>
+      </div>
+    </div>
+
+  </article>
+
+  <!-- CASE 10 — MEB HV BATTERY (Reference Case) -->
+  <article class="case-card">
+
+    <div class="case-header">
+      <div class="case-tag">Case #010 · Reference · MEB EV Platform</div>
+      <h2 class="case-title en-text">HV Battery Cell Imbalance — VW ID.4 / ID.3</h2>
+      <h2 class="case-title fr-text">Déséquilibre Cellules Batterie HV — VW ID.4 / ID.3</h2>
+      <div class="case-meta">
+        <div class="case-meta-item">Platform: <span>MEB (VW ID.3, ID.4, ID.5, Skoda Enyaq, Audi Q4 e-tron)</span></div>
+        <div class="case-meta-item">Battery: <span>82 kWh (288 cells, 12 modules) or 62 kWh</span></div>
+        <div class="case-meta-item en-inline">Common at: <span>30,000+ km / fast-charge heavy use</span></div>
+        <div class="case-meta-item fr-inline">Commun à: <span>30 000+ km / charge rapide intensive</span></div>
+        <div class="case-meta-item en-inline">Warranty: <span>8 years / 160,000 km in Canada</span></div>
+        <div class="case-meta-item fr-inline">Garantie: <span>8 ans / 160 000 km au Canada</span></div>
+      </div>
+    </div>
+
+    <div class="case-body">
+
+      <!-- ENGLISH -->
+      <div class="en-text">
+        <p style="background:rgba(255,184,0,0.08);border-left:2px solid var(--amber);padding:0.8rem 1rem;font-size:0.85rem;margin-bottom:1.5rem;"><strong>⚠ Reference case with safety requirement:</strong> HV battery diagnostics require <strong>HV-certified technician training</strong> and proper safety equipment. Reading data with VCDS is safe, but any physical battery work must follow OEM protocols. Never attempt module-level work without certification.</p>
+
+        <h2>The Symptoms</h2>
+        <div class="symptom-box">
+          <strong>Typical customer complaint:</strong> "My ID.4 shows a yellow warning 'Electrical system not working correctly.' Range estimate dropped from 380 km to 320 km over a few weeks. The car still drives normally but I'm worried about the battery."
+        </div>
+        <p>The VW MEB platform uses a sophisticated battery management system (BMS) that monitors individual cell voltages. When cells drift apart in capacity or self-discharge rate, the BMS attempts to "balance" them by selectively discharging the higher cells. When this balancing can't keep up, <strong>cell voltage delta exceeds limits and the BMS triggers warnings</strong>. Left unaddressed, the imbalanced cells can lead to module replacement and eventual battery pack issues.</p>
+
+        <h2>The Investigation</h2>
+
+        <h3>Step 1 — Read DTCs and warning history</h3>
+        <p>Connect VCDS or compatible tool, scan module 8C (HV Battery). Look for:</p>
+        <ul>
+          <li><strong>"Hybrid Battery Pack Voltage Variation Exceeded Limit"</strong> — the primary code for cell imbalance</li>
+          <li>P0461 — High-voltage battery state of charge fault</li>
+          <li>Pending vs. confirmed status — pending indicates early-stage issue</li>
+          <li>"Unlearning counter" — counts how many times the threshold was crossed before warning</li>
+        </ul>
+        <p><strong>⚠ VERIFY:</strong> MEB platform updates frequently; specific module addresses may change. Cross-reference with current ElsaPro documentation.</p>
+
+        <h3>Step 2 — Measure cell voltage delta</h3>
+        <p>Using VCDS in module 8C, capture individual cell voltages. The 82 kWh pack has 288 cells:</p>
+        <ul>
+          <li><strong>Healthy delta:</strong> Under 10mV (0.010V) between highest and lowest cell</li>
+          <li><strong>Watch zone:</strong> 10-15mV — monitor; may self-correct with balancing</li>
+          <li><strong>Warning zone:</strong> 15-25mV — approaching BMS threshold</li>
+          <li><strong>Critical:</strong> Above 25mV — VW will likely require module replacement</li>
+        </ul>
+        <p>Measure when vehicle is <strong>stationary, not under load</strong>, ideally after a Level 1 full charge to 100% and 3+ hours of rest.</p>
+
+        <h3>Step 3 — Identify outlier cells</h3>
+        <p>Look for cells that consistently show:</p>
+        <ul>
+          <li>Lower voltage than the pack average</li>
+          <li>Faster voltage drop under load</li>
+          <li>Slower voltage recovery after charging</li>
+        </ul>
+        <p>An outlier cell typically points to a specific module (modules contain 24 cells each on the 82kWh pack — 8s3p configuration). Identifying which module is failing helps the dealer plan replacement parts ordering.</p>
+
+        <h3>Step 4 — Check for applicable TSBs / Recalls</h3>
+        <p>VW issued <strong>recall 93P7</strong> for HV Battery Cell Modules on certain ID.4 vehicles. Verify:</p>
+        <ul>
+          <li>VIN eligibility through VW Canada dealer portal</li>
+          <li>Software version — newer firmware has improved balancing algorithms</li>
+          <li>Service campaign status — VW occasionally adds vehicles to coverage</li>
+        </ul>
+
+        <h3>Step 5 — State of Health (SoH) measurement</h3>
+        <p>Perform a deep cycle test for accurate SoH reading (per VW shop procedures):</p>
+        <ul>
+          <li>Discharge battery to under 10%</li>
+          <li>Charge to 100% on Level 1 or Level 2</li>
+          <li>Let sit 1 hour for BMS cell balancing</li>
+          <li>Read "Maximum energy content of traction battery" in VCDS</li>
+          <li>Compare to original capacity (77 kWh usable for 82 kWh pack)</li>
+        </ul>
+        <p>VW warranty covers replacement if capacity drops below <strong>70% within 8 years / 160,000 km</strong> in Canada.</p>
+      </div>
+
+      <!-- FRENCH -->
+      <div class="fr-text">
+        <p style="background:rgba(255,184,0,0.08);border-left:2px solid var(--amber);padding:0.8rem 1rem;font-size:0.85rem;margin-bottom:1.5rem;"><strong>⚠ Cas de référence avec exigence de sécurité :</strong> Les diagnostics de batterie HV nécessitent <strong>une formation de technicien certifié HV</strong> et un équipement de sécurité approprié. Lire les données avec VCDS est sécuritaire, mais tout travail physique sur la batterie doit suivre les protocoles OEM. Ne jamais tenter de travail au niveau du module sans certification.</p>
+
+        <h2>Les Symptômes</h2>
+        <div class="symptom-box">
+          <strong>Plainte typique du client :</strong> « Mon ID.4 affiche un avertissement jaune "Système électrique ne fonctionne pas correctement". L'estimation d'autonomie est passée de 380 km à 320 km en quelques semaines. L'auto roule encore normalement mais je m'inquiète pour la batterie. »
+        </div>
+        <p>La plateforme VW MEB utilise un système sophistiqué de gestion de batterie (BMS) qui surveille les tensions individuelles des cellules. Quand les cellules dérivent en capacité ou en taux d'auto-décharge, le BMS tente de les "équilibrer" en déchargeant sélectivement les cellules plus hautes. Quand cet équilibrage ne peut pas suivre, <strong>le delta de tension des cellules dépasse les limites et le BMS déclenche des avertissements</strong>. Non traité, les cellules déséquilibrées peuvent mener au remplacement de module et éventuellement à des problèmes de bloc batterie.</p>
+
+        <h2>L'Investigation</h2>
+
+        <h3>Étape 1 — Lire les DTC et l'historique d'avertissements</h3>
+        <p>Brancher VCDS ou outil compatible, scanner module 8C (Batterie HV). Chercher :</p>
+        <ul>
+          <li><strong>"Hybrid Battery Pack Voltage Variation Exceeded Limit"</strong> — le code principal pour déséquilibre de cellules</li>
+          <li>P0461 — Défaillance d'état de charge batterie haute tension</li>
+          <li>Statut en attente vs. confirmé — en attente indique un problème en début d'étape</li>
+          <li>"Unlearning counter" — compte combien de fois le seuil a été franchi avant l'avertissement</li>
+        </ul>
+        <p><strong>⚠ VÉRIFIER :</strong> La plateforme MEB se met à jour fréquemment; les adresses de module spécifiques peuvent changer. Recouper avec la documentation ElsaPro actuelle.</p>
+
+        <h3>Étape 2 — Mesurer le delta de tension des cellules</h3>
+        <p>En utilisant VCDS dans le module 8C, capturer les tensions individuelles des cellules. Le bloc 82 kWh a 288 cellules :</p>
+        <ul>
+          <li><strong>Delta sain :</strong> Sous 10mV (0,010V) entre la cellule la plus haute et la plus basse</li>
+          <li><strong>Zone de surveillance :</strong> 10-15mV — surveiller; peut s'auto-corriger avec l'équilibrage</li>
+          <li><strong>Zone d'avertissement :</strong> 15-25mV — approchant le seuil BMS</li>
+          <li><strong>Critique :</strong> Au-dessus de 25mV — VW exigera probablement un remplacement de module</li>
+        </ul>
+        <p>Mesurer quand le véhicule est <strong>stationnaire, pas sous charge</strong>, idéalement après une charge complète Niveau 1 à 100% et 3+ heures de repos.</p>
+
+        <h3>Étape 3 — Identifier les cellules aberrantes</h3>
+        <p>Chercher les cellules qui montrent constamment :</p>
+        <ul>
+          <li>Tension plus basse que la moyenne du bloc</li>
+          <li>Chute de tension plus rapide sous charge</li>
+          <li>Récupération de tension plus lente après charge</li>
+        </ul>
+        <p>Une cellule aberrante pointe typiquement vers un module spécifique (les modules contiennent 24 cellules chacun sur le bloc 82kWh — configuration 8s3p). Identifier quel module fait défaut aide le concessionnaire à planifier la commande des pièces de remplacement.</p>
+
+        <h3>Étape 4 — Vérifier les TSB / Rappels applicables</h3>
+        <p>VW a émis le <strong>rappel 93P7</strong> pour les modules de cellules de batterie HV sur certains véhicules ID.4. Vérifier :</p>
+        <ul>
+          <li>Éligibilité VIN via le portail concessionnaire VW Canada</li>
+          <li>Version logicielle — un firmware plus récent a des algorithmes d'équilibrage améliorés</li>
+          <li>Statut de campagne de service — VW ajoute occasionnellement des véhicules à la couverture</li>
+        </ul>
+
+        <h3>Étape 5 — Mesure de l'État de Santé (SoH)</h3>
+        <p>Effectuer un test de cycle profond pour lecture SoH précise (selon les procédures d'atelier VW) :</p>
+        <ul>
+          <li>Décharger la batterie sous 10%</li>
+          <li>Charger à 100% sur Niveau 1 ou Niveau 2</li>
+          <li>Laisser reposer 1 heure pour l'équilibrage des cellules BMS</li>
+          <li>Lire "Maximum energy content of traction battery" dans VCDS</li>
+          <li>Comparer à la capacité originale (77 kWh utilisable pour bloc 82 kWh)</li>
+        </ul>
+        <p>La garantie VW couvre le remplacement si la capacité tombe sous <strong>70% dans les 8 ans / 160 000 km</strong> au Canada.</p>
+      </div>
+
+      <h2 class="en-text">The Solution</h2>
+      <h2 class="fr-text">La Solution</h2>
+
+      <div class="solution-box en-text">
+        <strong>Diagnostic approach:</strong> Identify if balancing can recover the pack (Level 1 full charge + extended rest), or if module replacement is needed. Module replacement is a <strong>dealer-only repair</strong> requiring HV-certified technicians and specialized equipment. Your role as an independent technician is accurate diagnosis to support the customer's warranty claim — most legitimate cases are covered under the 8-year/160,000 km battery warranty.
+      </div>
+      <div class="solution-box fr-text">
+        <strong>Approche diagnostique :</strong> Identifier si l'équilibrage peut récupérer le bloc (charge complète Niveau 1 + repos prolongé), ou si un remplacement de module est nécessaire. Le remplacement de module est une <strong>réparation au concessionnaire uniquement</strong> nécessitant des techniciens certifiés HV et équipement spécialisé. Votre rôle comme technicien indépendant est un diagnostic précis pour appuyer la réclamation de garantie du client — la plupart des cas légitimes sont couverts sous la garantie batterie 8 ans/160 000 km.
+      </div>
+
+      <h3 class="en-text">Canadian Considerations</h3>
+      <h3 class="fr-text">Considérations Canadiennes</h3>
+
+      <div class="symptom-box en-text">
+        <strong>Quebec/Ontario EV owners:</strong> Cold weather reduces range estimates significantly (sometimes 30-40% in extreme cold) — this is normal and not battery degradation. Real degradation shows up as <strong>permanently reduced charging capacity</strong> regardless of temperature. Track Max Energy Content monthly to distinguish weather effects from real degradation. Heated battery preconditioning before fast charging is essential in Canadian winters to maintain battery health.
+      </div>
+      <div class="symptom-box fr-text">
+        <strong>Propriétaires VE au Québec/Ontario :</strong> Le temps froid réduit significativement les estimations d'autonomie (parfois 30-40% en froid extrême) — c'est normal et pas de la dégradation de batterie. La vraie dégradation apparaît comme une <strong>capacité de charge réduite de façon permanente</strong> peu importe la température. Suivre le Max Energy Content mensuellement pour distinguer les effets météo de la vraie dégradation. Le préconditionnement de batterie chauffée avant la charge rapide est essentiel en hivers canadiens pour maintenir la santé de la batterie.
+      </div>
+
+      <h3 class="en-text">Key Takeaways for Technicians</h3>
+      <h3 class="fr-text">Points Clés pour Techniciens</h3>
+
+      <ul class="en-text">
+        <li><strong>VCDS read-only diagnostics are safe</strong> for any qualified technician — no HV exposure</li>
+        <li><strong>Physical battery work requires HV certification</strong> — never attempt without proper training</li>
+        <li><strong>Cell voltage delta under 10mV = healthy</strong> pack</li>
+        <li><strong>Always check for active recalls/TSBs</strong> via VIN before recommending repairs</li>
+        <li><strong>Track Max Energy Content monthly</strong> for accurate SoH baseline</li>
+        <li><strong>Cold weather is not degradation</strong> — educate customers on temperature effects</li>
+        <li><strong>Your role: accurate diagnosis to support warranty claims</strong> — dealer does the actual HV work</li>
+      </ul>
+
+      <ul class="fr-text">
+        <li><strong>Diagnostics VCDS en lecture seule sont sécuritaires</strong> pour tout technicien qualifié — pas d'exposition HV</li>
+        <li><strong>Le travail physique sur la batterie nécessite certification HV</strong> — ne jamais tenter sans formation appropriée</li>
+        <li><strong>Delta de tension de cellule sous 10mV = bloc</strong> en santé</li>
+        <li><strong>Toujours vérifier les rappels/TSB actifs</strong> via VIN avant de recommander des réparations</li>
+        <li><strong>Suivre le Max Energy Content mensuellement</strong> pour ligne de base SoH précise</li>
+        <li><strong>Le temps froid n'est pas de la dégradation</strong> — éduquer les clients sur les effets de température</li>
+        <li><strong>Votre rôle : diagnostic précis pour appuyer les réclamations de garantie</strong> — le concessionnaire fait le vrai travail HV</li>
+      </ul>
+
+    </div>
+
+    <div class="case-footer">
+      <div class="case-footer-time en-text">VCDS diagnostic: 30min · Module replacement: dealer only · Warranty: 8yr/160,000km</div>
+      <div class="case-footer-time fr-text">Diagnostic VCDS: 30min · Remplacement module: concessionnaire seulement · Garantie: 8ans/160 000km</div>
+      <div class="case-footer-tags">
+        <span class="tag-pill">MEB</span>
+        <span class="tag-pill">HV Battery</span>
+        <span class="tag-pill">VW ID.4</span>
+        <span class="tag-pill">EV</span>
+        <span class="tag-pill">P0461</span>
+        <span class="tag-pill">Cell Balance</span>
+      </div>
+    </div>
+
+  </article>
+</section>
+<div class="no-results" id="no-results" style="display:none;">
+  <div class="no-results-icon">🔍</div>
+  <p class="en-text">No cases match your search.<br><span style="color:var(--muted)">Try a different keyword or clear the filter.</span></p>
+  <p class="fr-text">Aucun cas ne correspond à votre recherche.<br><span style="color:var(--muted)">Essayez un autre mot-clé ou effacez le filtre.</span></p>
+</div>
+
+<!-- ROADMAP — Cases in production -->
+<section class="roadmap-section">
+  <div class="roadmap-inner">
+    <div class="section-header">
+      <div class="section-tag en-text">Coming soon</div>
+      <div class="section-tag fr-text">Prochainement</div>
+      <h2 class="section-title en-text">CASES IN <span>PRODUCTION</span></h2>
+      <h2 class="section-title fr-text">CAS EN <span>PRODUCTION</span></h2>
+      <p class="section-sub en-text">New cases are documented as we encounter them in the workshop. Here's what's currently being written up.</p>
+      <p class="section-sub fr-text">De nouveaux cas sont documentés au fur et à mesure qu'on les rencontre en atelier. Voici ce qui est présentement en rédaction.</p>
+    </div>
+
+    <div class="roadmap-grid">
+      <div class="roadmap-card">
+        <div class="roadmap-num">#011</div>
+        <div class="roadmap-content">
+          <div class="roadmap-title en-text">DQ381 7-speed wet DSG Golf R MK7.5</div>
+          <div class="roadmap-title fr-text">DQ381 DSG 7 vitesses humide Golf R MK7.5</div>
+          <div class="roadmap-tags"><span>DQ381</span><span>Golf R</span><span>MK7.5</span></div>
+        </div>
+      </div>
+
+      <div class="roadmap-card">
+        <div class="roadmap-num">#012</div>
+        <div class="roadmap-content">
+          <div class="roadmap-title en-text">DQ500 high-torque DSG — Caravelle T6 / SQ5</div>
+          <div class="roadmap-title fr-text">DQ500 DSG haut couple — Caravelle T6 / SQ5</div>
+          <div class="roadmap-tags"><span>DQ500</span><span>T6</span><span>SQ5</span></div>
+        </div>
+      </div>
+
+      <div class="roadmap-card">
+        <div class="roadmap-num">#013</div>
+        <div class="roadmap-content">
+          <div class="roadmap-title en-text">N80 EVAP purge valve failure — EA888</div>
+          <div class="roadmap-title fr-text">Défaillance valve purge EVAP N80 — EA888</div>
+          <div class="roadmap-tags"><span>EA888</span><span>P0441</span><span>EVAP</span></div>
+        </div>
+      </div>
+
+      <div class="roadmap-card">
+        <div class="roadmap-num">#014</div>
+        <div class="roadmap-content">
+          <div class="roadmap-title en-text">HPFP cam follower wear — EA113 2.0T</div>
+          <div class="roadmap-title fr-text">Usure suiveur HPFP — EA113 2.0T</div>
+          <div class="roadmap-tags"><span>EA113</span><span>HPFP</span><span>2.0T FSI</span></div>
+        </div>
+      </div>
+
+      <div class="roadmap-card">
+        <div class="roadmap-num">#015</div>
+        <div class="roadmap-content">
+          <div class="roadmap-title en-text">Audi MMI 3G/3G+ map update failure</div>
+          <div class="roadmap-title fr-text">Échec mise à jour cartes MMI 3G/3G+</div>
+          <div class="roadmap-tags"><span>MMI</span><span>Coding</span><span>Audi</span></div>
+        </div>
+      </div>
+
+      <div class="roadmap-card">
+        <div class="roadmap-num">#016</div>
+        <div class="roadmap-content">
+          <div class="roadmap-title en-text">N75 boost solenoid limp mode — EA113</div>
+          <div class="roadmap-title fr-text">Mode dégradé solénoïde boost N75 — EA113</div>
+          <div class="roadmap-tags"><span>EA113</span><span>N75</span><span>Limp Mode</span></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="roadmap-note en-text">New case published approximately every 2-3 weeks. <a href="https://www.skool.com/vag-academy-quebec-2369" target="_blank">Join the community</a> to get notified.</p>
+    <p class="roadmap-note fr-text">Nouveau cas publié approximativement toutes les 2-3 semaines. <a href="https://www.skool.com/vag-academy-quebec-2369" target="_blank">Rejoignez la communauté</a> pour être averti.</p>
+  </div>
+</section>
+
+<!-- SUBMIT YOUR CASE -->
+<section class="submit-section" id="submit-case">
+  <div class="submit-inner">
+    <div class="section-header">
+      <div class="section-tag en-text">Member contribution</div>
+      <div class="section-tag fr-text">Contribution membre</div>
+      <h2 class="section-title en-text">GOT A CASE WORTH<br><span>DOCUMENTING?</span></h2>
+      <h2 class="section-title fr-text">UN CAS QUI MÉRITE<br><span>D'ÊTRE DOCUMENTÉ ?</span></h2>
+      <p class="section-sub en-text">Eurotech members can submit their workshop cases for documentation. If we publish your case, you get credited and lifetime access to a premium tier feature.</p>
+      <p class="section-sub fr-text">Les membres Eurotech peuvent soumettre leurs cas d'atelier pour documentation. Si on publie votre cas, vous êtes crédité et obtenez un accès à vie à une fonctionnalité premium.</p>
+    </div>
+
+    <div class="submit-steps">
+      <div class="submit-step">
+        <div class="submit-step-num">1</div>
+        <div class="submit-step-text en-text">Email the case details to <a href="mailto:astroracinggear@gmail.com?subject=Case%20Submission">astroracinggear@gmail.com</a></div>
+        <div class="submit-step-text fr-text">Envoyez les détails du cas à <a href="mailto:astroracinggear@gmail.com?subject=Soumission%20de%20cas">astroracinggear@gmail.com</a></div>
+      </div>
+      <div class="submit-step">
+        <div class="submit-step-num">2</div>
+        <div class="submit-step-text en-text">Include: vehicle, symptoms, VCDS findings, what you tried, the fix</div>
+        <div class="submit-step-text fr-text">Incluez : véhicule, symptômes, lectures VCDS, ce que vous avez essayé, la solution</div>
+      </div>
+      <div class="submit-step">
+        <div class="submit-step-num">3</div>
+        <div class="submit-step-text en-text">We verify the technical details, document it, and credit your name</div>
+        <div class="submit-step-text fr-text">On vérifie les détails techniques, on documente, et on vous crédite</div>
+      </div>
+    </div>
+
+    <a href="mailto:astroracinggear@gmail.com?subject=Case%20Submission" class="btn-submit">
+      <span class="en-inline">📨 Submit Your Case</span>
+      <span class="fr-inline">📨 Soumettre Votre Cas</span>
+    </a>
+  </div>
 </section>
 
 <!-- CTA -->
@@ -852,10 +2219,77 @@ function setLang(lang){
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
   });
+  // Update placeholder on search
+  const search = document.getElementById('case-search');
+  if (search) {
+    search.placeholder = lang === 'fr' ? search.dataset.frPlaceholder : search.dataset.enPlaceholder;
+  }
+  // Update filter tags
+  document.querySelectorAll('.filter-tag[data-en][data-fr]').forEach(tag => {
+    tag.textContent = lang === 'fr' ? tag.dataset.fr : tag.dataset.en;
+  });
   localStorage.setItem('lang', lang);
 }
 const saved = localStorage.getItem('lang');
 if (saved === 'fr') setLang('fr');
+
+/* ═══════════════════════════
+   FILTER + SEARCH
+═══════════════════════════ */
+let activeFilter = 'all';
+let searchQuery = '';
+
+function applyFilters() {
+  const cases = document.querySelectorAll('.case-card');
+  let visibleCount = 0;
+
+  cases.forEach(card => {
+    // Get all tags + title from this case
+    const tags = Array.from(card.querySelectorAll('.tag-pill')).map(t => t.textContent.toLowerCase()).join(' ');
+    const titles = Array.from(card.querySelectorAll('.case-title, .case-tag, .case-meta-item')).map(t => t.textContent.toLowerCase()).join(' ');
+    const allText = (tags + ' ' + titles + ' ' + card.textContent).toLowerCase();
+
+    // Check filter
+    const filterMatch = activeFilter === 'all' || tags.includes(activeFilter.toLowerCase()) || titles.includes(activeFilter.toLowerCase());
+
+    // Check search
+    const searchMatch = !searchQuery || allText.includes(searchQuery.toLowerCase());
+
+    if (filterMatch && searchMatch) {
+      card.classList.remove('hidden');
+      visibleCount++;
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+
+  // Update count
+  const countEl = document.getElementById('search-count');
+  if (countEl) countEl.textContent = visibleCount + ' / ' + cases.length;
+
+  // No results message
+  const noResults = document.getElementById('no-results');
+  if (noResults) noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+}
+
+// Filter tag clicks
+document.querySelectorAll('.filter-tag').forEach(tag => {
+  tag.addEventListener('click', () => {
+    document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
+    tag.classList.add('active');
+    activeFilter = tag.dataset.filter;
+    applyFilters();
+  });
+});
+
+// Search input
+const searchInput = document.getElementById('case-search');
+if (searchInput) {
+  searchInput.addEventListener('input', (e) => {
+    searchQuery = e.target.value.trim();
+    applyFilters();
+  });
+}
 </script>
 
 </body>
