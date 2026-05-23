@@ -892,41 +892,209 @@ kbd {
   color: var(--red);
 }
 
-/* CODE GATE MODAL */
+/* CODE GATE MODAL — PRO SPLIT PANEL */
 .code-gate {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(5,5,7,0.92);
-  backdrop-filter: blur(10px);
+  background: rgba(5,5,7,0.94);
+  backdrop-filter: blur(12px);
   z-index: 2000;
   align-items: center;
   justify-content: center;
-  padding: 2rem 1rem;
+  padding: 1.5rem;
 }
-.code-gate.active { display: flex; }
+.code-gate.active { display: flex; animation: gateFade 0.4s ease; }
+@keyframes gateFade { from { opacity: 0; } to { opacity: 1; } }
+
 .code-gate-content {
-  background: var(--d2);
-  border: 1px solid var(--border);
-  border-top: 3px solid var(--red);
-  max-width: 420px;
+  display: flex;
   width: 100%;
-  padding: 2.5rem 2rem;
-  text-align: center;
+  max-width: 880px;
+  min-height: 540px;
+  background: var(--d2, #15151a);
+  border: 1px solid var(--border, rgba(255,255,255,0.08));
+  box-shadow: 0 30px 90px rgba(0,0,0,0.6);
+  overflow: hidden;
+  animation: gateSlide 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.code-gate-icon { font-size: 2.5rem; margin-bottom: 1rem; }
-.code-gate-title {
+@keyframes gateSlide { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+/* LEFT BRANDING PANEL */
+.gate-brand {
+  flex: 1;
+  position: relative;
+  background:
+    linear-gradient(135deg, rgba(200,0,26,0.16), rgba(0,0,0,0)),
+    linear-gradient(180deg, #1a1015, #0c0c10);
+  padding: 0;
+  overflow: hidden;
+  min-width: 0;
+}
+.gate-brand-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(200,0,26,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,0,26,0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+.gate-brand-overlay::after {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -20%;
+  width: 70%;
+  height: 80%;
+  background: radial-gradient(circle, rgba(200,0,26,0.18), transparent 70%);
+}
+.gate-brand-inner {
+  position: relative;
+  z-index: 2;
+  padding: 2.8rem 2.4rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.gate-logo {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.8rem;
-  letter-spacing: 0.05em;
-  color: var(--white);
+  font-size: 1.7rem;
+  letter-spacing: 0.1em;
+  color: var(--white, #f5f5f3);
+  line-height: 1;
+}
+.gate-logo em { color: var(--red, #c8001a); font-style: normal; }
+.gate-logo-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  color: var(--muted, #888);
+  margin-top: 0.5rem;
+  text-transform: uppercase;
+}
+.gate-tagline {
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--white2, #d8d8d8);
+  margin: 2rem 0 1.8rem;
+  font-weight: 300;
+}
+.gate-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  flex: 1;
+}
+.gate-features li {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: var(--white2, #c8c8c8);
+}
+.gate-features li strong { color: var(--white, #fff); font-weight: 600; }
+.gate-feat-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(200,0,26,0.12);
+  border: 1px solid rgba(200,0,26,0.25);
+  border-radius: 4px;
+}
+.gate-brand-footer {
+  margin-top: 1.8rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.gate-status {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--green, #00e87a);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.gate-pulse {
+  width: 7px; height: 7px;
+  background: var(--green, #00e87a);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--green, #00e87a);
+  animation: gatePulse 2s infinite;
+}
+@keyframes gatePulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+/* RIGHT ACCESS PANEL */
+.gate-access {
+  width: 380px;
+  flex-shrink: 0;
+  background: var(--d2, #15151a);
+  border-left: 3px solid var(--red, #c8001a);
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.gate-lang-toggle {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  background: transparent;
+  border: 1px solid var(--b3, rgba(255,255,255,0.15));
+  color: var(--white2, #c8c8c8);
+  padding: 0.35rem 0.7rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.gate-lang-toggle:hover { border-color: var(--red); color: var(--red); }
+.gate-access-inner {
+  padding: 2.8rem 2.4rem;
+  width: 100%;
+}
+.gate-lock-badge {
+  font-size: 2rem;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(200,0,26,0.1);
+  border: 1px solid rgba(200,0,26,0.3);
+  margin-bottom: 1.4rem;
+}
+.gate-access-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  letter-spacing: 0.04em;
+  color: var(--white, #fff);
+  line-height: 1;
   margin-bottom: 0.6rem;
 }
-.code-gate-sub {
-  color: var(--white2);
-  font-size: 0.9rem;
+.gate-access-sub {
+  font-size: 0.85rem;
   line-height: 1.5;
-  margin-bottom: 1.5rem;
+  color: var(--muted, #999);
+  margin-bottom: 1.8rem;
+}
+.gate-input-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  color: var(--muted, #888);
+  margin-bottom: 0.5rem;
 }
 .code-input {
   width: 100%;
@@ -936,53 +1104,109 @@ kbd {
   font-family: 'JetBrains Mono', monospace;
   font-size: 1.3rem;
   text-align: center;
-  letter-spacing: 0.15em;
-  padding: 0.9rem;
+  letter-spacing: 0.2em;
+  padding: 0.95rem;
   outline: none;
   text-transform: uppercase;
-  transition: border-color 0.2s;
+  transition: all 0.2s;
 }
-.code-input:focus { border-color: var(--red); }
+.code-input:focus {
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px rgba(200,0,26,0.12);
+}
+.code-input::placeholder { color: rgba(255,255,255,0.2); }
 .code-error {
   display: none;
   color: var(--red2, #ff4458);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   margin-top: 0.6rem;
   font-family: 'JetBrains Mono', monospace;
 }
 .code-submit-btn {
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.8rem;
-  letter-spacing: 0.15em;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   padding: 1rem;
-  background: var(--red);
+  background: var(--red, #c8001a);
   color: white;
   border: none;
   cursor: pointer;
   margin-top: 1.2rem;
-  transition: background 0.2s;
+  transition: all 0.2s;
 }
 .code-submit-btn:hover { background: #a00015; }
-.code-gate-footer {
-  margin-top: 1.5rem;
-  font-size: 0.82rem;
-  color: var(--muted);
-}
-.code-gate-footer a {
-  color: var(--red);
-  text-decoration: none;
-  border-bottom: 1px solid rgba(200,0,26,0.4);
-}
-.code-gate-footer a:hover { border-bottom-color: var(--red); }
-.code-gate-limit-note {
-  margin-top: 1rem;
+.code-submit-btn:hover .gate-btn-arrow { transform: translateX(4px); }
+.gate-btn-arrow { transition: transform 0.2s; }
+.gate-limit-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.4rem;
+  padding: 0.7rem 0.9rem;
+  background: rgba(255,184,0,0.06);
+  border: 1px solid rgba(255,184,0,0.2);
   font-size: 0.7rem;
-  color: var(--muted);
+  color: var(--white2, #c8c8c8);
+  line-height: 1.3;
+}
+.gate-limit-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  color: var(--amber, #ffb800);
+  flex-shrink: 0;
+  line-height: 1;
+}
+.gate-divider {
+  text-align: center;
+  margin: 1.6rem 0 1rem;
+  position: relative;
   font-family: 'JetBrains Mono', monospace;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted, #777);
+}
+.gate-divider::before, .gate-divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 28%;
+  height: 1px;
+  background: var(--border, rgba(255,255,255,0.1));
+}
+.gate-divider::before { left: 0; }
+.gate-divider::after { right: 0; }
+.gate-join-btn {
+  display: block;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.85rem;
+  background: transparent;
+  border: 1px solid var(--b3, rgba(255,255,255,0.15));
+  color: var(--white2, #c8c8c8);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.gate-join-btn:hover {
+  border-color: var(--red);
+  color: var(--red);
+  background: rgba(200,0,26,0.05);
+}
+
+@media(max-width: 760px) {
+  .code-gate-content { flex-direction: column; min-height: 0; max-width: 420px; max-height: 92vh; overflow-y: auto; }
+  .gate-brand { display: none; }
+  .gate-access { width: 100%; border-left: none; border-top: 3px solid var(--red); }
+  .gate-access-inner { padding: 2.2rem 1.8rem; }
 }
 
 /* TUTORIAL MODAL */
@@ -1043,6 +1267,56 @@ kbd {
   line-height: 1.7;
   font-size: 0.92rem;
 }
+
+/* Intro hero strip at top of tutorial */
+.tut-hero {
+  background: linear-gradient(135deg, rgba(200,0,26,0.1), rgba(0,0,0,0));
+  border: 1px solid rgba(200,0,26,0.2);
+  border-left: 3px solid var(--red);
+  padding: 1.2rem 1.4rem;
+  margin-bottom: 1.6rem;
+}
+.tut-hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: 0.04em;
+  color: var(--white);
+  margin-bottom: 0.4rem;
+}
+.tut-hero p { margin: 0; font-size: 0.88rem; color: var(--white2); }
+
+/* Each section becomes a card */
+.tut-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  padding: 1.2rem 1.3rem;
+  margin-bottom: 1rem;
+  transition: border-color 0.2s;
+}
+.tut-card:hover { border-color: rgba(200,0,26,0.2); }
+.tut-card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 0.7rem;
+}
+.tut-card-icon {
+  width: 34px; height: 34px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  background: rgba(200,0,26,0.1);
+  border: 1px solid rgba(200,0,26,0.25);
+  border-radius: 4px;
+}
+.tut-card-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+  color: var(--white);
+}
 .tutorial-body h3 {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 1.2rem;
@@ -1051,9 +1325,11 @@ kbd {
   letter-spacing: 0.05em;
 }
 .tutorial-body h3:first-child { margin-top: 0; }
-.tutorial-body p { margin-bottom: 0.8rem; }
-.tutorial-body ul { padding-left: 1.5rem; margin-bottom: 1rem; }
+.tutorial-body p { margin-bottom: 0.7rem; }
+.tut-card p:last-child { margin-bottom: 0; }
+.tutorial-body ul { padding-left: 1.3rem; margin-bottom: 0.5rem; }
 .tutorial-body ul li { margin-bottom: 0.4rem; }
+.tut-card ul:last-child { margin-bottom: 0; }
 .tutorial-body code {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.82rem;
@@ -1065,13 +1341,47 @@ kbd {
 .tutorial-body strong { color: var(--white); }
 .tutorial-body a { color: var(--red); text-decoration: none; }
 .tutorial-body a:hover { text-decoration: underline; }
-.conf-list { list-style: none !important; padding-left: 0 !important; }
-.conf-list li { padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
+
+/* CONFIDENCE badges as proper visual rows */
+.conf-list { list-style: none !important; padding-left: 0 !important; margin: 0 !important; }
+.conf-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.86rem;
+}
+.conf-list li:last-child { border-bottom: none; }
+.conf-badge {
+  flex-shrink: 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.25rem 0.6rem;
+  border-radius: 3px;
+  white-space: nowrap;
+  min-width: 58px;
+  text-align: center;
+}
+.conf-badge.high { background: rgba(0,232,122,0.12); color: var(--green); border: 1px solid rgba(0,232,122,0.3); }
+.conf-badge.med { background: rgba(255,184,0,0.12); color: var(--amber); border: 1px solid rgba(255,184,0,0.3); }
+.conf-badge.low { background: rgba(200,0,26,0.12); color: var(--red2, #ff4458); border: 1px solid rgba(200,0,26,0.3); }
+/* legacy support */
 .conf-h { color: var(--green); font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; }
 .conf-m { color: var(--amber); font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; }
 .conf-l { color: var(--red2); font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; }
+
+/* DO / DON'T lists with colored markers */
+.tut-do li { list-style: none; position: relative; padding-left: 1.5rem; }
+.tut-do li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-weight: bold; }
+.tut-dont li { list-style: none; position: relative; padding-left: 1.5rem; }
+.tut-dont li::before { content: '✕'; position: absolute; left: 0; color: var(--red2, #ff4458); font-weight: bold; }
+.tut-do, .tut-dont { padding-left: 0 !important; }
+
 .tutorial-footer {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   padding-top: 1.5rem;
   border-top: 1px solid var(--border);
   text-align: center;
@@ -1162,16 +1472,61 @@ kbd {
   <!-- CODE GATE MODAL -->
   <div class="code-gate" id="codeGate">
     <div class="code-gate-content">
-      <div class="code-gate-icon">🔐</div>
-      <div class="code-gate-title">Accès Membre Eurotech</div>
-      <div class="code-gate-sub">Entrez votre code membre pour accéder à l'outil de diagnostic VAG.</div>
-      <input type="text" id="code-input" class="code-input" placeholder="ETA-XXXX" maxlength="8" autocomplete="off" onkeydown="if(event.key==='Enter')submitCode()">
-      <div id="code-error" class="code-error"></div>
-      <button class="code-submit-btn" onclick="submitCode()">Accéder à l'outil</button>
-      <div class="code-gate-footer">
-        Pas encore membre ? <a href="https://www.skool.com/vag-academy-quebec-2369" target="_blank">Rejoindre Eurotech Academy</a>
+
+      <!-- LEFT: Branding panel -->
+      <div class="gate-brand">
+        <div class="gate-brand-overlay"></div>
+        <div class="gate-brand-inner">
+          <div class="gate-logo">EUROTECH<em>.</em>ACADEMY</div>
+          <div class="gate-logo-sub">VAG DIAGNOSTIC ENGINE</div>
+
+          <div class="gate-tagline">L'assistant de diagnostic IA conçu pour les techniciens VAG.</div>
+
+          <ul class="gate-features">
+            <li><span class="gate-feat-icon">⚙</span> <div><strong>Tous les moteurs VAG</strong><br>EA888, EA189, EA837, EA855, MEB...</div></li>
+            <li><span class="gate-feat-icon">🔍</span> <div><strong>Décodage VIN automatique</strong><br>Identification instantanée du véhicule</div></li>
+            <li><span class="gate-feat-icon">📋</span> <div><strong>Procédures VCDS détaillées</strong><br>Codes DTC, causes, solutions</div></li>
+            <li><span class="gate-feat-icon">🍁</span> <div><strong>Contexte canadien</strong><br>Adapté au climat et marché local</div></li>
+          </ul>
+
+          <div class="gate-brand-footer">
+            <div class="gate-status"><span class="gate-pulse"></span> Système en ligne</div>
+          </div>
+        </div>
       </div>
-      <div class="code-gate-limit-note">3 recherches gratuites par jour pendant la phase de lancement</div>
+
+      <!-- RIGHT: Access panel -->
+      <div class="gate-access">
+        <button class="gate-lang-toggle" id="gate-lang-btn" onclick="toggleGateLang()">EN</button>
+
+        <div class="gate-access-inner">
+          <div class="gate-lock-badge">🔐</div>
+
+          <div class="gate-access-title" data-fr="Accès Membre" data-en="Member Access">Accès Membre</div>
+          <div class="gate-access-sub" data-fr="Entrez votre code membre pour débloquer l'outil de diagnostic." data-en="Enter your member code to unlock the diagnostic tool.">Entrez votre code membre pour débloquer l'outil de diagnostic.</div>
+
+          <div class="gate-input-label" data-fr="CODE MEMBRE" data-en="MEMBER CODE">CODE MEMBRE</div>
+          <input type="text" id="code-input" class="code-input" placeholder="ETA-XXXX" maxlength="8" autocomplete="off" onkeydown="if(event.key==='Enter')submitCode()">
+          <div id="code-error" class="code-error"></div>
+
+          <button class="code-submit-btn" onclick="submitCode()">
+            <span data-fr="Déverrouiller l'outil" data-en="Unlock the tool">Déverrouiller l'outil</span>
+            <span class="gate-btn-arrow">→</span>
+          </button>
+
+          <div class="gate-limit-pill">
+            <span class="gate-limit-num">3</span>
+            <span data-fr="recherches gratuites / jour — phase de lancement" data-en="free searches / day — launch phase">recherches gratuites / jour — phase de lancement</span>
+          </div>
+
+          <div class="gate-divider"><span data-fr="pas encore membre ?" data-en="not a member yet?">pas encore membre ?</span></div>
+
+          <a href="https://www.skool.com/vag-academy-quebec-2369" target="_blank" class="gate-join-btn">
+            <span data-fr="Rejoindre Eurotech Academy" data-en="Join Eurotech Academy">Rejoindre Eurotech Academy</span>
+          </a>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -1186,94 +1541,158 @@ kbd {
 
         <!-- EN VERSION -->
         <div class="lang-content lang-en">
-          <h3>🎯 What this tool is — and isn't</h3>
-          <p>This is an <strong>AI-powered reference assistant</strong> trained on VAG technical data. It accelerates your diagnostic workflow by aggregating common knowledge from multiple sources. <strong>It is not a replacement for ElsaPro, ODIS, or hands-on inspection.</strong></p>
+          <div class="tut-hero">
+            <div class="tut-hero-title">An AI reference assistant — not a replacement</div>
+            <p>Trained on VAG technical data, this tool accelerates your diagnostic workflow by aggregating common knowledge from multiple sources. It does <strong>not</strong> replace ElsaPro, ODIS, or hands-on inspection.</p>
+          </div>
 
-          <h3>📊 Reading the CONFIDENCE rating</h3>
-          <p>Every response ends with a confidence self-assessment:</p>
-          <ul class="conf-list">
-            <li><span class="conf-h">CONFIDENCE: HIGH</span> — Cross-referenced from multiple verified sources. Safe to act on.</li>
-            <li><span class="conf-m">CONFIDENCE: MEDIUM</span> — General technical reasoning. Verify before ordering parts.</li>
-            <li><span class="conf-l">CONFIDENCE: LOW</span> — Speculative or incomplete data. <strong>Always verify</strong> with ElsaPro.</li>
-          </ul>
+          <div class="tut-card">
+            <div class="tut-card-head">
+              <div class="tut-card-icon">📊</div>
+              <div class="tut-card-title">Reading the CONFIDENCE rating</div>
+            </div>
+            <p>Every response ends with a confidence self-assessment:</p>
+            <ul class="conf-list">
+              <li><span class="conf-badge high">HIGH</span> <div>Cross-referenced from multiple verified sources. Safe to act on.</div></li>
+              <li><span class="conf-badge med">MEDIUM</span> <div>General technical reasoning. Verify before ordering parts.</div></li>
+              <li><span class="conf-badge low">LOW</span> <div>Speculative or incomplete data. <strong>Always verify</strong> with ElsaPro.</div></li>
+            </ul>
+          </div>
 
-          <h3>⚠ The "VERIFY" flag</h3>
-          <p>When you see <code>⚠ VERIFY: [something]</code> in a response, it means the AI is uncertain about that specific detail. Cross-check against ElsaPro before acting on those points.</p>
+          <div class="tut-card">
+            <div class="tut-card-head">
+              <div class="tut-card-icon">⚠</div>
+              <div class="tut-card-title">The "VERIFY" flag</div>
+            </div>
+            <p>When you see <code>⚠ VERIFY: [something]</code> in a response, the AI is uncertain about that specific detail. Cross-check against ElsaPro before acting on those points.</p>
+          </div>
 
-          <h3>✅ Best practices</h3>
-          <ul>
-            <li><strong>Use VIN when possible</strong> — auto-decodes year/model/engine</li>
-            <li><strong>Be specific in queries</strong> — "P0299 above 3000 rpm WOT" beats "P0299"</li>
-            <li><strong>Mention symptoms together</strong> — "P0299 + rough idle + cold start"</li>
-            <li><strong>Confirm engine code</strong> — the tool may flag uncertainty if VIN/model conflict</li>
-            <li><strong>Cross-check with VCDS live data</strong> — never replace direct measurement</li>
-          </ul>
+          <div class="tut-card">
+            <div class="tut-card-head">
+              <div class="tut-card-icon">✅</div>
+              <div class="tut-card-title">Best practices</div>
+            </div>
+            <ul class="tut-do">
+              <li><strong>Use VIN when possible</strong> — auto-decodes year/model/engine</li>
+              <li><strong>Be specific</strong> — "P0299 above 3000 rpm WOT" beats "P0299"</li>
+              <li><strong>Group symptoms</strong> — "P0299 + rough idle + cold start"</li>
+              <li><strong>Confirm engine code</strong> — the tool flags VIN/model conflicts</li>
+              <li><strong>Cross-check VCDS live data</strong> — never replace direct measurement</li>
+            </ul>
+          </div>
 
-          <h3>🚫 What NOT to use it for</h3>
-          <ul>
-            <li>❌ Final repair authorization without ElsaPro confirmation</li>
-            <li>❌ Specific torque specs or fluid capacities — always verify by VIN</li>
-            <li>❌ Wiring diagrams or pin assignments — refer to official docs</li>
-            <li>❌ Recall/TSB confirmation — check VW/Audi Canada portal with VIN</li>
-          </ul>
+          <div class="tut-card">
+            <div class="tut-card-head">
+              <div class="tut-card-icon">🚫</div>
+              <div class="tut-card-title">What NOT to use it for</div>
+            </div>
+            <ul class="tut-dont">
+              <li>Final repair authorization without ElsaPro confirmation</li>
+              <li>Specific torque specs or fluid capacities — verify by VIN</li>
+              <li>Wiring diagrams or pin assignments — refer to official docs</li>
+              <li>Recall/TSB confirmation — check VW/Audi Canada portal with VIN</li>
+            </ul>
+          </div>
 
-          <h3>💡 When the AI says something wrong</h3>
-          <p>The AI can make mistakes, especially on rare engines or post-2024 models. If a response seems off:</p>
-          <ul>
-            <li>Look at the CONFIDENCE rating — LOW means trust it less</li>
-            <li>Check for ⚠ VERIFY flags</li>
-            <li>Re-run with more specific context (engine code, VIN)</li>
-            <li>Report wrong answers to <a href="mailto:astroracinggear@gmail.com">astroracinggear@gmail.com</a> — helps us improve the system</li>
-          </ul>
+          <div class="tut-card">
+            <div class="tut-card-head">
+              <div class="tut-card-icon">💡</div>
+              <div class="tut-card-title">When the AI gets it wrong</div>
+            </div>
+            <p>The AI can make mistakes, especially on rare engines or post-2024 models. If a response seems off:</p>
+            <ul>
+              <li>Check the CONFIDENCE rating — LOW means trust it less</li>
+              <li>Look for ⚠ VERIFY flags</li>
+              <li>Re-run with more specific context (engine code, VIN)</li>
+              <li>Report wrong answers to <a href="mailto:astroracinggear@gmail.com">astroracinggear@gmail.com</a></li>
+            </ul>
+          </div>
 
-          <h3>📈 Continuous improvement</h3>
-          <p>An automated test bot validates this tool daily against known VAG cases. Errors are tracked and the system prompt is refined weekly. Your feedback accelerates this process.</p>
+          <div class="tut-card">
+            <div class="tut-card-head">
+              <div class="tut-card-icon">📈</div>
+              <div class="tut-card-title">Continuous improvement</div>
+            </div>
+            <p>An automated bot validates this tool daily against known VAG cases. Errors are tracked and the system is refined weekly. Your feedback accelerates this.</p>
+          </div>
         </div>
 
         <!-- FR VERSION -->
         <div class="lang-content lang-fr" style="display:none;">
-          <h3>🎯 Ce que cet outil est — et n'est pas</h3>
-          <p>Il s'agit d'un <strong>assistant de référence propulsé par IA</strong> formé sur des données techniques VAG. Il accélère votre flux de travail diagnostique en agrégeant des connaissances communes provenant de multiples sources. <strong>Ce n'est pas un substitut à ElsaPro, ODIS, ou une inspection en personne.</strong></p>
+          <div class="tut-hero">
+            <div class="tut-hero-title">Un assistant de référence IA — pas un substitut</div>
+            <p>Formé sur des données techniques VAG, cet outil accélère votre flux diagnostique en agrégeant des connaissances de multiples sources. Il ne <strong>remplace pas</strong> ElsaPro, ODIS, ou une inspection en personne.</p>
+          </div>
 
-          <h3>📊 Lecture de l'indice de CONFIANCE</h3>
-          <p>Chaque réponse se termine par une auto-évaluation de confiance :</p>
-          <ul class="conf-list">
-            <li><span class="conf-h">CONFIDENCE: HIGH</span> — Recoupé de plusieurs sources vérifiées. Vous pouvez agir en toute sécurité.</li>
-            <li><span class="conf-m">CONFIDENCE: MEDIUM</span> — Raisonnement technique général. Vérifiez avant de commander des pièces.</li>
-            <li><span class="conf-l">CONFIDENCE: LOW</span> — Données spéculatives ou incomplètes. <strong>Toujours vérifier</strong> avec ElsaPro.</li>
-          </ul>
+          <div class="tut-card">
+            <div class="tut-card-head">
+              <div class="tut-card-icon">📊</div>
+              <div class="tut-card-title">Lire l'indice de CONFIANCE</div>
+            </div>
+            <p>Chaque réponse se termine par une auto-évaluation de confiance :</p>
+            <ul class="conf-list">
+              <li><span class="conf-badge high">HIGH</span> <div>Recoupé de plusieurs sources vérifiées. Sécuritaire d'agir.</div></li>
+              <li><span class="conf-badge med">MEDIUM</span> <div>Raisonnement technique général. Vérifiez avant de commander.</div></li>
+              <li><span class="conf-badge low">LOW</span> <div>Données spéculatives ou incomplètes. <strong>Toujours vérifier</strong> avec ElsaPro.</div></li>
+            </ul>
+          </div>
 
-          <h3>⚠ Le marqueur "VERIFY"</h3>
-          <p>Quand vous voyez <code>⚠ VERIFY: [élément]</code> dans une réponse, cela signifie que l'IA n'est pas certaine de ce détail spécifique. Recoupez avec ElsaPro avant d'agir sur ces points.</p>
+          <div class="tut-card">
+            <div class="tut-card-head">
+              <div class="tut-card-icon">⚠</div>
+              <div class="tut-card-title">Le marqueur "VERIFY"</div>
+            </div>
+            <p>Quand vous voyez <code>⚠ VERIFY: [élément]</code>, l'IA n'est pas certaine de ce détail. Recoupez avec ElsaPro avant d'agir sur ces points.</p>
+          </div>
 
-          <h3>✅ Bonnes pratiques</h3>
-          <ul>
-            <li><strong>Utilisez le VIN quand possible</strong> — décode automatiquement année/modèle/moteur</li>
-            <li><strong>Soyez spécifique</strong> — "P0299 au-dessus de 3000 rpm WOT" vaut mieux que "P0299"</li>
-            <li><strong>Mentionnez les symptômes ensemble</strong> — "P0299 + ralenti instable + démarrage à froid"</li>
-            <li><strong>Confirmez le code moteur</strong> — l'outil peut signaler une incertitude si VIN/modèle entrent en conflit</li>
-            <li><strong>Recoupez avec les données VCDS en direct</strong> — ne remplacez jamais une mesure directe</li>
-          </ul>
+          <div class="tut-card">
+            <div class="tut-card-head">
+              <div class="tut-card-icon">✅</div>
+              <div class="tut-card-title">Bonnes pratiques</div>
+            </div>
+            <ul class="tut-do">
+              <li><strong>Utilisez le VIN</strong> — décode année/modèle/moteur automatiquement</li>
+              <li><strong>Soyez spécifique</strong> — "P0299 au-dessus de 3000 rpm WOT" vaut mieux que "P0299"</li>
+              <li><strong>Groupez les symptômes</strong> — "P0299 + ralenti instable + démarrage à froid"</li>
+              <li><strong>Confirmez le code moteur</strong> — l'outil signale les conflits VIN/modèle</li>
+              <li><strong>Recoupez les données VCDS live</strong> — ne remplacez jamais une mesure directe</li>
+            </ul>
+          </div>
 
-          <h3>🚫 Ce pour quoi NE PAS l'utiliser</h3>
-          <ul>
-            <li>❌ Autorisation finale de réparation sans confirmation ElsaPro</li>
-            <li>❌ Spécifications de couple ou capacités de fluides spécifiques — toujours vérifier par VIN</li>
-            <li>❌ Schémas électriques ou affectations de broches — consulter les docs officielles</li>
-            <li>❌ Confirmation de rappel/TSB — vérifier le portail VW/Audi Canada avec le VIN</li>
-          </ul>
+          <div class="tut-card">
+            <div class="tut-card-head">
+              <div class="tut-card-icon">🚫</div>
+              <div class="tut-card-title">Ce pour quoi NE PAS l'utiliser</div>
+            </div>
+            <ul class="tut-dont">
+              <li>Autorisation finale de réparation sans confirmation ElsaPro</li>
+              <li>Spécifications de couple ou capacités de fluides — vérifier par VIN</li>
+              <li>Schémas électriques ou affectations de broches — docs officielles</li>
+              <li>Confirmation de rappel/TSB — portail VW/Audi Canada avec le VIN</li>
+            </ul>
+          </div>
 
-          <h3>💡 Quand l'IA se trompe</h3>
-          <p>L'IA peut faire des erreurs, surtout sur des moteurs rares ou modèles post-2024. Si une réponse semble étrange :</p>
-          <ul>
-            <li>Regardez l'indice CONFIDENCE — LOW signifie moins de confiance</li>
-            <li>Cherchez les marqueurs ⚠ VERIFY</li>
-            <li>Relancez avec plus de contexte (code moteur, VIN)</li>
-            <li>Signalez les mauvaises réponses à <a href="mailto:astroracinggear@gmail.com">astroracinggear@gmail.com</a> — ça aide à améliorer le système</li>
-          </ul>
+          <div class="tut-card">
+            <div class="tut-card-head">
+              <div class="tut-card-icon">💡</div>
+              <div class="tut-card-title">Quand l'IA se trompe</div>
+            </div>
+            <p>L'IA peut faire des erreurs, surtout sur des moteurs rares ou modèles post-2024. Si une réponse semble étrange :</p>
+            <ul>
+              <li>Regardez l'indice CONFIDENCE — LOW signifie moins de confiance</li>
+              <li>Cherchez les marqueurs ⚠ VERIFY</li>
+              <li>Relancez avec plus de contexte (code moteur, VIN)</li>
+              <li>Signalez les erreurs à <a href="mailto:astroracinggear@gmail.com">astroracinggear@gmail.com</a></li>
+            </ul>
+          </div>
 
-          <h3>📈 Amélioration continue</h3>
-          <p>Un bot de test automatisé valide cet outil quotidiennement contre des cas VAG connus. Les erreurs sont suivies et le système est affiné chaque semaine. Vos commentaires accélèrent ce processus.</p>
+          <div class="tut-card">
+            <div class="tut-card-head">
+              <div class="tut-card-icon">📈</div>
+              <div class="tut-card-title">Amélioration continue</div>
+            </div>
+            <p>Un bot automatisé valide cet outil quotidiennement contre des cas VAG connus. Les erreurs sont suivies et le système affiné chaque semaine. Vos commentaires accélèrent ça.</p>
+          </div>
         </div>
 
         <div class="tutorial-footer">
@@ -2061,6 +2480,17 @@ function submitCode() {
 function clearMemberCode() {
   localStorage.removeItem('eta_member_code');
   alert('Code effacé. Vous devrez le ré-entrer.');
+}
+
+/* Gate language toggle */
+let gateLang = 'fr';
+function toggleGateLang() {
+  gateLang = gateLang === 'fr' ? 'en' : 'fr';
+  const btn = document.getElementById('gate-lang-btn');
+  if (btn) btn.textContent = gateLang === 'fr' ? 'EN' : 'FR';
+  document.querySelectorAll('#codeGate [data-fr][data-en]').forEach(el => {
+    el.textContent = gateLang === 'fr' ? el.dataset.fr : el.dataset.en;
+  });
 }
 
 function showLimitReached(msg, used, limit) {
