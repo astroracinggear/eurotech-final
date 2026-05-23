@@ -1,4 +1,23 @@
-// VAG Diagnostic Engine v8 — fast + smart NHTSA override
+// VAG Diagnostic Engine v9 — member code auth + daily limit (3/day per code)
+const { getStore } = require('@netlify/blobs');
+
+// ═══════════════════════════════════════════════
+// CODES MEMBRES VALIDES — éditer ici pour ajouter/retirer
+// ═══════════════════════════════════════════════
+const VALID_CODES = [
+  "ETA-27HA", "ETA-2CNA", "ETA-2DMQ", "ETA-2QHP", "ETA-33PU",
+  "ETA-36GN", "ETA-3UPY", "ETA-47FE", "ETA-4AJR", "ETA-69PN",
+  "ETA-6P2V", "ETA-84AW", "ETA-8ELV", "ETA-8GT9", "ETA-8LX6",
+  "ETA-92JK", "ETA-9WK4", "ETA-ATS7", "ETA-BKST", "ETA-BKYN",
+  "ETA-CCYD", "ETA-DHTN", "ETA-EAR8", "ETA-ETWM", "ETA-G2YD",
+  "ETA-GE8F", "ETA-K53M", "ETA-K6VQ", "ETA-K9R2", "ETA-LY3H",
+  "ETA-MEBA", "ETA-NCPN", "ETA-PC92", "ETA-R6NE", "ETA-RDWA",
+  "ETA-RR6X", "ETA-RVXT", "ETA-S92F", "ETA-S9N8", "ETA-S9TN",
+  "ETA-TLTN", "ETA-UG3P", "ETA-UXPA", "ETA-VYWC", "ETA-W8YC",
+  "ETA-WWF3", "ETA-Y227", "ETA-Y3MZ", "ETA-YGBY", "ETA-Z3CR"
+];
+
+const DAILY_LIMIT = 3; // recherches par jour par code
 
 exports.handler = async (event) => {
   const h = {
@@ -11,9 +30,46 @@ exports.handler = async (event) => {
   if (!process.env.ANTHROPIC_API_KEY) return { statusCode: 500, headers: h, body: JSON.stringify({ error: 'No API key' }) };
 
   try {
-    const { vin, vehicle, queryType, query, sources } = JSON.parse(event.body || '{}');
+    const { vin, vehicle, queryType, query, sources, code } = JSON.parse(event.body || '{}');
+
+    // 1. VALIDATION DU CODE MEMBRE
+    if (!code) {
+      return { statusCode: 401, headers: h, body: JSON.stringify({ error: 'NO_CODE', message: 'Code membre requis. Entrez votre code Eurotech.' }) };
+    }
+    const cleanCode = String(code).trim().toUpperCase();
+    if (!VALID_CODES.includes(cleanCode)) {
+      return { statusCode: 403, headers: h, body: JSON.stringify({ error: 'INVALID_CODE', message: 'Code invalide. Verifiez votre code membre Eurotech.' }) };
+    }
+
     if (!query) return { statusCode: 400, headers: h, body: JSON.stringify({ error: 'Query required' }) };
 
+    // 2. LIMITE QUOTIDIENNE (3/jour par code)
+    const today = new Date().toISOString().slice(0, 10);
+    const usageKey = `${cleanCode}_${today}`;
+    let usageCount = 0;
+
+    try {
+      const store = getStore('vag-usage');
+      const existing = await store.get(usageKey);
+      usageCount = existing ? parseInt(existing, 10) : 0;
+
+      if (usageCount >= DAILY_LIMIT) {
+        return {
+          statusCode: 429,
+          headers: h,
+          body: JSON.stringify({
+            error: 'DAILY_LIMIT',
+            message: `Limite quotidienne atteinte (${DAILY_LIMIT} recherches/jour). Revenez demain.`,
+            used: usageCount,
+            limit: DAILY_LIMIT
+          })
+        };
+      }
+    } catch (blobErr) {
+      console.error('Blobs read error:', blobErr.message);
+    }
+
+    // 3. NHTSA VIN DECODE
     let vinHint = '';
     if (vin && vin.length === 17) {
       try {
@@ -36,6 +92,7 @@ exports.handler = async (event) => {
       } catch {}
     }
 
+    // 4. PROMPT
     const sys = `Senior VAG technical specialist. Workshop pros depend on accuracy.
 
 ENGINE TRUTH:
@@ -87,7 +144,24 @@ RULES:
 
     const d = await r.json();
     const text = (d.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n').trim();
-    return { statusCode: 200, headers: h, body: JSON.stringify({ result: text, tokens: d.usage }) };
+
+    // 5. INCRÉMENTER LE COMPTEUR (après succès)
+    try {
+      const store = getStore('vag-usage');
+      await store.set(usageKey, String(usageCount + 1));
+    } catch (blobErr) {
+      console.error('Blobs write error:', blobErr.message);
+    }
+
+    return {
+      statusCode: 200,
+      headers: h,
+      body: JSON.stringify({
+        result: text,
+        tokens: d.usage,
+        usage: { used: usageCount + 1, limit: DAILY_LIMIT, remaining: DAILY_LIMIT - usageCount - 1 }
+      })
+    };
 
   } catch (e) {
     return { statusCode: 500, headers: h, body: JSON.stringify({ error: e.message }) };
