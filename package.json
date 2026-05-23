@@ -1,5 +1,5 @@
 {
-  "name": "eurotech-final",
+  "name": "eurotech-academy",
   "version": "1.0.0",
   "dependencies": {
     "@netlify/functions": "^2.8.1",
