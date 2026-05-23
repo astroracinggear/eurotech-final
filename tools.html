@@ -892,6 +892,99 @@ kbd {
   color: var(--red);
 }
 
+/* CODE GATE MODAL */
+.code-gate {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(5,5,7,0.92);
+  backdrop-filter: blur(10px);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+.code-gate.active { display: flex; }
+.code-gate-content {
+  background: var(--d2);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--red);
+  max-width: 420px;
+  width: 100%;
+  padding: 2.5rem 2rem;
+  text-align: center;
+}
+.code-gate-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+.code-gate-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  letter-spacing: 0.05em;
+  color: var(--white);
+  margin-bottom: 0.6rem;
+}
+.code-gate-sub {
+  color: var(--white2);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+.code-input {
+  width: 100%;
+  background: var(--d4, #0a0a0a);
+  border: 1px solid var(--b3, rgba(255,255,255,0.15));
+  color: var(--white);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.3rem;
+  text-align: center;
+  letter-spacing: 0.15em;
+  padding: 0.9rem;
+  outline: none;
+  text-transform: uppercase;
+  transition: border-color 0.2s;
+}
+.code-input:focus { border-color: var(--red); }
+.code-error {
+  display: none;
+  color: var(--red2, #ff4458);
+  font-size: 0.8rem;
+  margin-top: 0.6rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+.code-submit-btn {
+  width: 100%;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 1rem;
+  background: var(--red);
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 1.2rem;
+  transition: background 0.2s;
+}
+.code-submit-btn:hover { background: #a00015; }
+.code-gate-footer {
+  margin-top: 1.5rem;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.code-gate-footer a {
+  color: var(--red);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(200,0,26,0.4);
+}
+.code-gate-footer a:hover { border-bottom-color: var(--red); }
+.code-gate-limit-note {
+  margin-top: 1rem;
+  font-size: 0.7rem;
+  color: var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
 /* TUTORIAL MODAL */
 .tutorial-modal {
   display: none;
@@ -1064,6 +1157,22 @@ kbd {
       <a href="#" onclick="openTutorial();return false;" class="disc-link" data-en="Read usage guide →" data-fr="Voir le mode d'emploi →">Read usage guide →</a>
     </div>
     <button class="disc-close" onclick="this.parentElement.style.display='none';localStorage.setItem('disc_dismissed','1');" title="Dismiss">×</button>
+  </div>
+
+  <!-- CODE GATE MODAL -->
+  <div class="code-gate" id="codeGate">
+    <div class="code-gate-content">
+      <div class="code-gate-icon">🔐</div>
+      <div class="code-gate-title">Accès Membre Eurotech</div>
+      <div class="code-gate-sub">Entrez votre code membre pour accéder à l'outil de diagnostic VAG.</div>
+      <input type="text" id="code-input" class="code-input" placeholder="ETA-XXXX" maxlength="8" autocomplete="off" onkeydown="if(event.key==='Enter')submitCode()">
+      <div id="code-error" class="code-error"></div>
+      <button class="code-submit-btn" onclick="submitCode()">Accéder à l'outil</button>
+      <div class="code-gate-footer">
+        Pas encore membre ? <a href="https://www.skool.com/vag-academy-quebec-2369" target="_blank">Rejoindre Eurotech Academy</a>
+      </div>
+      <div class="code-gate-limit-note">3 recherches gratuites par jour pendant la phase de lancement</div>
+    </div>
   </div>
 
   <!-- TUTORIAL MODAL -->
@@ -1460,6 +1569,15 @@ if (localStorage.getItem('disc_dismissed')) {
   const banner = document.querySelector('.disclaimer-banner');
   if (banner) banner.style.display = 'none';
 }
+// Show code gate on load if no member code (after tutorial)
+window.addEventListener('load', () => {
+  if (!localStorage.getItem('eta_member_code')) {
+    const delay = localStorage.getItem('tutorial_seen') ? 400 : 1600;
+    setTimeout(() => {
+      if (!localStorage.getItem('eta_member_code')) openCodeGate();
+    }, delay);
+  }
+});
 
 /* ═══════════════════════════
    STATE
@@ -1809,6 +1927,13 @@ function copyResult() {
    MAIN SEARCH
 ═══════════════════════════ */
 async function doSearch() {
+  // Vérifier le code membre
+  const memberCode = localStorage.getItem('eta_member_code');
+  if (!memberCode) {
+    openCodeGate();
+    return;
+  }
+
   const vin = document.getElementById('vin').value.trim().toUpperCase();
   const model = document.getElementById('model').value.trim();
   const year = document.getElementById('year').value.trim();
@@ -1850,18 +1975,37 @@ async function doSearch() {
         vehicle,
         queryType: searchType,
         query,
-        sources
+        sources,
+        code: memberCode
       })
     });
 
+    const data = await response.json().catch(() => ({}));
+
+    // Gestion des erreurs d'authentification / limite
+    if (response.status === 401 || response.status === 403) {
+      // Code invalide ou manquant — effacer et redemander
+      localStorage.removeItem('eta_member_code');
+      showError(data.message || 'Code membre invalide.');
+      openCodeGate();
+      return;
+    }
+    if (response.status === 429) {
+      // Limite quotidienne atteinte
+      showLimitReached(data.message, data.used, data.limit);
+      return;
+    }
     if (!response.ok) {
-      const err = await response.json().catch(() => ({}));
-      throw new Error(err.error || `HTTP ${response.status}`);
+      throw new Error(data.error || `HTTP ${response.status}`);
     }
 
-    const data = await response.json();
     const responseText = data.result || data.text || data.content || data.message || data.response || JSON.stringify(data);
     showResult(responseText, vehicle, sources, searchType);
+
+    // Afficher le compteur d'usage restant
+    if (data.usage) {
+      updateUsageDisplay(data.usage.remaining, data.usage.limit);
+    }
 
   } catch(err) {
     showError(err.message);
@@ -1871,6 +2015,76 @@ async function doSearch() {
     if (b) b.disabled = false;
     if (bt) bt.textContent = 'Search + AI Verify';
   }
+}
+
+/* ═══════════════════════════
+   CODE MEMBRE — GATE
+═══════════════════════════ */
+function openCodeGate() {
+  document.getElementById('codeGate').classList.add('active');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => {
+    const input = document.getElementById('code-input');
+    if (input) input.focus();
+  }, 100);
+}
+function closeCodeGate() {
+  document.getElementById('codeGate').classList.remove('active');
+  document.body.style.overflow = '';
+}
+function submitCode() {
+  const input = document.getElementById('code-input');
+  const code = input.value.trim().toUpperCase();
+  const errEl = document.getElementById('code-error');
+
+  if (!code) {
+    errEl.textContent = 'Entrez votre code.';
+    errEl.style.display = 'block';
+    return;
+  }
+  // Format basique : ETA-XXXX
+  if (!/^ETA-[A-Z0-9]{4}$/.test(code)) {
+    errEl.textContent = 'Format invalide. Exemple : ETA-XXXX';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  // Sauvegarder et fermer — la validation réelle se fait côté serveur
+  localStorage.setItem('eta_member_code', code);
+  errEl.style.display = 'none';
+  closeCodeGate();
+
+  // Relancer la recherche si une query existe
+  const query = document.getElementById('query').value.trim();
+  if (query) doSearch();
+}
+function clearMemberCode() {
+  localStorage.removeItem('eta_member_code');
+  alert('Code effacé. Vous devrez le ré-entrer.');
+}
+
+function showLimitReached(msg, used, limit) {
+  const out = document.getElementById('output') || document.querySelector('.output-area') || document.querySelector('.panel-right');
+  const html = `
+    <div style="text-align:center; padding:3rem 2rem;">
+      <div style="font-size:3rem; margin-bottom:1rem;">⏳</div>
+      <h3 style="font-family:'Bebas Neue',sans-serif; font-size:1.8rem; color:var(--amber); margin-bottom:1rem;">Limite quotidienne atteinte</h3>
+      <p style="color:var(--white2); max-width:400px; margin:0 auto 1rem;">${msg || 'Vous avez utilisé vos 3 recherches du jour.'}</p>
+      <p style="font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:var(--muted);">${used || 3} / ${limit || 3} recherches utilisées aujourd'hui</p>
+      <p style="color:var(--muted); font-size:0.85rem; margin-top:1.5rem;">Revenez demain pour 3 nouvelles recherches.</p>
+    </div>`;
+  if (out) out.innerHTML = html;
+}
+
+function updateUsageDisplay(remaining, limit) {
+  let badge = document.getElementById('usage-badge');
+  if (!badge) {
+    badge = document.createElement('div');
+    badge.id = 'usage-badge';
+    badge.style.cssText = 'position:fixed;bottom:1rem;right:1rem;background:var(--d2,#1a1a1a);border:1px solid var(--border,rgba(255,255,255,0.1));padding:0.5rem 1rem;font-family:monospace;font-size:0.7rem;color:var(--muted,#888);z-index:50;border-radius:4px;';
+    document.body.appendChild(badge);
+  }
+  badge.textContent = `${remaining}/${limit} recherches restantes aujourd'hui`;
 }
 
 /* ═══════════════════════════
