@@ -1,22 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<<!-- Favicon Eurotech -->
-<link rel="icon" type="image/x-icon" href="/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180.png">>
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Real VAG Diagnostic Cases — Eurotech Performance Academy</title>
 <meta name="description" content="10 real-world VAG diagnostic case studies: EA888 oil consumption, EA189 TDI P0237, Haldex AWD, air suspension, DQ250 DSG, EA837 water pump, timing chain, EA855 5-cyl, EGR cooler, MEB HV battery. Workshop-tested with VCDS, optimized for Canadian climate.">
-<meta name="keywords" content="EA888 oil consumption, PCV failure VAG, Audi S3 8V, VW Golf R MK7, P0299, P0237, EA189 TDI, CJAA, G31 MAP sensor, Haldex service, AWD Golf R, air suspension Q7 4L, A8 air bag, Touareg suspension, DQ250 mechatronic, DSG hard shift, EA837 water pump, S4 B8, EA888 timing chain, P0011, P0014, P0016, EA855 RS3 misfire, P0301, EGR cooler TDI, hydro-lock, MEB battery, ID.4, HV cell balance, Canadian winter VAG, VCDS diagnostic">
-<link rel="canonical" href="https://eurotech-academy.ca/cas-reels.html">
+<meta name="keywords" content="EA888 oil consumption, valve stem seals Golf GTI, VW Golf GTI MK7, blue smoke cold start, EA888 Gen3 oil burning, PCV failure VAG, Audi S3 8V, Golf R MK7, P0299, P0237, EA189 TDI, Haldex service, air suspension Q7 4L, DQ250 mechatronic, EA837 water pump, EA888 timing chain, P0011, P0014, EA855 RS3 misfire, P0301, EGR cooler TDI, MEB battery, ID.4, Canadian winter VAG, VCDS diagnostic">
+<link rel="canonical" href="https://eurotech-academy.ca/cas-reel.html">
 
 <!-- Open Graph -->
-<meta property="og:title" content="Real VAG Cases — EA888 Oil Consumption Diagnosis">
-<meta property="og:description" content="Workshop case study: 2016 Audi S3 with excessive oil consumption resolved through PCV diagnosis.">
+<meta property="og:title" content="Real VAG Cases — Golf GTI Oil Consumption from Valve Seals">
+<meta property="og:description" content="Workshop case study: VW Golf GTI MK7 burning 1L oil per 800km — diagnosed to valve stem seals using the sit-and-restart test after confirming a good PCV.">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://eurotech-academy.ca/cas-reels.html">
+<meta property="og:url" content="https://eurotech-academy.ca/cas-reel.html">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -287,14 +283,16 @@ body.fr .fr-inline{display:inline}
 
     <div class="case-header">
       <div class="case-tag">Case #001 · EA888 Gen3</div>
-      <h2 class="case-title en-text">Excessive Oil Consumption — 2016 Audi S3</h2>
-      <h2 class="case-title fr-text">Consommation d'Huile Excessive — Audi S3 2016</h2>
+      <h2 class="case-title en-text">Oil Consumption from Valve Stem Seals — VW Golf GTI MK7</h2>
+      <h2 class="case-title fr-text">Consommation d'Huile par Joints de Soupape — VW Golf GTI MK7</h2>
       <div class="case-meta">
-        <div class="case-meta-item">Vehicle: <span>2016 Audi S3 (8V)</span></div>
-        <div class="case-meta-item">Engine: <span>EA888 Gen3 (CJXC)</span></div>
+        <div class="case-meta-item">Vehicle: <span>2016 VW Golf GTI MK7</span></div>
+        <div class="case-meta-item">Engine: <span>EA888 Gen3 (2.0 TSI)</span></div>
         <div class="case-meta-item">Mileage: <span>~160,000 km</span></div>
-        <div class="case-meta-item en-inline">Issue: <span>Oil loss + unstable idle</span></div>
-        <div class="case-meta-item fr-inline">Problème: <span>Perte d'huile + ralenti instable</span></div>
+        <div class="case-meta-item en-inline">Issue: <span>1L oil / 800-1000 km</span></div>
+        <div class="case-meta-item fr-inline">Problème: <span>1L huile / 800-1000 km</span></div>
+        <div class="case-meta-item en-inline">Smoke: <span>Blue, cold start + restart</span></div>
+        <div class="case-meta-item fr-inline">Fumée: <span>Bleue, démarrage à froid + redémarrage</span></div>
       </div>
     </div>
 
@@ -304,125 +302,130 @@ body.fr .fr-inline{display:inline}
       <div class="en-text">
         <h2>The Symptoms</h2>
         <div class="symptom-box">
-          <strong>Customer complaint:</strong> "My car is burning oil — I'm adding 1 liter every 1,500 km. There's no leak under the car, no smoke from the exhaust, but the idle feels rough some mornings."
+          <strong>Customer complaint:</strong> "I'm burning a liter of oil every 800 to 1000 km. There's a blue puff of smoke when I start it cold, and sometimes when I start it again after it's been sitting a little while."
         </div>
-        <p>On initial inspection, the diagnosis was anything but obvious. <strong>No external oil leaks</strong> on the engine block, transmission, or oil pan. <strong>No CEL — zero stored DTCs</strong> on first VCDS scan. The customer was clearly losing oil somewhere internal.</p>
+        <p>Heavy oil consumption — <strong>1 liter every 800-1000 km</strong> — is well beyond the EA888's already-known appetite for oil. The blue smoke pattern was the key clue from the start: it appeared on <strong>cold start</strong> and, critically, on a <strong>restart after the engine had been sitting for a short period</strong>. That specific timing points away from the usual suspect and toward something else.</p>
 
         <h2>The Investigation</h2>
 
-        <h3>Step 1 — Confirming oil consumption is internal</h3>
-        <p>With no external leaks and no exhaust smoke (which would suggest valve seals or piston rings), the next suspect on the EA888 Gen3 is always the <strong>PCV system</strong>. The crankcase ventilation is known to fail on this engine family — when the PCV diaphragm tears or sticks, oil gets pulled into the intake tract through the charge pipes.</p>
+        <h3>Step 1 — Rule out the PCV first</h3>
+        <p>On any EA888 Gen3 with oil consumption, the PCV (crankcase ventilation) is suspect number one. It's the most common failure on this engine family. <strong>So we replaced the PCV and verified the new one was functioning correctly.</strong> The consumption and the blue smoke continued. PCV was not the cause.</p>
 
-        <h3>Step 2 — Quick PCV pressure test</h3>
-        <p>I removed the oil filler cap with the engine running at idle. <strong>The engine speed didn't change.</strong> On a healthy PCV system, pulling the cap should cause a slight drop in idle (broken vacuum seal). No change = the PCV is already pulling air from somewhere it shouldn't be — confirming PCV failure suspicion.</p>
+        <h3>Step 2 — Cold start observation</h3>
+        <p>Cold start produced a clear <strong>blue puff</strong> from the exhaust. Blue smoke = oil being burned in the combustion chamber. With the PCV confirmed good and no external leaks, the oil had to be entering the cylinders directly — either past the rings or past the valve stem seals.</p>
 
-        <h3>Step 3 — Visual inspection of charge pipes</h3>
-        <p>Disconnected the charge pipe from the throttle body. <strong>Pipes were saturated with oil.</strong> This is the smoking gun — failed PCV diaphragm allowing crankcase oil mist to enter the intake tract, which then gets burned in the combustion chamber. Explains the consumption without external leaks or visible smoke.</p>
+        <h3>Step 3 — The decisive test: idle, shut down, wait, restart</h3>
+        <p>This is the test that separates valve stem seals from piston rings. We let the engine idle, shut it down, and <strong>waited about 15 minutes</strong>. On restart — <strong>a large puff of blue smoke.</strong></p>
+        <p>Here's why that matters: when the engine sits, oil seeps <strong>past worn valve stem seals</strong> and pools on top of the valves and in the combustion chamber. On restart, all that accumulated oil burns off at once — the big blue puff. Worn piston rings, by contrast, smoke more under load and deceleration, not specifically after a sit-and-restart.</p>
 
-        <h3>Step 4 — VCDS confirmation</h3>
-        <p>Connected VCDS and looked at long-term fuel trims (LTFT) under load:</p>
-        <ul>
-          <li>LTFT Bank 1 was working hard to compensate (significant correction values)</li>
-          <li>The engine was running rich-correction-rich constantly</li>
-          <li>Confirms unmetered oil entering the combustion mix</li>
-        </ul>
+        <h3>Step 4 — Confirming the diagnosis</h3>
+        <p>The combination was conclusive: heavy consumption, blue smoke on cold start, a large puff on warm restart after sitting, and a <strong>confirmed-good PCV</strong>. All signs pointed to <strong>worn valve stem seals</strong> letting oil drain into the chambers when the engine was off.</p>
+
+        <h3>Step 5 — Checking the timing chain while we're in there</h3>
+        <p>Valve stem seals on the EA888 require pulling the valve cover and going deep into the top end — the same area you access for the timing chain. So before quoting, we inspected the chain tensioner. <strong>The tensioner was at 5 notches out of a maximum of 7.</strong></p>
+        <p>On the EA888, the tensioner ratchets out as the chain stretches. At 5/7, this chain was well into its wear life — not failing yet, but close enough that letting it go would mean a second teardown in the near future. The smart call: <strong>do the timing chain at the same time as the valve seals.</strong></p>
       </div>
 
       <!-- FRENCH -->
       <div class="fr-text">
         <h2>Les Symptômes</h2>
         <div class="symptom-box">
-          <strong>Plainte du client :</strong> « Mon auto brûle de l'huile — j'ajoute 1 litre à tous les 1500 km. Aucune fuite sous l'auto, pas de fumée à l'échappement, mais le ralenti vibre certains matins. »
+          <strong>Plainte du client :</strong> « Je brûle un litre d'huile à tous les 800 à 1000 km. Y'a une boucane bleue quand je pars à froid, et des fois quand je redémarre après l'avoir laissée reposer un petit bout. »
         </div>
-        <p>À l'inspection initiale, le diagnostic était tout sauf évident. <strong>Aucune fuite d'huile externe</strong> visible sur le bloc, la transmission ou le carter. <strong>Pas de CEL — zéro DTC enregistré</strong> au premier scan VCDS. Le client perdait clairement de l'huile quelque part à l'interne.</p>
+        <p>Une consommation d'huile aussi forte — <strong>1 litre aux 800-1000 km</strong> — dépasse largement l'appétit déjà connu de l'EA888 pour l'huile. Le pattern de fumée bleue était l'indice clé dès le départ : elle apparaissait au <strong>démarrage à froid</strong> et, surtout, au <strong>redémarrage après que le moteur ait reposé un court moment</strong>. Ce timing précis nous éloigne du suspect habituel et pointe vers autre chose.</p>
 
         <h2>L'Investigation</h2>
 
-        <h3>Étape 1 — Confirmer que la consommation est interne</h3>
-        <p>Aucune fuite externe et aucune fumée à l'échappement (qui suggérerait des joints de queue de soupape ou des segments), le prochain suspect sur l'EA888 Gen3 est toujours le <strong>système PCV</strong>. La ventilation du carter est reconnue pour faire défaut sur cette famille de moteurs — quand le diaphragme PCV se déchire ou colle, l'huile est aspirée dans le tract d'admission via les charge pipes.</p>
+        <h3>Étape 1 — Éliminer le PCV en premier</h3>
+        <p>Sur n'importe quel EA888 Gen3 avec consommation d'huile, le PCV (ventilation du carter) est le suspect numéro un. C'est la défaillance la plus commune sur cette famille de moteurs. <strong>Alors on a remplacé le PCV et vérifié que le neuf fonctionnait correctement.</strong> La consommation et la fumée bleue ont continué. Le PCV n'était pas la cause.</p>
 
-        <h3>Étape 2 — Test rapide de pression PCV</h3>
-        <p>J'ai enlevé le bouchon d'huile avec le moteur au ralenti. <strong>Le régime moteur n'a pas changé.</strong> Sur un système PCV sain, retirer le bouchon devrait causer une légère chute du ralenti (rupture de l'étanchéité du vide). Pas de changement = le PCV aspire déjà de l'air d'un endroit où il ne devrait pas — confirme la défaillance PCV.</p>
+        <h3>Étape 2 — Observation au démarrage à froid</h3>
+        <p>Le démarrage à froid produisait une <strong>boucane bleue</strong> claire à l'échappement. Fumée bleue = huile brûlée dans la chambre de combustion. Avec le PCV confirmé bon et aucune fuite externe, l'huile devait entrer directement dans les cylindres — soit par les segments, soit par les joints de queue de soupape.</p>
 
-        <h3>Étape 3 — Inspection visuelle des charge pipes</h3>
-        <p>J'ai débranché le charge pipe du papillon. <strong>Les conduits étaient saturés d'huile.</strong> C'est la preuve formelle — diaphragme PCV défectueux qui permet à la brume d'huile du carter d'entrer dans le tract d'admission, puis d'être brûlée dans la chambre de combustion. Ça explique la consommation sans fuite externe ni fumée visible.</p>
+        <h3>Étape 3 — Le test décisif : ralenti, arrêt, attente, redémarrage</h3>
+        <p>C'est le test qui sépare les joints de soupape des segments de piston. On a laissé le moteur tourner au ralenti, on l'a arrêté, et on a <strong>attendu environ 15 minutes</strong>. Au redémarrage — <strong>une grosse bouffée de fumée bleue.</strong></p>
+        <p>Voici pourquoi c'est important : quand le moteur repose, l'huile suinte <strong>par les joints de queue de soupape usés</strong> et s'accumule sur le dessus des soupapes et dans la chambre de combustion. Au redémarrage, toute cette huile accumulée brûle d'un coup — la grosse bouffée bleue. Les segments usés, au contraire, fument plus sous charge et en décélération, pas spécifiquement après un repos-redémarrage.</p>
 
-        <h3>Étape 4 — Confirmation VCDS</h3>
-        <p>Branché le VCDS et regardé les fuel trims long terme (LTFT) sous charge :</p>
-        <ul>
-          <li>LTFT Banque 1 travaillait fort pour compenser (valeurs de correction significatives)</li>
-          <li>Le moteur tournait en correction-riche-correction constamment</li>
-          <li>Confirme l'huile non-mesurée qui entre dans le mélange de combustion</li>
-        </ul>
+        <h3>Étape 4 — Confirmer le diagnostic</h3>
+        <p>La combinaison était concluante : forte consommation, fumée bleue au démarrage à froid, grosse bouffée au redémarrage chaud après repos, et un <strong>PCV confirmé bon</strong>. Tous les signes pointaient vers des <strong>joints de queue de soupape usés</strong> laissant l'huile s'écouler dans les chambres quand le moteur était arrêté.</p>
+
+        <h3>Étape 5 — Vérifier la chaîne de distribution tant qu'on est là</h3>
+        <p>Les joints de soupape sur l'EA888 demandent d'enlever le couvercle de soupapes et d'aller creux dans le haut du moteur — la même zone qu'on accède pour la chaîne de distribution. Alors avant de soumissionner, on a inspecté le tensionneur de chaîne. <strong>Le tensionneur était à 5 coches sur un maximum de 7.</strong></p>
+        <p>Sur l'EA888, le tensionneur sort par crans à mesure que la chaîne s'étire. À 5/7, cette chaîne était bien avancée dans son usure — pas encore défaillante, mais assez proche pour que la laisser aller voudrait dire un deuxième démontage dans un futur rapproché. Le choix intelligent : <strong>faire la chaîne de distribution en même temps que les joints de soupape.</strong></p>
       </div>
 
       <h2 class="en-text">The Diagnosis Procedure</h2>
       <h2 class="fr-text">La Procédure Diagnostique</h2>
 
       <ol class="steps-list">
-        <li class="en-text"><strong>Visual external check</strong> — confirm no oil leaks at valve cover, oil pan, turbo seals, or rear main</li>
-        <li class="fr-text"><strong>Vérification visuelle externe</strong> — confirmer aucune fuite au couvercle de soupapes, carter, joints turbo ou principal arrière</li>
+        <li class="en-text"><strong>Confirm consumption rate</strong> — quantify it (here: 1L per 800-1000 km, abnormally high even for EA888)</li>
+        <li class="fr-text"><strong>Confirmer le taux de consommation</strong> — le quantifier (ici : 1L aux 800-1000 km, anormalement élevé même pour un EA888)</li>
 
-        <li class="en-text"><strong>Exhaust observation</strong> — no smoke under acceleration rules out valve seals/rings</li>
-        <li class="fr-text"><strong>Observation échappement</strong> — pas de fumée à l'accélération exclut les joints de soupapes/segments</li>
+        <li class="en-text"><strong>External leak check</strong> — rule out valve cover, oil pan, turbo seals, rear main</li>
+        <li class="fr-text"><strong>Vérification fuite externe</strong> — éliminer couvercle de soupapes, carter, joints turbo, principal arrière</li>
 
-        <li class="en-text"><strong>PCV test (oil cap method)</strong> — engine running at idle, remove oil cap. RPM should drop slightly. No change = failed PCV</li>
-        <li class="fr-text"><strong>Test PCV (méthode bouchon d'huile)</strong> — moteur au ralenti, enlever le bouchon d'huile. Le RPM devrait descendre légèrement. Aucun changement = PCV défectueux</li>
+        <li class="en-text"><strong>Replace and verify PCV first</strong> — most common EA888 Gen3 cause; eliminate it before going deeper</li>
+        <li class="fr-text"><strong>Remplacer et vérifier le PCV d'abord</strong> — cause la plus commune sur EA888 Gen3; l'éliminer avant d'aller plus loin</li>
 
-        <li class="en-text"><strong>Charge pipe inspection</strong> — disconnect both pipes. Oil pooling = PCV pulling oil through</li>
-        <li class="fr-text"><strong>Inspection charge pipes</strong> — débrancher les deux conduits. Huile accumulée = PCV qui aspire l'huile</li>
+        <li class="en-text"><strong>Cold start observation</strong> — blue smoke = oil burning in chamber, not PCV</li>
+        <li class="fr-text"><strong>Observation démarrage à froid</strong> — fumée bleue = huile brûlée dans la chambre, pas le PCV</li>
 
-        <li class="en-text"><strong>VCDS fuel trim analysis</strong> — log LTFT under load. Significant negative correction confirms unmetered fuel/oil entering combustion</li>
-        <li class="fr-text"><strong>Analyse fuel trim VCDS</strong> — enregistrer LTFT sous charge. Correction négative significative confirme du carburant/huile non-mesuré entrant dans la combustion</li>
+        <li class="en-text"><strong>Sit-and-restart test</strong> — idle, shut down, wait ~15 min, restart. Big blue puff = oil pooling past valve stem seals</li>
+        <li class="fr-text"><strong>Test repos-redémarrage</strong> — ralenti, arrêt, attendre ~15 min, redémarrer. Grosse bouffée bleue = huile accumulée par les joints de soupape</li>
 
-        <li class="en-text"><strong>Turbo inspection</strong> — verify turbo seals, especially on aftermarket turbos that may not be OEM-grade</li>
-        <li class="fr-text"><strong>Inspection turbo</strong> — vérifier les joints du turbo, particulièrement sur les turbos aftermarket qui ne sont pas nécessairement de qualité OEM</li>
+        <li class="en-text"><strong>Differentiate rings vs seals</strong> — rings smoke under load/decel; seals smoke on cold start and warm restart after sitting</li>
+        <li class="fr-text"><strong>Différencier segments vs joints</strong> — segments fument sous charge/décélération; joints fument au démarrage à froid et redémarrage chaud après repos</li>
+
+        <li class="en-text"><strong>Inspect timing chain tensioner</strong> — top-end access overlaps with seal job. Tensioner at 5/7 notches = recommend chain service simultaneously</li>
+        <li class="fr-text"><strong>Inspecter le tensionneur de chaîne</strong> — l'accès au haut moteur chevauche le job de joints. Tensionneur à 5/7 coches = recommander le service de chaîne en même temps</li>
       </ol>
 
       <h2 class="en-text">The Solution</h2>
       <h2 class="fr-text">La Solution</h2>
 
       <div class="solution-box en-text">
-        <strong>Fix:</strong> PCV valve replacement + turbo seal inspection. Critical detail — the customer had an <strong>aftermarket turbo</strong> installed previously, so verifying the turbo wasn't the source of pressurized oil overwhelming the PCV was essential.
+        <strong>Fix:</strong> Valve stem seals replaced <strong>with the head on the car</strong> (no head removal — done in place), combined with a full timing job: <strong>valve stem seals + timing chain + chain guides + tensioner</strong>. Since the top-end teardown overlaps for both jobs, and the tensioner was already at 5/7, doing them together saved the customer a second labor-heavy teardown down the road.
       </div>
       <div class="solution-box fr-text">
-        <strong>Solution :</strong> Remplacement de la valve PCV + inspection des joints turbo. Détail critique — le client avait un <strong>turbo aftermarket</strong> installé précédemment, donc vérifier que le turbo n'était pas la source d'huile pressurisée surchargeant le PCV était essentiel.
+        <strong>Solution :</strong> Joints de queue de soupape remplacés <strong>tête sur l'auto</strong> (sans enlever la tête — fait sur place), combiné à un job de timing complet : <strong>joints de soupape + chaîne de distribution + guides de chaîne + tensionneur</strong>. Comme le démontage du haut moteur se chevauche pour les deux jobs, et que le tensionneur était déjà à 5/7, les faire ensemble a évité au client un deuxième démontage coûteux en main-d'œuvre plus tard.
       </div>
 
-      <p class="en-text"><strong>Why this matters:</strong> A failed PCV is the most common cause of "phantom" oil consumption on EA888 Gen3 engines. But on modified vehicles with aftermarket turbos, the root cause might be a leaking turbo seal pushing oil into the crankcase faster than the PCV can handle, eventually destroying the PCV diaphragm. <strong>Replacing the PCV without checking the turbo is just buying time</strong> — the new PCV will fail again.</p>
-      <p class="fr-text"><strong>Pourquoi c'est important :</strong> Un PCV défectueux est la cause la plus commune de consommation d'huile « fantôme » sur les moteurs EA888 Gen3. Mais sur les véhicules modifiés avec des turbos aftermarket, la cause profonde peut être un joint de turbo qui fuit et pousse l'huile dans le carter plus rapidement que le PCV peut gérer, finissant par détruire le diaphragme PCV. <strong>Remplacer le PCV sans vérifier le turbo, c'est juste gagner du temps</strong> — le nouveau PCV tombera en panne aussi.</p>
+      <p class="en-text"><strong>Why this matters:</strong> On the EA888, everyone reaches for the PCV first — and they're usually right. But when the PCV is confirmed good and oil consumption continues with blue smoke, you have to go deeper. The sit-and-restart test is the cheapest, fastest way to point at valve stem seals before committing to teardown. <strong>Replacing the PCV and hoping is not a diagnosis</strong> — confirming it's good and then running the restart test is.</p>
+      <p class="fr-text"><strong>Pourquoi c'est important :</strong> Sur l'EA888, tout le monde saute sur le PCV en premier — et ils ont habituellement raison. Mais quand le PCV est confirmé bon et que la consommation d'huile continue avec de la fumée bleue, faut creuser plus loin. Le test repos-redémarrage est la façon la plus rapide et économique de pointer vers les joints de soupape avant de s'engager dans un démontage. <strong>Remplacer le PCV en espérant, c'est pas un diagnostic</strong> — confirmer qu'il est bon puis faire le test de redémarrage, ça l'est.</p>
 
       <h3 class="en-text">Key Takeaways for Technicians</h3>
       <h3 class="fr-text">Points Clés pour Techniciens</h3>
 
       <ul class="en-text">
-        <li><strong>EA888 Gen3 PCV is a known weak point</strong> — always suspect it on internal oil consumption with no DTC</li>
-        <li><strong>The oil cap test is fast and free</strong> — should be your first check</li>
-        <li><strong>Charge pipes full of oil = definitive sign</strong> of PCV failure</li>
-        <li><strong>VCDS fuel trims tell the story</strong> — extra fuel correction confirms unmetered intake contamination</li>
-        <li><strong>On modified cars, check the modification first</strong> — aftermarket turbos can destroy stock PCV systems</li>
-        <li><strong>No DTC ≠ no problem</strong> — the ECU only flags what it's calibrated to detect</li>
+        <li><strong>Quantify the consumption</strong> — 1L/800-1000 km is severe, beyond normal EA888 levels</li>
+        <li><strong>Always confirm PCV first</strong> — but confirm it's good, don't just assume it's the cause</li>
+        <li><strong>Blue smoke timing is the diagnostic</strong> — cold start + warm restart after sitting points to valve stem seals</li>
+        <li><strong>The sit-and-restart test is gold</strong> — let it sit ~15 min, restart, watch for the big puff</li>
+        <li><strong>Rings vs seals</strong> — rings smoke under load/decel; seals smoke after the engine sits</li>
+        <li><strong>Inspect the timing chain tensioner while you're in the top end</strong> — at 5/7 notches, do the chain at the same time to avoid a second teardown</li>
+        <li><strong>Don't part-swap blindly</strong> — a confirmed-good PCV that doesn't fix it tells you to keep looking</li>
       </ul>
 
       <ul class="fr-text">
-        <li><strong>Le PCV de l'EA888 Gen3 est un point faible connu</strong> — toujours le suspecter sur consommation d'huile interne sans DTC</li>
-        <li><strong>Le test du bouchon d'huile est rapide et gratuit</strong> — devrait être votre première vérification</li>
-        <li><strong>Charge pipes pleins d'huile = signe définitif</strong> de défaillance PCV</li>
-        <li><strong>Les fuel trims VCDS racontent l'histoire</strong> — correction de carburant supplémentaire confirme contamination non-mesurée à l'admission</li>
-        <li><strong>Sur les véhicules modifiés, vérifiez d'abord la modification</strong> — les turbos aftermarket peuvent détruire le système PCV d'origine</li>
-        <li><strong>Pas de DTC ≠ pas de problème</strong> — l'ECU ne signale que ce qu'il est calibré pour détecter</li>
+        <li><strong>Quantifier la consommation</strong> — 1L/800-1000 km est sévère, au-delà des niveaux normaux EA888</li>
+        <li><strong>Toujours confirmer le PCV en premier</strong> — mais confirmer qu'il est bon, pas juste assumer que c'est la cause</li>
+        <li><strong>Le timing de la fumée bleue est le diagnostic</strong> — démarrage à froid + redémarrage chaud après repos pointe vers les joints de soupape</li>
+        <li><strong>Le test repos-redémarrage est en or</strong> — laisser reposer ~15 min, redémarrer, guetter la grosse bouffée</li>
+        <li><strong>Segments vs joints</strong> — segments fument sous charge/décélération; joints fument après que le moteur repose</li>
+        <li><strong>Inspecter le tensionneur de chaîne tant qu'on est dans le haut moteur</strong> — à 5/7 coches, faire la chaîne en même temps pour éviter un deuxième démontage</li>
+        <li><strong>Pas de changement de pièces à l'aveugle</strong> — un PCV confirmé bon qui règle rien te dit de continuer à chercher</li>
       </ul>
 
     </div>
 
     <div class="case-footer">
-      <div class="case-footer-time en-text">Diagnostic time: ~1.5h · Repair: ~1h</div>
-      <div class="case-footer-time fr-text">Temps diagnostic: ~1,5h · Réparation: ~1h</div>
+      <div class="case-footer-time en-text">2016 · 160,000 km · Seals + timing chain done together, head on car</div>
+      <div class="case-footer-time fr-text">2016 · 160 000 km · Joints + chaîne faits ensemble, tête sur l'auto</div>
       <div class="case-footer-tags">
         <span class="tag-pill">EA888</span>
-        <span class="tag-pill">PCV</span>
-        <span class="tag-pill">VCDS</span>
-        <span class="tag-pill">Audi S3</span>
+        <span class="tag-pill">Valve Stem Seals</span>
+        <span class="tag-pill">Timing Chain</span>
+        <span class="tag-pill">Golf GTI MK7</span>
         <span class="tag-pill">Oil Consumption</span>
       </div>
     </div>
