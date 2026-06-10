@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<<!-- Favicon Eurotech -->
-<link rel="icon" type="image/x-icon" href="/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180.png">>
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Eurotech Performance Academy — VAG Technical Training</title>
@@ -100,8 +96,43 @@ h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4.5rem);line-h
 
 /* TOOLS */
 .tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem}
-.tool-item{padding:1.2rem;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);text-decoration:none;display:block;transition:border-color 0.2s,background 0.2s;cursor:pointer}
+.tool-item{padding:1.2rem;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);text-decoration:none;display:block;transition:border-color 0.2s,background 0.2s;cursor:pointer;position:relative}
 .tool-item:hover{border-color:rgba(200,0,26,0.4);background:rgba(200,0,26,0.05)}
+.tool-item-soon{opacity:0.55}
+.tool-item-soon:hover{opacity:0.85;border-color:rgba(255,255,255,0.15)}
+
+/* FEATURED CASE */
+.featured-case{background:linear-gradient(135deg,rgba(200,0,26,0.08),rgba(0,0,0,0));border:1px solid rgba(200,0,26,0.25);border-left:3px solid var(--red);padding:2rem 2rem 2.2rem;margin-top:1.5rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
+.featured-case-label{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.25em;color:var(--red);text-transform:uppercase;margin-bottom:0.7rem}
+.featured-case h3{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:0.03em;color:var(--white);line-height:1.1;margin-bottom:0.6rem}
+.featured-case-meta{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--text-muted);letter-spacing:0.05em;margin-bottom:1rem;line-height:1.6}
+.featured-case-meta span{color:var(--white);}
+.featured-case-symptom{font-style:italic;color:var(--text-muted);font-size:0.85rem;border-left:2px solid rgba(255,184,0,0.4);padding-left:1rem;margin:0.8rem 0 1rem;line-height:1.5}
+.featured-case-hook{font-size:0.92rem;color:var(--text);line-height:1.6;margin-bottom:1rem}
+.featured-case-hook strong{color:var(--red)}
+.featured-case-reveal{background:rgba(0,0,0,0.3);padding:1rem 1.2rem;border-left:2px solid var(--red);font-size:0.85rem;color:var(--text);line-height:1.55;margin-bottom:1.2rem}
+.featured-case-reveal strong{color:var(--white)}
+.featured-case-cta{display:inline-flex;align-items:center;gap:0.5rem;font-family:'JetBrains Mono',monospace;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.8rem 1.4rem;background:var(--red);color:white;text-decoration:none;transition:background 0.2s}
+.featured-case-cta:hover{background:#a00015}
+.featured-case-cta::after{content:'→';transition:transform 0.2s}
+.featured-case-cta:hover::after{transform:translateX(4px)}
+@media(max-width:760px){.featured-case{grid-template-columns:1fr;padding:1.5rem}}
+
+/* ABOUT ME */
+.about-me{display:grid;grid-template-columns:1fr 1.2fr;gap:2.5rem;align-items:start;margin-top:1.5rem}
+.about-photo-wrap{position:relative;border:1px solid rgba(255,255,255,0.08);overflow:hidden;background:rgba(0,0,0,0.4)}
+.about-photo-wrap img{width:100%;height:auto;display:block;aspect-ratio:3/4;object-fit:cover}
+.about-photo-wrap::before{content:'';position:absolute;top:0;left:0;width:3px;height:60px;background:var(--red);z-index:2}
+.about-photo-caption{position:absolute;bottom:0;left:0;right:0;padding:1rem 1.2rem;background:linear-gradient(transparent,rgba(0,0,0,0.85));color:var(--white);font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.08em;line-height:1.4}
+.about-photo-caption strong{color:var(--red);display:block;font-size:0.65rem;letter-spacing:0.2em;margin-bottom:0.3rem;text-transform:uppercase}
+.about-name{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.04em;color:var(--white);margin-bottom:0.3rem;line-height:1}
+.about-role{font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.2em;color:var(--red);text-transform:uppercase;margin-bottom:1.2rem}
+.about-text{font-size:0.95rem;line-height:1.75;color:var(--text);margin-bottom:1rem}
+.about-text strong{color:var(--white)}
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.08)}
+.about-stat-num{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--red);line-height:1}
+.about-stat-label{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;color:var(--text-muted);text-transform:uppercase;margin-top:0.3rem}
+@media(max-width:760px){.about-me{grid-template-columns:1fr;gap:1.5rem}.about-stats{grid-template-columns:1fr;gap:1.2rem}}
 .tool-icon{font-size:1.2rem;margin-bottom:0.5rem}
 .tool-name{font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--white);margin-bottom:0.3rem}
 .tool-desc{font-size:0.75rem;color:var(--text-muted);line-height:1.5}
@@ -165,6 +196,7 @@ h1{animation:fadeUp 0.6s 0.1s ease both}
   <a href="#" class="nav-logo">EUROTECH<span>.</span>ACADEMY</a>
   <ul class="nav-links">
     <li><a href="#training" data-en="Training" data-fr="Formation">Training</a></li>
+    <li><a href="#featured-case" data-en="Sample Case" data-fr="Exemple de Cas">Sample Case</a></li>
     <li><a href="#why" data-en="Why Us" data-fr="Pourquoi">Why Us</a></li>
     <li><a href="tools.html" data-en="Tools" data-fr="Outils">Tools</a></li>
     <li><a href="cas-reel.html" data-en="Cases" data-fr="Cas Réels">Cases</a></li>
@@ -284,6 +316,31 @@ h1{animation:fadeUp 0.6s 0.1s ease both}
 
 <div class="divider"></div>
 
+<div class="section-wrap" id="featured-case">
+  <div class="section-label" data-en="Real Workshop Case" data-fr="Cas Réel d'Atelier">Real Workshop Case</div>
+  <h2 data-en="THIS IS WHAT YOU'LL LEARN<br>TO DIAGNOSE." data-fr="VOICI CE QUE TU<br>APPRENDRAS À DIAGNOSTIQUER.">THIS IS WHAT YOU'LL LEARN<br>TO DIAGNOSE.</h2>
+  <p style="font-size:0.95rem;color:var(--text-muted);max-width:580px;line-height:1.7;" data-en="Every module is built on real workshop cases. Here's one example — a diagnosis that saved a customer from a major engine rebuild quote." data-fr="Chaque module est construit sur des cas réels d'atelier. Voici un exemple — un diagnostic qui a sauvé un client d'une soumission de moteur à refaire.">Every module is built on real workshop cases. Here's one example — a diagnosis that saved a customer from a major engine rebuild quote.</p>
+
+  <div class="featured-case">
+    <div>
+      <div class="featured-case-label" data-en="Case #001 · EA888 Gen3" data-fr="Cas #001 · EA888 Gen3">Case #001 · EA888 Gen3</div>
+      <h3 data-en="2016 VW Golf GTI MK7 — Burning 1L oil / 1000km" data-fr="VW Golf GTI MK7 2016 — Brûle 1L d'huile aux 1000km">2016 VW Golf GTI MK7 — Burning 1L oil / 1000km</h3>
+      <div class="featured-case-meta" data-en="Mileage: <span>160,000 km</span> · Symptoms: <span>blue smoke + oil-fouled plugs</span>" data-fr="Kilométrage : <span>160 000 km</span> · Symptômes : <span>boucane bleue + bougies huilées</span>">Mileage: <span>160,000 km</span> · Symptoms: <span>blue smoke + oil-fouled plugs</span></div>
+      <div class="featured-case-symptom" data-en="“I'm burning a liter of oil every 1000km. Blue smoke when I start it cold, and sometimes after it's been sitting for a few minutes.”" data-fr="« Je brûle un litre d'huile aux 1000 km. Boucane bleue à froid, et des fois quand je redémarre après un repos. »">“I'm burning a liter of oil every 1000km. Blue smoke when I start it cold, and sometimes after it's been sitting for a few minutes.”</div>
+    </div>
+
+    <div>
+      <p class="featured-case-hook" data-en="<strong>The trap:</strong> everyone reaches for the PCV on the EA888. We replaced it. Confirmed it was good. <strong>The consumption continued.</strong>" data-fr="<strong>Le piège :</strong> tout le monde saute sur le PCV sur l'EA888. On l'a remplacé. Vérifié bon. <strong>La consommation a continué.</strong>"><strong>The trap:</strong> everyone reaches for the PCV on the EA888. We replaced it. Confirmed it was good. <strong>The consumption continued.</strong></p>
+
+      <div class="featured-case-reveal" data-en="<strong>The $0 test that solved it:</strong> idle, shut down, wait 15 minutes, restart. Big blue puff = oil pooling past worn valve stem seals. While in the top end, the timing chain tensioner was at 5/7 notches — so we did the chain at the same time. One teardown instead of two." data-fr="<strong>Le test à 0$ qui a tout réglé :</strong> ralenti, arrêt, attendre 15 minutes, redémarrer. Grosse bouffée bleue = huile accumulée par les joints de queue de soupape usés. Tant qu'on était dans le haut moteur, le tensionneur de chaîne était à 5/7 coches — on a fait la chaîne en même temps. Un démontage au lieu de deux."><strong>The $0 test that solved it:</strong> idle, shut down, wait 15 minutes, restart. Big blue puff = oil pooling past worn valve stem seals. While in the top end, the timing chain tensioner was at 5/7 notches — so we did the chain at the same time. One teardown instead of two.</div>
+
+      <a href="cas-reel.html" class="featured-case-cta" data-en="Read the full case" data-fr="Lire le cas complet">Read the full case</a>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
 <div class="section-wrap" id="why">
   <div class="section-label" data-en="Why Eurotech Academy" data-fr="Pourquoi Eurotech Academy">Why Eurotech Academy</div>
   <h2 data-en="BUILT FOR THE<br>WORKSHOP. NOT<br>THE CLASSROOM." data-fr="CONSTRUIT POUR<br>L'ATELIER. PAS<br>LA SALLE DE CLASSE.">BUILT FOR THE<br>WORKSHOP. NOT<br>THE CLASSROOM.</h2>
@@ -336,18 +393,60 @@ h1{animation:fadeUp 0.6s 0.1s ease both}
 
 <div class="section-wrap" id="tools">
   <div class="section-label" data-en="Pro Tools" data-fr="Outils Pro">Pro Tools</div>
-  <h2 data-en="VAG RESEARCH<br>TOOLS — COMING SOON" data-fr="OUTILS DE RECHERCHE<br>VAG — BIENTÔT">VAG RESEARCH<br>TOOLS — COMING SOON</h2>
-  <p style="font-size:0.95rem;color:var(--text-muted);max-width:560px;line-height:1.7;" data-en="Premium tools for members. Aggregate North American and European VAG forums, validate technical information, and get AI-assisted diagnostics — all in one place." data-fr="Outils premium pour les membres. Agrégation des forums VAG nord-américains et européens, validation des informations techniques, et diagnostic assisté par IA — tout en un seul endroit.">Premium tools for members. Aggregate North American and European VAG forums, validate technical information, and get AI-assisted diagnostics — all in one place.</p>
+  <h2 data-en="VAG DIAGNOSTIC<br>ENGINE — LIVE NOW" data-fr="MOTEUR DE DIAGNOSTIC<br>VAG — EN LIGNE">VAG DIAGNOSTIC<br>ENGINE — LIVE NOW</h2>
+  <p style="font-size:0.95rem;color:var(--text-muted);max-width:560px;line-height:1.7;" data-en="The Eurotech VAG Diagnostic Engine — an AI-powered technical assistant trained on VAG-specific data. Live for members. Member code required." data-fr="Le moteur de diagnostic VAG Eurotech — un assistant technique propulsé par IA, entraîné sur les données spécifiques VAG. En ligne pour les membres. Code membre requis.">The Eurotech VAG Diagnostic Engine — an AI-powered technical assistant trained on VAG-specific data. Live for members. Member code required.</p>
   <div class="tools-grid">
-    <a href="tools.html" class="tool-item"><div class="tool-icon">🔍</div><div class="tool-name" data-en="VAG Forum Search" data-fr="Recherche Forums VAG">VAG Forum Search</div><div class="tool-desc" data-en="Search AudiWorld, VWVortex, Rennlist, PeachParts and more. Verified results by model and DTC." data-fr="Cherche dans AudiWorld, VWVortex, Rennlist, PeachParts et plus. Résultats vérifiés par modèle et DTC.">Search AudiWorld, VWVortex, Rennlist, PeachParts and more. Verified results by model and DTC.</div></a>
-    <a href="tools.html" class="tool-item"><div class="tool-icon">🔧</div><div class="tool-name" data-en="DTC Diagnostic Tool" data-fr="Outil Diagnostic DTC">DTC Diagnostic Tool</div><div class="tool-desc" data-en="Enter a DTC + your engine → get a structured diagnostic checklist with VCDS procedures." data-fr="Entre un DTC + ton moteur → reçois une checklist diagnostique structurée avec procédures VCDS.">Enter a DTC + your engine → get a structured diagnostic checklist with VCDS procedures.</div></a>
-    <a href="tools.html" class="tool-item"><div class="tool-icon">🧪</div><div class="tool-name" data-en="Fluid Reference DB" data-fr="Base de données fluides">Fluid Reference DB</div><div class="tool-desc" data-en="Look up exact fluid specs by VIN or model. Never use the wrong oil or DSG fluid again." data-fr="Trouve les fluides exacts par VIN ou modèle. Plus jamais de mauvaise huile ou fluide DSG.">Look up exact fluid specs by VIN or model. Never use the wrong oil or DSG fluid again.</div></a>
-    <a href="tools.html" class="tool-item"><div class="tool-icon">🔢</div><div class="tool-name" data-en="Live VIN Decoder" data-fr="Décodeur VIN Live">Live VIN Decoder</div><div class="tool-desc" data-en="Decode any VAG VIN instantly — country, brand, model year, production sequence." data-fr="Décode n'importe quel VIN VAG instantanément — pays, marque, année modèle, séquence de production.">Decode any VAG VIN instantly — country, brand, model year, production sequence.</div></a>
-    <a href="tools.html" class="tool-item"><div class="tool-icon">📋</div><div class="tool-name" data-en="TSB Alert by Model" data-fr="Alertes TSB par Modèle">TSB Alert by Model</div><div class="tool-desc" data-en="Enter your VIN → see all active TSBs, recalls and service campaigns applicable." data-fr="Entre ton VIN → vois tous les TSB actifs, rappels et campagnes service applicables.">Enter your VIN → see all active TSBs, recalls and service campaigns applicable.</div></a>
-    <a href="tools.html" class="tool-item"><div class="tool-icon">🤖</div><div class="tool-name" data-en="AI VAG Assistant" data-fr="Assistant VAG IA">AI VAG Assistant</div><div class="tool-desc" data-en="Ask a technical question — AI searches forums + Eurotech modules and responds with verified sources." data-fr="Pose une question technique — l'IA cherche dans les forums + modules Eurotech et répond avec sources vérifiées.">Ask a technical question — AI searches forums + Eurotech modules and responds with verified sources.</div></a>
+    <a href="tools.html" class="tool-item"><div class="tool-icon">🤖</div><div class="tool-name" data-en="AI VAG Assistant — LIVE" data-fr="Assistant VAG IA — EN LIGNE">AI VAG Assistant — LIVE</div><div class="tool-desc" data-en="Ask any VAG technical question — engine codes, DTCs, procedures, fluids. Trained on VAG-specific data with engine truth tables. Validated daily." data-fr="Pose n'importe quelle question technique VAG — codes moteur, DTC, procédures, fluides. Entraîné sur données VAG spécifiques avec tables de vérité moteur. Validé quotidiennement.">Ask any VAG technical question — engine codes, DTCs, procedures, fluids. Trained on VAG-specific data with engine truth tables. Validated daily.</div></a>
+    <a href="tools.html" class="tool-item"><div class="tool-icon">🔢</div><div class="tool-name" data-en="Live VIN Decoder — LIVE" data-fr="Décodeur VIN Live — EN LIGNE">Live VIN Decoder — LIVE</div><div class="tool-desc" data-en="Built into the AI assistant — enter any 17-character VIN and the engine, year, and model are decoded automatically via NHTSA + cross-checked." data-fr="Intégré à l'assistant IA — entre n'importe quel VIN 17 caractères, moteur/année/modèle décodés automatiquement via NHTSA + recoupés.">Built into the AI assistant — enter any 17-character VIN and the engine, year, and model are decoded automatically via NHTSA + cross-checked.</div></a>
+    <a href="tools.html" class="tool-item"><div class="tool-icon">🔧</div><div class="tool-name" data-en="DTC Analysis — LIVE" data-fr="Analyse DTC — EN LIGNE">DTC Analysis — LIVE</div><div class="tool-desc" data-en="Enter a DTC + your engine code → get a structured diagnostic response with probable causes, VCDS procedure and parts to inspect." data-fr="Entre un DTC + ton code moteur → reçois une réponse diagnostique structurée avec causes probables, procédure VCDS et pièces à inspecter.">Enter a DTC + your engine code → get a structured diagnostic response with probable causes, VCDS procedure and parts to inspect.</div></a>
+    <a href="tools.html" class="tool-item tool-item-soon"><div class="tool-icon">🧪</div><div class="tool-name" data-en="Fluid Reference DB — Q2" data-fr="Base fluides — Q2">Fluid Reference DB — Q2</div><div class="tool-desc" data-en="Coming Q2 2026 — Standalone fluid lookup by VIN or model. For now, ask the AI assistant for fluid specs." data-fr="À venir Q2 2026 — Recherche fluides autonome par VIN ou modèle. En attendant, demande à l'assistant IA pour les fluides.">Coming Q2 2026 — Standalone fluid lookup by VIN or model. For now, ask the AI assistant for fluid specs.</div></a>
+    <a href="tools.html" class="tool-item tool-item-soon"><div class="tool-icon">📋</div><div class="tool-name" data-en="TSB Alert — Q3" data-fr="Alertes TSB — Q3">TSB Alert — Q3</div><div class="tool-desc" data-en="Coming Q3 2026 — Enter your VIN, see all active TSBs and service campaigns. Currently: ask the AI assistant about known TSBs by model." data-fr="À venir Q3 2026 — Entre ton VIN, vois tous les TSB et campagnes actifs. Actuellement : demande à l'assistant IA les TSB connus par modèle.">Coming Q3 2026 — Enter your VIN, see all active TSBs and service campaigns. Currently: ask the AI assistant about known TSBs by model.</div></a>
   </div>
   <div style="margin-top:2rem;text-align:center;">
-    <a href="https://www.skool.com/vag-academy-quebec-2369" target="_blank" class="btn-primary" data-en="Join Now — Get Early Access to Tools" data-fr="Rejoindre — Accès anticipé aux outils">Join Now — Get Early Access to Tools</a>
+    <a href="https://www.skool.com/vag-academy-quebec-2369" target="_blank" class="btn-primary" data-en="Join — Get Access to the AI Engine" data-fr="Rejoindre — Accès au moteur IA">Join — Get Access to the AI Engine</a>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section-wrap" id="about">
+  <div class="section-label" data-en="Who's Behind This" data-fr="Qui Est Derrière">Who's Behind This</div>
+  <h2 data-en="A REAL WORKSHOP.<br>A REAL MECHANIC." data-fr="UN VRAI ATELIER.<br>UN VRAI MÉCANICIEN.">A REAL WORKSHOP.<br>A REAL MECHANIC.</h2>
+
+  <div class="about-me">
+    <div class="about-photo-wrap">
+      <img src="olivier-atelier.jpg" alt="Olivier Allaire — VAG Specialist, mécatronique DSG en cours">
+      <div class="about-photo-caption">
+        <strong data-en="In the workshop" data-fr="À l'atelier">In the workshop</strong>
+        <span data-en="DSG mechatronic teardown · Fluke 115 · daily VAG work" data-fr="Démontage mécatronique DSG · Fluke 115 · job VAG quotidien">DSG mechatronic teardown · Fluke 115 · daily VAG work</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="about-name">Olivier Allaire</div>
+      <div class="about-role" data-en="VAG Specialist · Quebec, Canada" data-fr="Spécialiste VAG · Québec, Canada">VAG Specialist · Quebec, Canada</div>
+
+      <p class="about-text" data-en="Eurotech Academy isn't built from textbooks. It's built from <strong>real workshop hours</strong> spent on VW, Audi, SEAT and Skoda — diagnosing failures, learning the platform quirks, and figuring out what actually works versus what the parts catalog says." data-fr="Eurotech Academy n'est pas construite à partir de manuels. Elle est construite à partir de <strong>vraies heures d'atelier</strong> passées sur VW, Audi, SEAT et Skoda — à diagnostiquer des défaillances, apprendre les particularités de la plateforme, et comprendre ce qui marche vraiment vs ce que dit le catalogue de pièces.">Eurotech Academy isn't built from textbooks. It's built from <strong>real workshop hours</strong> spent on VW, Audi, SEAT and Skoda — diagnosing failures, learning the platform quirks, and figuring out what actually works versus what the parts catalog says.</p>
+
+      <p class="about-text" data-en="I built the academy I wish I'd had when I started — the one with the actual cases, the actual numbers (like a chain tensioner at 5/7 notches), and the cold-climate context that European training material never covers." data-fr="J'ai bâti l'académie que j'aurais aimé avoir quand j'ai commencé — celle avec les vrais cas, les vrais chiffres (comme un tensionneur de chaîne à 5/7 coches), et le contexte de climat froid que le matériel de formation européen ne couvre jamais.">I built the academy I wish I'd had when I started — the one with the actual cases, the actual numbers (like a chain tensioner at 5/7 notches), and the cold-climate context that European training material never covers.</p>
+
+      <p class="about-text" data-en="Every module, every case study, every quiz — written from the bench, not from a podium." data-fr="Chaque module, chaque étude de cas, chaque QCM — écrit du banc d'atelier, pas d'un podium.">Every module, every case study, every quiz — written from the bench, not from a podium.</p>
+
+      <div class="about-stats">
+        <div>
+          <div class="about-stat-num">VAG</div>
+          <div class="about-stat-label" data-en="Specialty focus" data-fr="Spécialité">Specialty focus</div>
+        </div>
+        <div>
+          <div class="about-stat-num">VCDS</div>
+          <div class="about-stat-label" data-en="Daily tool" data-fr="Outil quotidien">Daily tool</div>
+        </div>
+        <div>
+          <div class="about-stat-num">🇨🇦</div>
+          <div class="about-stat-label" data-en="Built in Quebec" data-fr="Conçu au Québec">Built in Quebec</div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -365,7 +464,7 @@ h1{animation:fadeUp 0.6s 0.1s ease both}
       <li>8 Canada specialization modules</li>
       <li>10 quiz questions + answer key per module</li>
       <li>Private community on Skool</li>
-      <li>Early access to Pro Tools (coming soon)</li>
+      <li>Access to the AI VAG Diagnostic Engine</li>
       <li>New modules added regularly</li>
     </ul>
     <ul class="price-features" id="price-features-fr" style="display:none">
@@ -373,7 +472,7 @@ h1{animation:fadeUp 0.6s 0.1s ease both}
       <li>8 modules spécialisation Canada</li>
       <li>10 QCM + corrigé commenté par module</li>
       <li>Communauté privée sur Skool</li>
-      <li>Accès anticipé aux outils Pro (bientôt)</li>
+      <li>Accès au moteur de diagnostic IA VAG</li>
       <li>Nouveaux modules ajoutés régulièrement</li>
     </ul>
     <a href="https://www.skool.com/vag-academy-quebec-2369" target="_blank" class="btn-primary" style="width:100%;display:block;text-align:center;" data-en="Join Eurotech Academy" data-fr="Rejoindre Eurotech Academy">Join Eurotech Academy</a>
@@ -401,7 +500,7 @@ h1{animation:fadeUp 0.6s 0.1s ease both}
       <ul>
         <li><a href="#training" data-en="All Modules" data-fr="Tous les modules">All Modules</a></li>
         <li><a href="#training" data-en="Canada Specialization" data-fr="Spécialisation Canada">Canada Specialization</a></li>
-        <li><a href="#tools" data-en="Pro Tools (Soon)" data-fr="Outils Pro (Bientôt)">Pro Tools (Soon)</a></li>
+        <li><a href="#tools" data-en="AI Diagnostic Engine" data-fr="Moteur de Diagnostic IA">AI Diagnostic Engine</a></li>
         <li><a href="https://www.skool.com/vag-academy-quebec-2369" target="_blank" data-en="Join on Skool" data-fr="Rejoindre sur Skool">Join on Skool</a></li>
       </ul>
     </div>
